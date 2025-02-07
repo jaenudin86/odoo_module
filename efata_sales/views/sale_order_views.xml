@@ -6,16 +6,17 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <!-- Menyembunyikan order_line jika status bukan 'draft' -->
-            <xpath expr="//field[@name='order_line']" position="attributes">
+            <!-- <xpath expr="//field[@name='order_line']" position="attributes">
                 <attribute name="invisible">1</attribute>
-            </xpath>
-
-            <!-- Menambahkan tombol "Send Sample" di header form -->
-            <!-- <xpath expr="//form//header" position="inside">
-                <button name="action_send_sample" string="Send Sample" type="object"
-                    class="oe_highlight" 
-                    attrs="{'invisible': [('state', '!=', 'draft')]}"/>
             </xpath> -->
+          <xpath expr="//field[@name='state']" position="replace">
+        <field name="state" widget="statusbar" statusbar_visible="draft,sent,sample_sent"/>
+    </xpath>
+
+
+
+
+            
         </field>
     </record>
 </odoo>
