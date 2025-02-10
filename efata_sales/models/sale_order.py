@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields,api
 
 class inheritSaleOrder(models.Model):
     _inherit = "sale.order"
@@ -6,6 +6,21 @@ class inheritSaleOrder(models.Model):
     state = fields.Selection(selection_add=[('sample_sent', 'Sample Sent')], ondelete={'sample_sent': 'set default'})
 
 
+    type_transaksi = fields.Selection([
+        ('so', 'Sales Order'),
+        ('sample', 'Sample Order')
+    ], string="Type Transaksi", default='so')
+
+    def action_confirm(self):
+        """Override action_confirm untuk menetapkan type_transaksi ke 'so'"""
+        self.write({'type_transaksi': 'so'})
+        return super(inheritSaleOrder, self).action_confirm()
+
+    def action_sample(self):
+        """Membuat fungsi action_sample dengan logika yang sama seperti action_confirm,
+        tetapi menetapkan type_transaksi ke 'sample'"""
+        self.write({'type_transaksi': 'sample'})
+        return super(inheritSaleOrder, self).action_confirm()
 def action_send_sample(self):
         for order in self:
             # Ubah status ke "Sample Sent"

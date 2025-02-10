@@ -5,18 +5,39 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <!-- Menyembunyikan order_line jika status bukan 'draft' -->
-            <!-- <xpath expr="//field[@name='order_line']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath> -->
-          <xpath expr="//field[@name='state']" position="replace">
-        <field name="state" widget="statusbar" statusbar_visible="draft,sent,sample_sent"/>
-    </xpath>
+            <!-- Mengubah label tombol Confirm menjadi Confirm SO -->
+            <xpath expr="//button[@name='action_confirm']" position="attributes">
+                <attribute name="string">Confirm SO</attribute>
+            </xpath>
 
-
-
-
-            
+            <!-- Menambahkan tombol Sample -->
+            <xpath expr="//header" position="inside">
+                <button name="action_sample" type="object" string="Sample" class="oe_highlight"/>
+            </xpath>
         </field>
     </record>
+<!-- <odoo> -->
+
+
+<record id="view_order_list_inherit" model="ir.ui.view">
+    <field name="name">sale.order.list.inherit</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_tree"/>  <!-- Gunakan jika benar ada -->
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+            <field name="type_transaksi"/>
+        </xpath>
+    </field>
+</record>
+<record id="view_order_listview_inherit" model="ir.ui.view">
+    <field name="name">sale.order.listview.inherit</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_quotation_tree"/>  <!-- Gunakan jika benar ada -->
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+            <field name="type_transaksi"/>
+        </xpath>
+    </field>
+</record>
+<!-- </odoo> -->
 </odoo>
