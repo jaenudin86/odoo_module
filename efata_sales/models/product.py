@@ -11,8 +11,11 @@ class ProductTemplate(models.Model):
     
     @api.depends('standard_price')
     def _compute_list_price(self):
-        for product in self:
-            if product.standard_price:
-                product.list_price = product.standard_price * 0.8
+            for product in self:
+                if product.standard_price:
+                    product.list_price = product.standard_price * 1.008  # Tambah 0.8%
+                else:
+                    product.list_price = 0  # Jika cost kosong, harga jual 0
+
 
     # standard_price = fields.Float(compute='_compute_standard_price', store=True, string='Cost')
