@@ -26,7 +26,8 @@ Long description of module's purpose
         'views/views.xml',
         'views/templates.xml',
         'views/sale_order_views.xml',
-        'views/report_saleorder.xml',
+        # 'views/report_saleorder.xml',
+        'views/report_price_quotation.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

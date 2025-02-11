@@ -12,8 +12,16 @@
 
             <!-- Menambahkan tombol Sample -->
             <xpath expr="//header" position="inside">
-                <button name="action_sample" type="object" string="Sample" class="oe_highlight"/>
+                <button name="action_sample" type="object" string="Sample" class="oe_highlight" invisible="state == 'sale' or state == 'sample_sent'"/>
             </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="replace">
+               <button name="action_cancel" type="object" string="Cancel" invisible="state not in ['draft', 'sent', 'sale','sample_sent'] or not id or locked" data-hotkey="x"/>
+            </xpath>
+               
+             <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="statusbar_visible">draft,sent,sale,sample_sent,approved</attribute>
+            </xpath>
+
         </field>
     </record>
 <!-- <odoo> -->
@@ -41,7 +49,7 @@
 </record>
 <!-- <?xml version="1.0" encoding="UTF-8"?> -->
 <!-- <odoo> -->
-    <record id="inherit_sale_order_line_tree_view" model="ir.ui.view">
+    <!-- <record id="inherit_sale_order_line_tree_view" model="ir.ui.view">
         <field name="name">inherit.sale.order.line.tree.view</field>
         <field name="model">sale.order.line</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
@@ -51,7 +59,7 @@
                 <field name="price_unit"/>
             </xpath>
         </field>
-    </record>
+    </record> -->
 <!-- </odoo> -->
 
 <!-- </odoo> -->
