@@ -1,22 +1,18 @@
-# -*- coding: utf-8 -*-
-# from odoo import http
+from odoo import http
+from odoo.http import request
 
+class DebugController(http.Controller):
+    @http.route('/debug/product_properties', type='http', auth='user')
+    def debug_product_properties(self):
+        # Ambil satu order line
+        line = request.env['sale.order.line'].search([], limit=2)
 
-# class EfataSales(http.Controller):
-#     @http.route('/efata_sales/efata_sales', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
-
-#     @http.route('/efata_sales/efata_sales/objects', auth='public')
-#     def list(self, **kw):
-#         return http.request.render('efata_sales.listing', {
-#             'root': '/efata_sales/efata_sales',
-#             'objects': http.request.env['efata_sales.efata_sales'].search([]),
-#         })
-
-#     @http.route('/efata_sales/efata_sales/objects/<model("efata_sales.efata_sales"):obj>', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('efata_sales.object', {
-#             'object': obj
-#         })
-
+        # Debug semua fields dalam order line
+        result = {
+            "ID": line.id,
+            "Product Name": line.product_id.name if line.product_id else "No Product",
+            # "Properties Raw": line.product_properties,  # Cek isi langsung
+            "Properties Dict": line.product_properties_dict,  # Cek apakah dict kosong
+        }
+        
+        return str(result)
