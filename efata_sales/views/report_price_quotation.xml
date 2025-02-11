@@ -31,12 +31,19 @@
                     <tbody>
                         <t t-foreach="docs.order_line" t-as="line">
                             <tr>
-                                <td><strong t-esc="line.product_id.name"/>
+                                <td><strong t-esc="line.product_id.name"/><br/>
                                  <em>Comment:</em></td>
                                 <td>
                                     <span t-esc="line.name"/><br/>
                                     <em>Is this trend? Product Trend</em>
                                 </td>
+                                <t t-if="line.product_properties_definition">
+                                    <t t-foreach="line.product_properties_definition" t-as="prop">
+                                        <tr>
+                                            <td><t t-esc="prop"/></td>
+                                        </tr>
+                                    </t>
+                                </t>
                                 <td><strong t-esc="line.price_unit"/></td>
                             </tr>
                         </t>
