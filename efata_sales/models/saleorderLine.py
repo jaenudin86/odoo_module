@@ -1,11 +1,13 @@
 from odoo import models, fields, api
+import json
 import logging
+
 _logger = logging.getLogger(__name__)
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    product_properties_dict = fields.Json(
+    product_properties_dict = fields.Text(
         string="Product Properties Dict",
         compute="_compute_product_properties_dict",
         store=False
@@ -45,5 +47,5 @@ class SaleOrderLine(models.Model):
                 _logger.info("===== FINAL PROPERTIES =====")
                 _logger.info(properties)
 
-            # Simpan ke field product_properties_dict
-            line.product_properties_dict = properties
+            # Simpan ke field product_properties_dict dalam format JSON
+            line.product_properties_dict = json.dumps(properties)

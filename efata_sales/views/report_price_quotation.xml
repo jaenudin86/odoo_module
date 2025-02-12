@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <template id="report_price_quotation_inherit" inherit_id="sale.report_saleorder">
         <xpath expr="//t[@t-call='sale.report_saleorder_raw']" position="replace">
@@ -6,59 +6,76 @@
         </xpath>
     </template>
 
-    <!-- Template Baru -->
     <template id="report_price_quotation">
         <t t-call="web.external_layout">
-        <main>
-            <div class="page">
-                <div style="text-align: center; font-size: 20px;">
-                    <strong>PRICE QUOTATION</strong>
-                </div>
+            <main>
+                <span><h3>Quotation #</h3> </span>
+                <span t-esc="docs.name"/>
                 <br/>
-                <div>
-                    <strong>To:</strong> <span t-esc="docs.partner_id.name"/><br/>
-                    <strong>Customer Address:</strong> <span t-esc="docs.partner_id.contact_address"/>
-                </div>
                 <br/>
-                <table class="table table-bordered" style="width:100%; border-collapse: collapse;">
-                    <thead>
-                        <tr style="background: #EEE;">
-                            <th>Item</th>
-                            <th>Details</th>
-                            <th>USD/Kg before Vat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <t t-foreach="docs.order_line" t-as="line">
-                            <tr>
-                                <td><strong t-esc="line.product_id.name"/><br/>
-                                 <em>Comment:</em></td>
-                                <td>
-                                    <span t-esc="line.name"/><br/>
-                                    <em>Is this trend? Product Trend</em>
-                                </td>
+                <div class="page">
+                    <div style="text-align: left; float: left; width: 33%;">
+                        <strong>Date:</strong>
+                        <span t-esc="docs.date_order.strftime('%d/%m/%Y')"/>
+                    </div>
+                    <div style="text-align: center; font-size: 20px; float: left; width: 33%;">
+                        <strong>PRICE QUOTATION</strong>
+                    </div>
+                    <div style="text-align: left; float: right; width: 33%;">
+                        <strong>To:</strong> <span t-esc="docs.partner_id.name"/><br/>
+                        <strong>Customer Address:</strong> <span t-esc="docs.partner_id.contact_address"/><br/>
+                    </div>
 
-                                <td><strong t-esc="line.price_unit"/></td>
+                    <br/><br/>
+                    <br/><br/>
+                    Dear <span t-esc="docs.partner_id.name"/>,<br/>
+                    Herewith we are pleased to quote you our best price for the following sample recommendation:
+
+                    <table class="table table-bordered" style="width:100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: #EEE;">
+                                <th>Item</th>
+                                <th>Details</th>
+                                <th>USD/Kg before VAT</th>
                             </tr>
-                        </t>
-                    </tbody>
-                </table>
-                <br/>
-                <div>
-                    <strong>Price:</strong> subject to final confirmation<br/>
-                    <strong>Packing:</strong> in 25 kg HDPE drum<br/>
-                    <strong>Delivery:</strong> 14 - 30 days from PO received<br/>
-                    <strong>Payment:</strong> transfer in 30 days from invoice date
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs.order_line" t-as="line">
+                                <tr>
+                                    <td>
+                                        <strong t-esc="line.product_id.name"/><br/>
+                                        <em>Comment:</em>
+                                    </td>
+                                    <td>
+                                        <strong t-esc="line.name"/><br/>
+                                        <em>Is this trend? 
+                                            <t t-if="line.product_properties_dict">
+                                                <t t-esc="json.loads(line.product_properties_dict).get('ternd', '')"/>
+                                            </t>
+                                        </em>
+                                    </td>
+                                    <td><strong t-esc="line.price_unit"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <br/>
+                    <div>
+                        <strong>Packing:</strong> in 25 kg HDPE drum<br/>
+                        <strong>Delivery:</strong> 14 - 30 days from PO received<br/>
+                        <strong>Payment:</strong> transfer in 30 days from invoice date
+                    </div>
+                    <br/>
+                    <div>
+                        We are looking forward to receiving your confirmation/purchase order. Thank you.
+                    </div>
+                    <br/>
+                    <div>
+                        <strong>Salesperson:</strong><br/>
+                        <span t-esc="docs.user_id.name"/>
+                    </div>
                 </div>
-                <br/>
-                <div>
-                    We are looking forward to receiving your confirmation/purchase order. Thank you.
-                </div>
-                <br/>
-                <div>
-                    <strong>Salesperson:</strong> <span t-esc="docs.user_id.name"/>
-                </div>
-            </div>
             </main>
         </t>
     </template>
