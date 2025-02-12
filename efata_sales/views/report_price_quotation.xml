@@ -50,7 +50,7 @@
                                         <strong t-esc="line.name"/><br/>
                                         <em>Is this trend? 
                                             <t t-if="line.product_properties_dict">
-                                                <t t-esc="json.loads(line.product_properties_dict).get('ternd', '')"/>
+                                                <t t-esc="json.loads(line.product_properties_dict).get('Trend', '')"/>
                                             </t>
                                         </em>
                                     </td>
