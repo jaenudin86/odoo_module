@@ -22,11 +22,18 @@ class SaleOrderLine(models.Model):
                 category = line.product_id.categ_id
 
                 # Ambil definisi properti dari kategori (list of dicts)
-                prop_def_list = category.product_properties_definition
+                prop_def_list = category.product_properties_definition or []
+
                 # Ambil nilai properti dari produk
                 prop_values = line.product_id.product_properties
 
-                # Pastikan prop_values adalah dictionary
+                # Pastikan prop_values berbentuk dictionary, bukan list/string
+                if isinstance(prop_values, str):
+                    try:
+                        prop_values = json.loads(prop_values)
+                    except json.JSONDecodeError:
+                        prop_values = {}
+
                 if not isinstance(prop_values, dict):
                     prop_values = {}
 
@@ -50,4 +57,4 @@ class SaleOrderLine(models.Model):
                 _logger.info(properties)
 
             # Simpan sebagai JSON agar tidak error di QWeb
-            line.product_properties_dict = json.dumps(properties)
+            line.product_properties_dict = json.dumps(properties, ensure_ascii=False)
