@@ -24,6 +24,10 @@ class SaleOrderLine(models.Model):
                 # Ambil definisi properti dari kategori (list of dicts)
                 prop_def_list = category.product_properties_definition or []
 
+                # Log untuk cek struktur prop_def_list
+                _logger.info("===== FULL CATEGORY PROPERTY LIST =====")
+                _logger.info(prop_def_list)
+
                 # Ambil nilai properti dari produk
                 prop_values = line.product_id.product_properties
 
@@ -39,9 +43,10 @@ class SaleOrderLine(models.Model):
                     _logger.error("Invalid prop_values format: %s", prop_values)
                     prop_values = {}
 
-                # 🔹 Konversi list ke dictionary dengan key hash (ID kategori) yang sesuai
+                # 🔹 Konversi list ke dictionary dengan key hash yang benar
                 prop_def_dict = {
-                    prop.get("id"): prop.get("string") for prop in prop_def_list if isinstance(prop, dict)
+                    prop.get("id") or prop.get("name") or prop.get("code") or "UNKNOWN": prop.get("string") 
+                    for prop in prop_def_list if isinstance(prop, dict)
                 }
 
                 _logger.info("===== PROPERTY DEFINITION (CATEGORY) =====")
@@ -52,6 +57,9 @@ class SaleOrderLine(models.Model):
 
                 # 🔹 Loop berdasarkan key hash dari kategori
                 for key_hash, label in prop_def_dict.items():
+                    if key_hash == "UNKNOWN":
+                        _logger.warning("⚠️ WARNING: Ada kategori tanpa ID yang valid!")
+
                     value = prop_values.get(key_hash, "-")  # Ambil berdasarkan hash key
 
                     # 🔹 Jika value adalah Boolean, pastikan tidak salah ubah
