@@ -1,6 +1,6 @@
 from odoo import models, fields, api
-import json
 import logging
+import json
 
 _logger = logging.getLogger(__name__)
 
@@ -21,7 +21,7 @@ class SaleOrderLine(models.Model):
             if line.product_id and line.product_id.categ_id:
                 category = line.product_id.categ_id
 
-                # Ambil definisi properti dari kategori
+                # Ambil definisi properti dari kategori (list of dicts)
                 prop_def_list = category.product_properties_definition
                 # Ambil nilai properti dari produk
                 prop_values = line.product_id.product_properties
@@ -30,8 +30,8 @@ class SaleOrderLine(models.Model):
                 if not isinstance(prop_values, dict):
                     prop_values = {}
 
-                # Ubah list definisi properti menjadi dictionary {key: string}
-                prop_def_dict = {prop["name"]: prop["string"] for prop in prop_def_list}
+                # Konversi list ke dictionary dengan key yang benar
+                prop_def_dict = {prop.get("name"): prop.get("string") for prop in prop_def_list if isinstance(prop, dict)}
 
                 _logger.info("===== PROPERTY DEFINITION (CATEGORY) =====")
                 _logger.info(prop_def_dict)
@@ -39,13 +39,15 @@ class SaleOrderLine(models.Model):
                 _logger.info("===== PROPERTY VALUES (PRODUCT) =====")
                 _logger.info(prop_values)
 
-                # Cocokkan data antara product_properties_definition dan product_properties
+                # Cocokkan ID dari kategori dengan nilai produk
                 for key, label in prop_def_dict.items():
-                    value = prop_values.get(key, "-")  # Default "-"
+                    value = prop_values.get(key, "-")  # Ambil berdasarkan key
+                    if isinstance(value, bool):
+                        value = "Yes" if value else "No"
                     properties[label] = value
 
                 _logger.info("===== FINAL PROPERTIES =====")
                 _logger.info(properties)
 
-            # Simpan ke field product_properties_dict dalam format JSON
+            # Simpan sebagai JSON agar tidak error di QWeb
             line.product_properties_dict = json.dumps(properties)

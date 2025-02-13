@@ -52,6 +52,7 @@
                                             <t t-if="line.product_properties_dict">
                                                 <t t-esc="json.loads(line.product_properties_dict).get('Trend', '')"/>
                                             </t>
+                                            
                                         </em>
                                     </td>
                                     <td><strong t-esc="line.price_unit"/></td>
