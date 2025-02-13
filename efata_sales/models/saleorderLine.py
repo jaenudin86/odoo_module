@@ -23,15 +23,14 @@ class SaleOrderLine(models.Model):
 
                 # Ambil definisi properti dari kategori (list of dicts)
                 prop_def_list = category.product_properties_definition or []
-
-                # Log untuk cek struktur prop_def_list
                 _logger.info("===== FULL CATEGORY PROPERTY LIST =====")
                 _logger.info(prop_def_list)
 
-                # Ambil nilai properti dari produk
-                prop_values = line.product_id.product_properties
+                # 🔹 Ambil nilai properti dari `product.template`
+                prop_values = line.product_id.product_tmpl_id.product_properties
                 _logger.info("===== FULL PRODUCT PROPERTY LIST =====")
                 _logger.info(prop_values)
+
                 # 🔹 Pastikan `prop_values` dalam bentuk dictionary
                 if isinstance(prop_values, str):
                     try:
