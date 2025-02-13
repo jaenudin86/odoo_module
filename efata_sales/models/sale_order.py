@@ -1,6 +1,6 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 
-class inheritSaleOrder(models.Model):
+class InheritSaleOrder(models.Model):
     _inherit = "sale.order"
 
     state = fields.Selection(selection_add=[('sample_sent', 'Sample Sent')], ondelete={'sample_sent': 'set default'})
@@ -10,52 +10,26 @@ class inheritSaleOrder(models.Model):
         ('sample', 'Sample Order')
     ], string="Type Transaksi", default='so')
 
-  
-
     def action_confirm(self):
-        """Override action_confirm untuk menetapkan type_transaksi ke 'so'"""
-        try:
-            self.filtered(lambda r: r.state in ['draft', 'sent']).write({
-                'type_transaksi': 'so',
-                'state': 'sale'
-            })
-        except Exception as e:
-            raise UserError(f"Tidak dapat mengubah status: {str(e)}")
-            return super(inheritSaleOrder, self).action_confirm()
+        """Override action_confirm untuk memastikan perubahan dilakukan setelah konfirmasi"""
+        res = super(InheritSaleOrder, self).action_confirm()  # 🔹 Konfirmasi order dulu
+        self._update_type_transaksi()  # 🔹 Baru update state setelahnya
+        return res
 
     def action_sample(self):
-        """Membuat fungsi action_sample dengan logika yang sama seperti action_confirm,
-        tetapi menetapkan type_transaksi ke 'sample'"""
-        try:
-            self.filtered(lambda r: r.state in ['draft', 'sent']).write({
-                'type_transaksi': 'sample',
-                'state': 'sample_sent'
-            })
-        except Exception as e:
-            raise UserError(f"Tidak dapat mengubah status: {str(e)}")
-            return super(inheritSaleOrder, self).action_confirm()
+        """Fungsi untuk konfirmasi sebagai sample"""
+        self.ensure_one()  # Pastikan hanya satu order diproses
 
-    def action_send_sample(self):
-        for order in self:
-            # Ubah status ke "Sample Sent"
-            order.write({'state': 'sample_sent'})
+        if self.state not in ['draft', 'sent']:
+            raise exceptions.UserError("Some orders are not in a state requiring confirmation.")
 
-            # Kurangi stok produk di Inventory
-            for line in order.order_line:
-                product = line.product_id
-                if product.type == 'product':  # Pastikan produk adalah tipe stokable
-                    # Cari quant (stok) di lokasi internal
-                    quant = self.env['stock.quant'].search([
-                        ('product_id', '=', product.id),
-                        ('location_id.usage', '=', 'internal')
-                    ], limit=1)
-                    if quant:
-                        # Kurangi quantity on hand
-                        quant.write({'quantity': quant.quantity - line.product_uom_qty})
-                    else:
-                        # Jika quant tidak ditemukan, buat quant baru
-                        self.env['stock.quant'].create({
-                            'product_id': product.id,
-                            'location_id': self.env.ref('stock.stock_location_stock').id,
-                            'quantity': -line.product_uom_qty,
-                        })
+        self.write({'type_transaksi': 'sample'})  # 🔹 Tetapkan sebagai sample dulu
+        res = super(InheritSaleOrder, self).action_confirm()  # 🔹 Konfirmasi order
+        self._update_type_transaksi()  # 🔹 Baru update state setelah konfirmasi
+        return res
+
+    def _update_type_transaksi(self):
+        """Perbarui type_transaksi dan state setelah order dikonfirmasi"""
+        for order in self.filtered(lambda r: r.state == 'sale'):  # 🔹 Hanya order yang sudah dikonfirmasi
+            if order.type_transaksi == 'sample':
+                order.write({'state': 'sample_sent'})  # 🔹 Ubah state setelah action_confirm()
