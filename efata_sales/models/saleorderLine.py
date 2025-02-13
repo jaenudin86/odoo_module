@@ -27,18 +27,22 @@ class SaleOrderLine(models.Model):
                 # Ambil nilai properti dari produk
                 prop_values = line.product_id.product_properties
 
-                # Pastikan prop_values berbentuk dictionary, bukan list/string
+                # 🔹 Pastikan `prop_values` dalam bentuk dictionary
                 if isinstance(prop_values, str):
                     try:
                         prop_values = json.loads(prop_values)
                     except json.JSONDecodeError:
+                        _logger.error("JSON Decode Error: %s", prop_values)
                         prop_values = {}
 
                 if not isinstance(prop_values, dict):
+                    _logger.error("Invalid prop_values format: %s", prop_values)
                     prop_values = {}
 
-                # Konversi list ke dictionary dengan key yang benar
-                prop_def_dict = {prop.get("name"): prop.get("string") for prop in prop_def_list if isinstance(prop, dict)}
+                # 🔹 Konversi list ke dictionary dengan key hash (ID kategori) yang sesuai
+                prop_def_dict = {
+                    prop.get("id"): prop.get("string") for prop in prop_def_list if isinstance(prop, dict)
+                }
 
                 _logger.info("===== PROPERTY DEFINITION (CATEGORY) =====")
                 _logger.info(prop_def_dict)
@@ -46,22 +50,27 @@ class SaleOrderLine(models.Model):
                 _logger.info("===== PROPERTY VALUES (PRODUCT) =====")
                 _logger.info(prop_values)
 
-                # Cocokkan ID dari kategori dengan nilai produk
-                for key, label in prop_def_dict.items():
-                    value = prop_values.get(key, "-")  # Ambil berdasarkan key
+                # 🔹 Loop berdasarkan key hash dari kategori
+                for key_hash, label in prop_def_dict.items():
+                    value = prop_values.get(key_hash, "-")  # Ambil berdasarkan hash key
 
-                # 🔹 **Fix utama: Jangan ubah string jadi "No" hanya karena nilainya False**
+                    # 🔹 Jika value adalah Boolean, pastikan tidak salah ubah
                     if isinstance(value, bool):
-                        value = "Yes" if value else "-"
+                        value = "Yes" if value else "No"
 
-                    # Jika value kosong atau False yang salah baca, ubah jadi "-"
+                    # 🔹 Bersihkan string agar tidak ada spasi di awal/akhir
+                    if isinstance(value, str):
+                        value = value.strip()
+
+                    # 🔹 Jangan ubah `False` atau angka, hanya ubah string kosong dan `None`
                     if value in ["", False, None]:
                         value = "-"
 
+                    # 🔹 Simpan hasil ke dictionary yang sesuai
                     properties[label] = value
 
                 _logger.info("===== FINAL PROPERTIES =====")
                 _logger.info(properties)
 
-            # Simpan sebagai JSON agar tidak error di QWeb
+            # 🔹 Simpan sebagai JSON agar aman di QWeb
             line.product_properties_dict = json.dumps(properties, ensure_ascii=False)
