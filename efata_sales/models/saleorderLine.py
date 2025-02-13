@@ -49,8 +49,15 @@ class SaleOrderLine(models.Model):
                 # Cocokkan ID dari kategori dengan nilai produk
                 for key, label in prop_def_dict.items():
                     value = prop_values.get(key, "-")  # Ambil berdasarkan key
+
+                # 🔹 **Fix utama: Jangan ubah string jadi "No" hanya karena nilainya False**
                     if isinstance(value, bool):
-                        value = "Yes" if value else "No"
+                        value = "Yes" if value else "-"
+
+                    # Jika value kosong atau False yang salah baca, ubah jadi "-"
+                    if value in ["", False, None]:
+                        value = "-"
+
                     properties[label] = value
 
                 _logger.info("===== FINAL PROPERTIES =====")
