@@ -48,7 +48,7 @@
                                     </td>
                                     <td>
                                         <strong t-esc="line.name"/><br/>
-                                        <em>Is this trend? 
+                                        <em>In the trend of  
                                             <t t-if="line.product_properties_dict">
                                                 <t t-esc="json.loads(line.product_properties_dict).get('Trend', '')"/>
                                             </t>
