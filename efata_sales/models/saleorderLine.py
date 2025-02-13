@@ -60,19 +60,19 @@ class SaleOrderLine(models.Model):
                     if key_hash == "UNKNOWN":
                         _logger.warning("⚠️ WARNING: Ada kategori tanpa ID yang valid!")
 
-                    value = prop_values.get(key_hash, "-")  # Ambil berdasarkan hash key
+                    value = prop_values.get(key_hash)  # Ambil berdasarkan hash key
 
-                    # 🔹 Jika value adalah Boolean, pastikan tidak salah ubah
-                    if isinstance(value, bool):
+                    # 🔹 Perbaikan utama: Jangan ubah nilai valid menjadi "-"
+                    if value is None or value == "":
+                        value = "-"
+
+                    # 🔹 Jika value adalah Boolean, ubah ke format "Yes"/"No"
+                    elif isinstance(value, bool):
                         value = "Yes" if value else "No"
 
                     # 🔹 Bersihkan string agar tidak ada spasi di awal/akhir
-                    if isinstance(value, str):
+                    elif isinstance(value, str):
                         value = value.strip()
-
-                    # 🔹 Jangan ubah `False` atau angka, hanya ubah string kosong dan `None`
-                    if value in ["", False, None]:
-                        value = "-"
 
                     # 🔹 Simpan hasil ke dictionary yang sesuai
                     properties[label] = value
