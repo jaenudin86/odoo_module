@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="simpanan_report"
+            string="Simpanan Report"
+            model="ksp.simpanan"
+            report_type="qweb-pdf"
+            name="Koperasi-Innograph.report_simpanan_koperasi"
+            file="Koperasi-Innograph.report_simpanan_koperasi"/>
+    </data>
+</odoo>
