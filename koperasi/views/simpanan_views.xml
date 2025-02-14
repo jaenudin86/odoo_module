@@ -61,7 +61,6 @@
         <record model="ir.actions.act_window" id="ksp_simpanan_action">
             <field name="name">Simpanan</field>
             <field name="res_model">ksp.simpanan</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 
@@ -75,7 +74,6 @@
             id="submenu_ksp_simpanan"
             name="Simpanan"
             parent="menu_ksp_simpanan"
-
             action="ksp_simpanan_action"
         />
 
