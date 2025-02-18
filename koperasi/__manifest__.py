@@ -29,8 +29,8 @@ feature :
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
-        'views/templates.xml',
-        'views/simpanan_views.xml',
+        # 'views/templates.xml',
+        # 'views/simpanan_views.xml',
         # 'report/pinjaman_koperasi_report.xml',
         # 'report/pinjaman_report.xml',
         # 'report/simpanan_koperasi_report.xml',
