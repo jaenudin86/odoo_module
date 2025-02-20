@@ -24,9 +24,21 @@
          <!-- <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
             <field name="tax_amount" string="Pajak" attrs="{'invisible': [('order_id.incl_tax', '=', False)]}"/>
         </xpath> -->
-    <xpath expr="//field[@name='order_line']//group[@invisible='display_type']/field[@name='price_unit']" position="after">
-    <field name="tax_amount" string="Pajak" attrs="{'invisible': [('order_id.incl_tax', '=', False)]}"/>
-    </xpath>
+    <!-- <xpath expr="//field[@name='order_line']/form/group/group//field[@name='price_unit']" position="after">
+        <field name="tax_amount" string="Tax Amount" attrs="{'invisible': [('order_id.incl_tax', '=', False)]}"/>
+    </xpath> -->
+<!-- <xpath expr="//field[@name='order_line']//form//field[@name='price_unit']" position="after">
+    <field name="tax_amount" string="Tax Amount" invisible="1"/>
+</xpath> -->
+                <xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="before">
+                    <field name="tax_amount" string="Tax Amount" attrs="{'column_invisible': [('order_id.incl_tax', '=', true)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/list/field[@name='price_unit']" position="after">
+                    <field name="tax_amount" string="Tax Amount"  optional="show"/>
+                </xpath>
+
+
+        
 
 
 
