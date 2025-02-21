@@ -28,6 +28,7 @@ class InheritSaleOrder(models.Model):
         self._update_type_transaksi()  # 🔹 Baru update state setelahnya
         return res
 
+
     def action_sample(self):
         """Fungsi untuk konfirmasi sebagai sample"""
         self.ensure_one()  # Pastikan hanya satu order diproses
