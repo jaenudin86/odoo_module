@@ -11,12 +11,12 @@ class InheritSaleOrder(models.Model):
     ], string="Report Type", default='quotation')
 
     incl_tax = fields.Boolean(string="Incl. Tax", default=False)
-    @api.onchange('incl_tax')
-    def _compute_incl_tax(self):
-        self._logger.info("=== _compute_price_unit EXECUTED ===")
-        for order in self:
-            for line in order.order_line:
-                line._compute_price_with_tax() # Ensure price unit change is handled
+    # @api.onchange('incl_tax')
+    # def _compute_incl_tax(self):
+    #     self._logger.info("=== _compute_price_unit EXECUTED ===")
+    #     for order in self:
+    #         for line in order.order_line:
+    #             line._compute_price_with_tax() # Ensure price unit change is handled
     type_transaksi = fields.Selection([
         ('so', 'Sales Order'),
         ('sample', 'Sample Order')
