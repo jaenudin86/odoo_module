@@ -11,12 +11,12 @@ class InheritSaleOrder(models.Model):
     ], string="Report Type", default='quotation')
 
     incl_tax = fields.Boolean(string="Incl. Tax", default=False)
-    # @api.onchange('incl_tax')
-    # def _compute_incl_tax(self):
-    #     self._logger.info("=== _compute_price_unit EXECUTED ===")
-    #     for order in self:
-    #         for line in order.order_line:
-    #             line._compute_price_with_tax() # Ensure price unit change is handled
+    @api.onchange('incl_tax')
+    def _compute_incl_tax(self):
+        self._logger.info("=== _compute_price_unit EXECUTED ===")
+        for order in self:
+            for line in order.order_line:
+                line._compute_price_with_tax() # Ensure price unit change is handled
     type_transaksi = fields.Selection([
         ('so', 'Sales Order'),
         ('sample', 'Sample Order')
@@ -27,7 +27,6 @@ class InheritSaleOrder(models.Model):
         res = super(InheritSaleOrder, self).action_confirm()  # 🔹 Konfirmasi order dulu
         self._update_type_transaksi()  # 🔹 Baru update state setelahnya
         return res
-
 
     def action_sample(self):
         """Fungsi untuk konfirmasi sebagai sample"""
@@ -51,12 +50,12 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
     tax_amount = fields.Monetary(string="Pajak", compute="_compute_price_with_tax", store=True)
 
-    # @api.depends('product_id', 'tax_id', 'price_unit', 'order_id.incl_tax')
-    # def _compute_price_with_tax(self):
-    #     """Menghitung pajak hanya jika checkbox aktif"""
-    #     for line in self:
-    #         if line.order_id.incl_tax:
-    #             tax_rate = sum(line.tax_id.mapped('amount')) / 100
-    #             line.tax_amount = line.price_unit * tax_rate
-    #         else:
-    #             line.tax_amount = 0.0
+    @api.depends('product_id', 'tax_id', 'price_unit', 'order_id.incl_tax')
+    def _compute_price_with_tax(self):
+        """Menghitung pajak hanya jika checkbox aktif"""
+        for line in self:
+            if line.order_id.incl_tax:
+                tax_rate = sum(line.tax_id.mapped('amount')) / 100
+                line.tax_amount = line.price_unit * tax_rate
+            else:
+                line.tax_amount = 0.0
