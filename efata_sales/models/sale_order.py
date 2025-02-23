@@ -10,6 +10,7 @@ class InheritSaleOrder(models.Model):
         ('submission', 'Submission')
     ], string="Report Type", default='quotation')
 
+
     incl_tax = fields.Boolean(string="Incl. Tax", default=False)
     @api.onchange('incl_tax')
     def _compute_incl_tax(self):
