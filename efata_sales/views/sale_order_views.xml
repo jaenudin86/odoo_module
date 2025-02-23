@@ -32,12 +32,12 @@
 </xpath> -->
 
 
-                <!-- <xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="before">
+                <xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="before">
                     <field name="tax_amount" string="Tax Amount" attrs="{'column_invisible': [('order_id.incl_tax', '=', true)]}"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/list/field[@name='price_unit']" position="after">
                     <field name="tax_amount" string="Tax Amount"  optional="show"/>
-                </xpath> -->
+                </xpath>
 
 
         
