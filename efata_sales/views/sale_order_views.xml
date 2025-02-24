@@ -30,6 +30,8 @@
 <!-- <xpath expr="//field[@name='order_line']//form//field[@name='price_unit']" position="after">
     <field name="tax_amount" string="Tax Amount" invisible="1"/>
 </xpath> -->
+
+
                 <xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="before">
                     <field name="tax_amount" string="Tax Amount" attrs="{'column_invisible': [('order_id.incl_tax', '=', true)]}"/>
                 </xpath>
