@@ -2,108 +2,116 @@
 <odoo>
     <template id="report_price_quotation_inherit" inherit_id="sale.report_saleorder">
         <xpath expr="//t[@t-call='sale.report_saleorder_raw']" position="replace">
-            <t t-call="efata_sales.report_price_quotation"/>
+            <t t-call="efata_sales.report_price_quotation" />
         </xpath>
     </template>
 
     <template id="report_price_quotation">
         <t t-call="web.external_layout">
             <main>
-                <span><h3>Quotation #</h3> </span>
-                <span t-esc="docs.name"/>
-                <br/>
-                <br/>
+                <span>
+                    <h3>Quotation #</h3>
+                </span>
+                <span t-esc="docs.name" />
+                <br />
+                <br />
                 <div class="page">
                     <div style="text-align: left; float: left; width: 33%;">
                         <strong>Date:</strong>
-                        <span t-esc="docs.date_order.strftime('%d/%m/%Y')"/>
+                        <span t-esc="docs.date_order.strftime('%d/%m/%Y')" />
                     </div>
                     <div style="text-align: center; font-size: 20px; float: left; width: 33%;">
-                      
-                                <t t-if="docs.report_type == 'quotation'">
-                                      <strong>PRICE QUOTATION</strong>
-                                </t>
-                                <t t-elif="docs.report_type == 'submission'">
-                                    
-                                     <strong>PRICE SUBMISSION</strong>
-                                </t>
+
+                        <t t-if="docs.report_type == 'quotation'">
+                            <strong>PRICE QUOTATION</strong>
+                        </t>
+                        <t t-elif="docs.report_type == 'submission'">
+
+                            <strong>SAMPLE SUBMISSION</strong>
+                        </t>
                     </div>
                     <div style="text-align: left; float: right; width: 33%;">
-                        <strong>To:</strong> <span t-esc="docs.partner_id.name"/><br/>
-                        <strong>Customer Address:</strong> <span t-esc="docs.partner_id.contact_address"/><br/>
+                        <strong>To:</strong> <span t-esc="docs.partner_id.name" /><br />
+                        <strong>Customer Address:</strong> <span t-esc="docs.partner_id.contact_address" /><br />
                     </div>
 
-                    <br/><br/>
-                    <br/><br/>
-                    Dear <span t-esc="docs.partner_id.name"/>,<br/>
-                    Herewith we are pleased to quote you our best price for the following sample recommendation:
-
+                    <br /><br />
+                    <br /><br />
+                    <t t-if="docs.report_type == 'quotation'">
+                        Dear <span t-esc="docs.partner_id.name" />,<br />
+                        Herewith we are pleased to quote you our best price for the following sample recommendation:
+                    </t>
                     <table class="table table-bordered" style="width:100%; border-collapse: collapse;">
                         <thead>
                             <tr style="background: #EEE;">
                                 <th>Item</th>
                                 <th>Details</th>
 
-                               
-                            <t t-if="docs.incl_tax">
-                                <th>USD/Kg</th>
-                            </t>
-                            <t t-else="">
-                                <th>USD/Kg excl VAT</th>
-                            </t>
+                                <t t-if="docs.report_type == 'quotation'">
+                                    <t t-if="docs.incl_tax">
+                                        <th>USD/Kg</th>
+                                    </t>
+                                    <t t-else="">
+                                        <th>USD/Kg excl VAT</th>
+                                    </t>
+                                </t>
                             </tr>
                         </thead>
                         <tbody>
                             <t t-foreach="docs.order_line" t-as="line">
                                 <tr>
                                     <td>
-                                        <strong t-esc="line.product_id.name"/><br/>
+                                        <strong  /><br />
                                         <em>Comment:</em>
                                     </td>
                                     <td>
-                                        <strong t-esc="line.name"/><br/>
-                                        <em>In the trend of  
+                                        <strong t-esc="line.name" /><br />
+                                        <em>In the trend of
                                             <t t-if="line.product_properties_dict">
-                                                <t t-esc="json.loads(line.product_properties_dict).get('Trend', '')"/>
+                                                <t t-esc="json.loads(line.product_properties_dict).get('Trend', '')" />
                                             </t>
-                                            
+
                                         </em>
-                                        
+
                                     </td>
-                                    <t t-if="docs.incl_tax">
-                                    <td><strong t-esc="line.price_unit + line.tax_amount"/></td>
+                                    <t t-if="docs.report_type == 'quotation'">
+                                        <t t-if="docs.incl_tax">
+                                            <td><strong t-esc="line.price_unit + line.tax_amount" /></td>
+                                        </t>
+                                        <t t-else="">
+                                            <td><strong t-esc="line.price_unit" /></td>
+                                        </t>
                                     </t>
-                                    <t t-else="">
-                                    <td><strong t-esc="line.price_unit"/></td>
-                                    </t>
-                                   
-                                    </tr>
+                                </tr>
                             </t>
                         </tbody>
                     </table>
 
-                    <br/>
+                    <br />
+                    <t t-if="docs.report_type == 'quotation'">
+                        <t t-if="docs.note">
+                            <span t-field="docs.note"
+                                t-attf-style="#{'text-align:justify;text-justify:inter-word;' if docs.company_id.terms_type != 'html' else ''}"
+                                name="order_note" />
+                        </t>
+                        <t t-else="">
 
-                    <t t-if="docs.note">
-                        <span t-field="docs.note" t-attf-style="#{'text-align:justify;text-justify:inter-word;' if docs.company_id.terms_type != 'html' else ''}" name="order_note"/>
+                            <div>
+                                <strong>Packing:</strong> in 25 kg HDPE drum<br />
+                                <strong>Delivery:</strong> 14 - 30 days from PO received<br />
+                                <strong>Payment:</strong> transfer in 30 days from invoice date
+                            </div>
+                            <br />
+                            <div>
+                                We are looking forward to receiving your confirmation/purchase order. Thank you.
+                            </div>
+                        </t>
                     </t>
-                      <t t-else="">
-                    
+                    <br />
+
                     <div>
-                        <strong>Packing:</strong> in 25 kg HDPE drum<br/>
-                        <strong>Delivery:</strong> 14 - 30 days from PO received<br/>
-                        <strong>Payment:</strong> transfer in 30 days from invoice date
-                    </div>
-                    <br/>
-                    <div>
-                        We are looking forward to receiving your confirmation/purchase order. Thank you.
-                    </div>
-                     </t>
-                    <br/>
-                    
-                    <div>
-                        <strong>Salesperson:</strong><br/>
-                        <span t-esc="docs.user_id.name"/>
+                        <strong>Salesperson:</strong><br />
+                        <span t-esc="docs.user_id.name" />
                     </div>
                 </div>
             </main>
