@@ -108,11 +108,12 @@
                         </t>
                     </t>
                     <br />
-
+                    <t t-if="docs.report_type == 'quotation'">
                     <div>
                         <strong>Salesperson:</strong><br />
                         <span t-esc="docs.user_id.name" />
                     </div>
+                      </t>
                 </div>
             </main>
         </t>
