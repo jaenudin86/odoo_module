@@ -21,15 +21,7 @@
             <field name="report_type" widget="radio"/>
             <field name="incl_tax"/>
         </xpath>
-         <!-- <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
-            <field name="tax_amount" string="Pajak" attrs="{'invisible': [('order_id.incl_tax', '=', False)]}"/>
-        </xpath> -->
-    <!-- <xpath expr="//field[@name='order_line']/form/group/group//field[@name='price_unit']" position="after">
-        <field name="tax_amount" string="Tax Amount" attrs="{'invisible': [('order_id.incl_tax', '=', False)]}"/>
-    </xpath> -->
-<!-- <xpath expr="//field[@name='order_line']//form//field[@name='price_unit']" position="after">
-    <field name="tax_amount" string="Tax Amount" invisible="1"/>
-</xpath> -->
+
 
 
                 <xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="before">
@@ -64,6 +56,9 @@
         <xpath expr="//field[@name='name']" position="after">
             <field name="type_transaksi"/>
         </xpath>
+        <xpath expr="//field[@name='type_transaksi']" position="after">
+            <field name="report_type"/>
+        </xpath>
     </field>
 </record>
 <record id="view_order_listview_inherit" model="ir.ui.view">
@@ -73,6 +68,9 @@
     <field name="arch" type="xml">
         <xpath expr="//field[@name='name']" position="after">
             <field name="type_transaksi"/>
+        </xpath>
+        <xpath expr="//field[@name='type_transaksi']" position="after">
+            <field name="report_type"/>
         </xpath>
 
     </field>
