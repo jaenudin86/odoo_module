@@ -12,5 +12,5 @@ class ProductTemplate(models.Model):
     @api.depends('standard_price')
     def _compute_list_price(self):
             for product in self:
-                    product.list_price = product.standard_price / 0.7
+                    product.list_price = product.standard_price / 0.75
     list_price = fields.Float(compute='_compute_list_price',  readonly=False)
