@@ -8,11 +8,13 @@
 
     <template id="report_price_quotation">
         <t t-call="web.external_layout">
+        <t t-set="doc_name" t-value="'SalesOrder_' + docs.name + '_' + (docs.report_type or 'Report') + '_' + (docs.color or '')"/>
+        <t t-set="report_name" t-value="doc_name"/>
             <main>
-                <span>
+                <!-- <span>
                     <h3>Quotation #</h3>
                 </span>
-                <span t-esc="docs.name" />
+                <span t-esc="docs.name" /> -->
                 <br />
                 <br />
                 <div class="page">

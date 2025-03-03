@@ -20,6 +20,7 @@ Long description of module's purpose
     # any module necessary for this one to work correctly
     'depends': ['base','sale'],
 
+
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
@@ -28,7 +29,14 @@ Long description of module's purpose
         'views/sale_order_views.xml',
         # 'views/report_saleorder.xml',
         'views/report_price_quotation.xml',
+        'views/report_saleorder.xml',
     ],
+    'assets': {
+            'web.assets_backend': [
+                # 'efata_sales/static/src/js/colored_radio.js',
+                # 'efata_sales/static/src/js/colored_circle.js',
+            ],
+    },
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',

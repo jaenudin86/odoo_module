@@ -1,5 +1,6 @@
 from odoo import models, fields, api, exceptions
 import logging
+from odoo.exceptions import UserError
 class InheritSaleOrder(models.Model):
     _inherit = "sale.order"
     _logger = logging.getLogger(__name__)
@@ -9,7 +10,11 @@ class InheritSaleOrder(models.Model):
         ('quotation', 'Quotation'),
         ('submission', 'Submission')
     ], string="Report Type", default='quotation')
-
+    def write(self, vals):
+        for order in self:
+            if order.state != 'draft':  # Jika status bukan draft (Quotation)
+                raise UserError("Anda tidak dapat mengedit Sales Order setelah dikonfirmasi.")
+        return super(InheritSaleOrder, self).write(vals)
     incl_tax = fields.Boolean(string="Incl. Tax", default=False)
     @api.onchange('incl_tax')
     def _compute_incl_tax(self):
@@ -45,17 +50,46 @@ class InheritSaleOrder(models.Model):
         for order in self.filtered(lambda r: r.state == 'sale'):  # 🔹 Hanya order yang sudah dikonfirmasi
             if order.type_transaksi == 'sample':
                 order.write({'state': 'sample_sent'})  # 🔹 Ubah state setelah action_confirm()
-        
+
+    color = fields.Selection([
+        ('white', 'White'),
+        ('red', 'Red'),
+        ('yellow', 'Yellow'),
+        ('green', 'Green'),
+    ], string="Color", default='white')
+
+    color_index = fields.Integer("Color Index", compute="_compute_color_index")
+
+    def _compute_color_index(self):
+        """ Mengubah warna pilihan menjadi indeks untuk Odoo tree view """
+        color_mapping = {
+            'white': 0,
+            'red': 1,
+            'yellow': 2,
+            'green': 3,
+        }
+        for record in self:
+            record.color_index = color_mapping.get(record.color, 0)
+    
+    
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
     tax_amount = fields.Monetary(string="Pajak", compute="_compute_price_with_tax", store=True)
 
-    @api.depends('product_id', 'tax_ids', 'price_unit', 'order_id.incl_tax')
+    @api.depends('product_id', 'tax_id', 'price_unit', 'order_id.incl_tax')
     def _compute_price_with_tax(self):
         """Menghitung pajak hanya jika checkbox aktif"""
         for line in self:
             if line.order_id.incl_tax:
-                tax_rate = sum(line.tax_ids.mapped('amount')) / 100
+                tax_rate = sum(line.tax_id.mapped('amount')) / 100
                 line.tax_amount = line.price_unit * tax_rate
             else:
                 line.tax_amount = 0.0
+
+# class SaleOrderReport(models.AbstractModel):
+#     _name = 'report.sale.report_saleorder'
+#     _inherit = 'report.sale.report_saleorder'
+
+
+    
+

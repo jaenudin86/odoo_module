@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Existing Report Action -->
+        <record id="sale.action_report_saleorder" model="ir.actions.report">
+            <field name="print_report_name">
+                "'SalesOrder_' + object.name + '_' + (object.report_type or 'Report') + '_' + (object.color or '')"
+            </field>
+        </record>
+    </data>
+</odoo>
