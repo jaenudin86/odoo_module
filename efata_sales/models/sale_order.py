@@ -10,11 +10,11 @@ class InheritSaleOrder(models.Model):
         ('quotation', 'Quotation'),
         ('submission', 'Submission')
     ], string="Report Type", default='quotation')
-    def write(self, vals):
-        for order in self:
-            if order.state != 'draft':  # Jika status bukan draft (Quotation)
-                raise UserError("Anda tidak dapat mengedit Sales Order setelah dikonfirmasi.")
-        return super(InheritSaleOrder, self).write(vals)
+    # def write(self, vals):
+    #     for order in self:
+    #         if order.state != 'draft':  # Jika status bukan draft (Quotation)
+    #             raise UserError("Anda tidak dapat mengedit Sales Order setelah dikonfirmasi.")
+    #     return super(InheritSaleOrder, self).write(vals)
     incl_tax = fields.Boolean(string="Incl. Tax", default=False)
     @api.onchange('incl_tax')
     def _compute_incl_tax(self):
