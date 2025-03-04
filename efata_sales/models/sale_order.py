@@ -1,5 +1,9 @@
 from odoo import models, fields, api, exceptions
 import logging
+import logging
+import json
+
+_logger = logging.getLogger(__name__)
 from odoo.exceptions import UserError
 class InheritSaleOrder(models.Model):
     _inherit = "sale.order"
@@ -57,7 +61,11 @@ class InheritSaleOrder(models.Model):
         ('yellow', 'Yellow'),
         ('green', 'Green'),
     ], string="Color", default='white')
-
+    is_new = fields.Boolean(default=True)
+    def write(self, vals):  
+        # if 'name' in vals and self.name == 'New':
+        vals['is_new'] = False
+        return super(InheritSaleOrder, self).write(vals)
     color_index = fields.Integer("Color Index", compute="_compute_color_index")
 
     def _compute_color_index(self):
@@ -75,7 +83,11 @@ class InheritSaleOrder(models.Model):
     @api.constrains('partner_id', 'order_line', 'amount_total','report_type','type_transaksi','color')
     def _check_editable(self):
         for order in self:
-            if   order._origin.partner_id != False:  # Hanya bisa diedit jika state draft/sent
+            _logger.info(f"DEBUG: Order ID: {order.is_new}, Name: {order.name}, State: {order.state}")
+            print(f"DEBUG: Order ID: {order.is_new}, Name: {order.name}, State: {order.state}")
+            if  order.is_new == True:  # Order belum tersimpan, masih bisa diedit
+                continue    
+            else:
                 raise UserError("You cannot edit the Sales Order after it has been confirmed or if it has a Sales Order number!")
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
