@@ -75,8 +75,8 @@ class InheritSaleOrder(models.Model):
     @api.constrains('partner_id', 'order_line', 'amount_total','report_type','type_transaksi','color')
     def _check_editable(self):
         for order in self:
-            if order.state not in ('draft'):  # Hanya bisa diedit jika state draft/sent
-                raise UserError("Tidak dapat mengedit Sales Order setelah dikonfirmasi!")
+            if order.state != 'draft' or order.name:  # Hanya bisa diedit jika state draft/sent
+                raise UserError("You cannot edit the Sales Order after it has been confirmed or if it has a Sales Order number!")
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
     tax_amount = fields.Monetary(string="Pajak", compute="_compute_price_with_tax", store=True)
