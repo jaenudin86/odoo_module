@@ -9,9 +9,10 @@
             <xpath expr="//button[@name='action_confirm']" position="attributes">
                 <attribute name="string">Confirm SO</attribute>
             </xpath>
-            <xpath expr="//form" position="attributes">
-            <attribute name="edit">context.get('default_state') in ('draft')</attribute>
-            </xpath>
+
+            
+ 
+
             <!-- Menambahkan tombol Sample -->
             <xpath expr="//header" position="inside">
                 <button name="action_sample" type="object" string="Send Sample" class="oe_highlight" invisible="state == 'sale' or state == 'sample_sent'"/>
