@@ -80,7 +80,7 @@ class InheritSaleOrder(models.Model):
             record.color_index = color_mapping.get(record.color, 0)
         
    
-    @api.constrains('partner_id', 'order_line', 'amount_total','report_type','type_transaksi','color')
+    @api.constrains('order_line')
     def _check_editable(self):
         for order in self:
             _logger.info(f"DEBUG: Order ID: {order.is_new}, Name: {order.name}, State: {order.state}")
