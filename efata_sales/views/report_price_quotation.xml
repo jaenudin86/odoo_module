@@ -91,7 +91,7 @@
 
                     <br />
                     <t t-if="docs.report_type == 'quotation'">
-                        <t t-if="docs.note">
+                        <t t-if="docs.note and docs.note.strip()">
                             <span t-field="docs.note"
                                 t-attf-style="#{'text-align:justify;text-justify:inter-word;' if docs.company_id.terms_type != 'html' else ''}"
                                 name="order_note" />
