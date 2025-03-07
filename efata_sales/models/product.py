@@ -8,7 +8,7 @@ class ProductTemplate(models.Model):
     #     for product in self:
     #         if product.list_price:
     #             product.standard_price = product.list_price * 0.8
-    
+    reference2 = fields.Char(string="Reference 2")
     @api.depends('standard_price')
     def _compute_list_price(self):
             for product in self:

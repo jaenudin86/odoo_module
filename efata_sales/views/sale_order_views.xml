@@ -9,44 +9,49 @@
             <xpath expr="//button[@name='action_confirm']" position="attributes">
                 <attribute name="string">Confirm SO</attribute>
             </xpath>
-
-            
- 
-
             <!-- Menambahkan tombol Sample -->
             <xpath expr="//header" position="inside">
-                <button name="action_sample" type="object" string="Send Sample" class="oe_highlight" invisible="state == 'sale' or state == 'sample_sent'"/>
+                <button name="action_sample" type="object" string="Send Sample" class="oe_highlight"
+                    invisible="state == 'sale' or state == 'sample_sent'" />
             </xpath>
             <xpath expr="//button[@name='action_cancel']" position="replace">
-               <button name="action_cancel" type="object" string="Cancel" invisible="state not in ['draft', 'sent', 'sale','sample_sent'] or not id or locked" data-hotkey="x"/>
+                <button name="action_cancel" type="object" string="Cancel"
+                    invisible="state not in ['draft', 'sent', 'sale','sample_sent'] or not id or locked"
+                    data-hotkey="x" />
             </xpath>
-        <xpath expr="//field[@name='partner_id']" position="after">
-            <field name="report_type" widget="radio"/>
-            <field name="incl_tax"/>
-        </xpath>
-        <xpath expr="//field[@name='incl_tax']" position="after">
-           <field name="color"  string="Color Mark"  widget="radio"/>
-           
-        </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="report_type" widget="radio" />
+                <field name="incl_tax" />
+            </xpath>
+            <xpath expr="//field[@name='incl_tax']" position="after">
+                <field name="color" string="Color Mark" widget="radio" />
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="project"  />
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="before">
+                <field name="tax_amount" string="Tax Amount"
+                    attrs="{'column_invisible': [('order_id.incl_tax', '=', true)]}" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_unit']" position="after">
+                <field name="tax_amount" string="Tax Amount" optional="show" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='tax_id']" position="after">
+                <field name="notes" string="Notes" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='tax_id']" position="after">
+                <field name="notes" string="Notes" optional="show" />
+            </xpath>
 
 
 
-                <xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="before">
-                    <field name="tax_amount" string="Tax Amount" attrs="{'column_invisible': [('order_id.incl_tax', '=', true)]}"/>
-                </xpath>
-                <xpath expr="//field[@name='order_line']/list/field[@name='price_unit']" position="after">
-                    <field name="tax_amount" string="Tax Amount"  optional="show"/>
-                </xpath>
-
-
-        
 
 
 
 
 
-
-             <xpath expr="//field[@name='state']" position="attributes">
+            <xpath expr="//field[@name='state']" position="attributes">
                 <attribute name="statusbar_visible">draft,sent,sale,sample_sent,approved</attribute>
             </xpath>
 

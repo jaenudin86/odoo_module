@@ -30,6 +30,7 @@ Long description of module's purpose
         # 'views/report_saleorder.xml',
         'views/report_price_quotation.xml',
         'views/report_saleorder.xml',
+        'views/product_template_views.xml',
     ],
     'assets': {
             'web.assets_backend': [

@@ -19,6 +19,8 @@ class InheritSaleOrder(models.Model):
     #         if order.state != 'draft':  # Jika status bukan draft (Quotation)
     #             raise UserError("Anda tidak dapat mengedit Sales Order setelah dikonfirmasi.")
     #     return super(InheritSaleOrder, self).write(vals)
+
+    project = fields.Char(string="Project")
     incl_tax = fields.Boolean(string="Incl. Tax", default=False)
     @api.onchange('incl_tax')
     def _compute_incl_tax(self):
@@ -92,7 +94,7 @@ class InheritSaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
     tax_amount = fields.Monetary(string="Pajak", compute="_compute_price_with_tax", store=True)
-
+    notes = fields.Char(string="Notes")
     @api.depends('product_id', 'tax_id', 'price_unit', 'order_id.incl_tax')
     def _compute_price_with_tax(self):
         """Menghitung pajak hanya jika checkbox aktif"""
