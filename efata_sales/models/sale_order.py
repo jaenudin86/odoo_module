@@ -22,6 +22,19 @@ class InheritSaleOrder(models.Model):
 
     project = fields.Char(string="Project")
     incl_tax = fields.Boolean(string="Incl. Tax", default=False)
+    @api.model
+    def create(self, vals):
+        """ IF condition untuk memilih sequence berdasarkan report_type """
+        _logger.info(f"DEBUG: Order ID: {vals.get('report_type')}, Name: {vals.get('report_type')}, State: {vals.get('report_type')}")
+        try:
+            if vals.get('report_type') == 'quotation':
+                vals['name'] = self.env['ir.sequence'].next_by_code('sales.quotation')
+            else:
+                vals['name'] = self.env['ir.sequence'].next_by_code('sales.order')
+        except Exception as e:
+            _logger.error(f"Error generating sequence: {e}")
+            raise
+        return super(InheritSaleOrder, self).create(vals)
     @api.onchange('incl_tax')
     def _compute_incl_tax(self):
         self._logger.info("=== _compute_price_unit EXECUTED ===")

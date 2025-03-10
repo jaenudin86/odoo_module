@@ -13,16 +13,18 @@
             <main>
                 <!-- <span>
                     <h3>Quotation #</h3>
-                </span>
-                <span t-esc="docs.name" /> -->
+                </span> -->
+                <!-- <span t-esc="docs.name" /> -->
                 <br />
                 <br />
                 <div class="page">
                     <div style="text-align: left; float: left; width: 33%;">
                         <strong>Date:</strong>
                         <span t-esc="docs.date_order.strftime('%d/%m/%Y')" />
+                         <strong></strong><br />
+                        <span t-esc="docs.name" />
                     </div>
-                    <div style="text-align: center; font-size: 20px; float: left; width: 33%;">
+                    <!-- <div style="text-align: center; font-size: 20px; float: left; width: 33%;">
 
                         <t t-if="docs.report_type == 'quotation'">
                             <strong>PRICE QUOTATION</strong>
@@ -31,10 +33,10 @@
 
                             <strong>SAMPLE SUBMISSION</strong>
                         </t>
-                    </div>
+                    </div> -->
                     <div style="text-align: left; float: right; width: 33%;">
-                        <strong>To:</strong> <span t-esc="docs.partner_id.name" /><br />
-                        <strong>Customer Address:</strong> <span t-esc="docs.partner_id.contact_address" /><br />
+                        <strong>Kepada:</strong> <span t-esc="docs.partner_id.name" /><br />
+                        <strong>Project:</strong> <span t-esc="docs.project" /><br />
                     </div>
 
                     <br /><br />
