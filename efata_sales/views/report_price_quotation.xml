@@ -79,7 +79,7 @@
                                         <em>Comment:</em>
                                     </td>
                                     <td>
-                                        <strong t-esc="line.name" /><br />
+                                        <strong t-esc="line.product_id.reference2" /><br />
                                         <em>In the trend of
                                             <t t-if="line.product_properties_dict">
                                                 <t t-esc="json.loads(line.product_properties_dict).get('Trend', '')" />
@@ -89,7 +89,7 @@
 
                                     </td>
                                     <t t-if="docs.report_type == 'quotation'">
-                                       <td><strong t-esc="line.product_packaging_id" /></td>
+                                       <td><strong t-esc="line.product_packaging_id.name" /></td>
                                         <t t-if="docs.incl_tax">
                                             <td><strong t-esc="line.price_unit + line.tax_amount" /></td>
                                         </t>
