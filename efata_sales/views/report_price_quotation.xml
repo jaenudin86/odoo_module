@@ -112,20 +112,21 @@
                         <t t-else="">
 
                             <div>
-                                <strong>Packing:</strong> in 25 kg HDPE drum<br />
-                                <strong>Delivery:</strong> 14 - 30 days from PO received<br />
-                                <strong>Payment:</strong> transfer in 30 days from invoice date
+                                <strong>MOQ:</strong>Sesuai Packing<br />
+                                <strong>Pengiriman:</strong>30 - 60 Hari dari PO diterima<br />
+                                <strong>Pembayaran:</strong><span t-esc="docs.payment_term_id.name" /><br />
                             </div>
                             <br />
                             <div>
-                                We are looking forward to receiving your confirmation/purchase order. Thank you.
+                                Demikian surat penawaran ini kami sampaikan dan kami nantikan konfirmasi dari ibu/Bapak<br /><br />
+                                Terima kasih untuk kerjasamanya.
                             </div>
                         </t>
                     </t>
                     <br />
                     <t t-if="docs.report_type == 'quotation'">
                     <div>
-                        <strong>Salesperson:</strong><br />
+                        <strong>Hormat Kami:</strong><br />
                         <span t-esc="docs.user_id.name" />
                     </div>
                       </t>
