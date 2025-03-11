@@ -138,7 +138,7 @@
                                 Demikian surat  ini kami sampaikan dan kami nantikan konfirmasi dari ibu/Bapak<br /><br />
                                 Terima kasih untuk kerjasamanya.
                             </div>
-                            <t t-if="not docs.note">
+                            <t t-if="docs.note">
                             <span t-field="docs.note"
                                 t-attf-style="#{'text-align:justify;text-justify:inter-word;' if docs.company_id.terms_type != 'html' else ''}"
                                 name="order_note" />
