@@ -69,6 +69,9 @@
                                         <th>USD/Kg excl VAT</th>
                                     </t>
                                 </t>
+                                <t t-if="docs.report_type != 'quotation'">
+                                     <th>Notes</th>
+                                </t>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,6 +91,9 @@
                                         </em>
 
                                     </td>
+                                    <t t-if="docs.report_type != 'quotation'">
+                                         <td><strong t-esc="line.notes" /></td>
+                                    </t>
                                     <t t-if="docs.report_type == 'quotation'">
                                        <td><strong t-esc="line.product_packaging_id.name" /></td>
                                         <t t-if="docs.incl_tax">
