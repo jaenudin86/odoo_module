@@ -24,7 +24,14 @@
                          <strong></strong><br />
                         <span t-esc="docs.name" />
                     </div>
-                    <!-- <div style="text-align: center; font-size: 20px; float: left; width: 33%;">
+
+                    <div style="text-align: left; float: right; width: 33%;">
+                        <strong>Kepada:</strong> <span t-esc="docs.partner_id.name" /><br />
+                        <strong>Project:</strong> <span t-esc="docs.project" /><br />
+                    </div>
+
+
+                    <div style="text-align: center; font-size: 20px; float: left; width: 33%; margin-top: +60px;">
 
                         <t t-if="docs.report_type == 'quotation'">
                             <strong>PRICE QUOTATION</strong>
@@ -33,25 +40,28 @@
 
                             <strong>SAMPLE SUBMISSION</strong>
                         </t>
-                    </div> -->
-                    <div style="text-align: left; float: right; width: 33%;">
-                        <strong>Kepada:</strong> <span t-esc="docs.partner_id.name" /><br />
-                        <strong>Project:</strong> <span t-esc="docs.project" /><br />
                     </div>
-
                     <br /><br />
                     <br /><br />
                     <t t-if="docs.report_type == 'quotation'">
                         Dear <span t-esc="docs.partner_id.name" />,<br />
-                        Herewith we are pleased to quote you our best price for the following sample recommendation:
+                        
+                        <t t-if="docs.report_type == 'quotation'">
+                            Bersamaan ini kami menyapampaikan  penawaran harga sebagai beriku:
+                        </t>
+                        <t t-elif="docs.report_type == 'submission'">
+
+                             Bersamaan ini kami menyapampaikan sample sebagai beriku:
+                        </t>
                     </t>
                     <table class="table table-bordered" style="width:100%; border-collapse: collapse;">
                         <thead>
                             <tr style="background: #EEE;">
-                                <th>Item</th>
-                                <th>Details</th>
-
+                                <th>Kode</th>
+                                <th>Nama Product</th>
+                                
                                 <t t-if="docs.report_type == 'quotation'">
+                                     <th>Packing</th>
                                     <t t-if="docs.incl_tax">
                                         <th>USD/Kg</th>
                                     </t>
@@ -65,7 +75,7 @@
                             <t t-foreach="docs.order_line" t-as="line">
                                 <tr>
                                     <td>
-                                        <strong  /><br />
+                                        <strong t-esc="line.name"  /><br />
                                         <em>Comment:</em>
                                     </td>
                                     <td>
@@ -79,6 +89,7 @@
 
                                     </td>
                                     <t t-if="docs.report_type == 'quotation'">
+                                       <td><strong t-esc="line.product_packaging_id" /></td>
                                         <t t-if="docs.incl_tax">
                                             <td><strong t-esc="line.price_unit + line.tax_amount" /></td>
                                         </t>
@@ -93,7 +104,7 @@
 
                     <br />
                     <t t-if="docs.report_type == 'quotation'">
-                        <t t-if="docs.note.strip()">
+                        <t t-if="docs.note">
                             <span t-field="docs.note"
                                 t-attf-style="#{'text-align:justify;text-justify:inter-word;' if docs.company_id.terms_type != 'html' else ''}"
                                 name="order_note" />
