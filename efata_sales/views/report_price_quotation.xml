@@ -15,18 +15,16 @@
                     <h3>Quotation #</h3>
                 </span> -->
                 <!-- <span t-esc="docs.name" /> -->
-                <br />
-                <br />
+
                 <div class="page">
                     <div style="text-align: left; float: left; width: 33%;">
-                        <strong>Date:</strong>
+                        <strong>Tanggal:</strong>
                         <span t-esc="docs.date_order.strftime('%d/%m/%Y')" />
-                         <strong></strong><br />
-                        <span t-esc="docs.name" />
+                         <strong></strong><br/><br/>
+                        <strong t-esc="docs.name" />
                     </div>
-
                     <div style="text-align: left; float: right; width: 33%;">
-                        <strong>Kepada:</strong> <span t-esc="docs.partner_id.name" /><br />
+                        <strong>Kepada:</strong> <span t-esc="docs.partner_id.name" /><br /><br/>
                         <strong>Project:</strong> <span t-esc="docs.project" /><br />
                     </div>
 
@@ -41,17 +39,17 @@
                             <strong>SAMPLE SUBMISSION</strong>
                         </t>
                     </div>
+                    
                     <br /><br />
                     <br /><br />
                     <t t-if="docs.report_type == 'quotation'">
                         Dear <span t-esc="docs.partner_id.name" />,<br />
                         
                         <t t-if="docs.report_type == 'quotation'">
-                            Bersamaan ini kami menyapampaikan  penawaran harga sebagai beriku:
+                            Bersamaan ini kami menyapampaikan  penawaran harga sebagai berikut:
                         </t>
-                        <t t-elif="docs.report_type == 'submission'">
-
-                             Bersamaan ini kami menyapampaikan sample sebagai beriku:
+                        <t t-if="docs.report_type == 'submission'">
+                             Bersamaan ini kami menyapampaikan sample sebagai berikut:
                         </t>
                     </t>
                     <table class="table table-bordered" style="width:100%; border-collapse: collapse;">
@@ -83,7 +81,7 @@
                                     </td>
                                     <td>
                                         <strong t-esc="line.product_id.reference2" /><br />
-                                        <em>In the trend of
+                                        <em>
                                             <t t-if="line.product_properties_dict">
                                                 <t t-esc="json.loads(line.product_properties_dict).get('Trend', '')" />
                                             </t>
