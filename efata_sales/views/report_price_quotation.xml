@@ -115,23 +115,23 @@
                         </t>
                         <t t-else="">
 
-                            <table style="width:100%; border: 0;">
-                                <tr>
-                                    <td style="width: 20%;"><strong>MOQ</strong></td>
-                                    <td>:</td>
-                                    <td>Sesuai Packing</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Pengiriman</strong></td>
-                                     <td>:</td>
-                                    <td>30 - 60 Hari dari PO diterima</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Pembayaran</strong></td>
-                                     <td>:</td>
-                                    <td><span t-esc="docs.payment_term_id.name" /></td>
-                                </tr>
-                            </table>
+                            <div style="width:100%; display: flex; flex-direction: column;">
+                                <div style="display: flex;">
+                                    <div style="width: 20%;"><strong>MOQ</strong></div>
+                                    <div>:</div>
+                                    <div>Sesuai Packing</div>
+                                </div>
+                                <div style="display: flex;">
+                                    <div style="width: 20%;"><strong>Pengiriman</strong></div>
+                                    <div>:</div>
+                                    <div>30 - 60 Hari dari PO diterima</div>
+                                </div>
+                                <div style="display: flex;">
+                                    <div style="width: 20%;"><strong>Pembayaran</strong></div>
+                                    <div>:</div>
+                                    <div><span t-esc="docs.payment_term_id.name" /></div>
+                                </div>
+                            </div>
                             <br />
                             <div>
                                 Demikian surat penawaran ini kami sampaikan dan kami nantikan konfirmasi dari ibu/Bapak<br /><br />
