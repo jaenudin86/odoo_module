@@ -115,19 +115,19 @@
                         </t>
                         <t t-else="">
 
-                            <div style="width:100%; display: flex;">
-                                <div style="display: flex;">
-                                    <div style="width: 20%;"><strong>MOQ</strong></div>
+                            <div style="width:100%; display: flex; justify-content: space-between;">
+                                <div style="display: flex; width: 30%;">
+                                    <div style="width: 40%;"><strong>MOQ</strong></div>
                                     <div>:</div>
                                     <div>Sesuai Packing</div>
                                 </div>
-                                <div style="display: flex;">
-                                    <div style="width: 20%;"><strong>Pengiriman</strong></div>
+                                <div style="display: flex; width: 30%;">
+                                    <div style="width: 40%;"><strong>Pengiriman</strong></div>
                                     <div>:</div>
                                     <div>30 - 60 Hari dari PO diterima</div>
                                 </div>
-                                <div style="display: flex;">
-                                    <div style="width: 20%;"><strong>Pembayaran</strong></div>
+                                <div style="display: flex; width: 30%;">
+                                    <div style="width: 40%;"><strong>Pembayaran</strong></div>
                                     <div>:</div>
                                     <div><span t-esc="docs.payment_term_id.name" /></div>
                                 </div>
