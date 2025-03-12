@@ -34,7 +34,7 @@
                         <t t-if="docs.report_type == 'quotation'">
                             <strong>PRICE QUOTATION</strong>
                         </t>
-                        <t t-elif="docs.report_type == 'submission'">
+                        <t t-elif="docs.report_type == 'quotation'">
 
                             <strong>SAMPLE SUBMISSION</strong>
                         </t>
@@ -42,7 +42,7 @@
                     
                     <br /><br />
                     <br /><br />
-                    <t t-if="docs.report_type == 'quotation'">
+                    <!-- <t t-if="docs.report_type == 'quotation'"> -->
                         Dear <span t-esc="docs.partner_id.name" />,<br />
                         
                         <t t-if="docs.report_type == 'quotation'">
@@ -51,7 +51,7 @@
                         <t t-if="docs.report_type == 'submission'">
                              Bersamaan ini kami menyapampaikan sample sebagai berikut:
                         </t>
-                    </t>
+                    <!-- </t> -->
                     <table class="table table-bordered" style="width:100%; border-collapse: collapse;">
                         <thead>
                             <tr style="background: #EEE;">
