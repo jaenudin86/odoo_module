@@ -13,7 +13,7 @@
                     <ul class="list-unstyled" name="company_address_list">
                         <li>
                         <div class="text-start">
-                            <strong t-esc="docs.partner_id.name"></strong><br/>
+                            <strong t-esc="docs.partner_id.name"/><br/>
                             <t t-set="street_parts" t-value="docs.partner_id.street.split(',')"/>
                             <t t-foreach="street_parts" t-as="part">
                                 <span t-esc="part"/><br/>
