@@ -32,7 +32,8 @@ Long description of module's purpose
         'views/report_saleorder.xml',
         'views/product_template_views.xml',
         'data/sequence.xml',
-        'views/custom_bubble_layout.xml'
+        'views/custom_bubble_layout.xml',
+        'views/product_template_kanban_view.xml'
     ],
     'assets': {
             'web.assets_backend': [
