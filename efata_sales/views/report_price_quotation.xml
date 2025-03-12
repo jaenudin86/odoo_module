@@ -34,7 +34,7 @@
                         <t t-if="docs.report_type == 'quotation'">
                             <strong>PRICE QUOTATION</strong>
                         </t>
-                        <t t-elif="docs.report_type == 'quotation'">
+                        <t t-elif="docs.report_type == 'submission'">
 
                             <strong>SAMPLE SUBMISSION</strong>
                         </t>
@@ -130,7 +130,7 @@
                     <br />
                     <t t-if="docs.report_type == 'quotation'">
                     <div>
-                        <strong>Hormat Kami:</strong><br /><br /><br /><br />
+                        <strong>Hormat Kami</strong><br /><br /><br /><br />
                         <span t-esc="docs.user_id.name" />
                     </div>
                       </t>
@@ -153,7 +153,7 @@
                     <br />
                     <t t-if="docs.report_type != 'quotation'">
                     <div>
-                        <strong>Hormat Kami:</strong><br /><br /><br /><br />
+                        <strong>Hormat Kami</strong><br /><br /><br /><br />
                         <span t-esc="docs.user_id.name" />
                     </div>
                       </t>
