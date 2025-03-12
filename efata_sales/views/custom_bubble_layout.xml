@@ -21,7 +21,7 @@
                             <span t-esc="docs.partner_id.city"/> <span t-esc="docs.partner_id.zip"/><br/>
                             <span t-esc="docs.partner_id.country_id.name"/>
                         </div>
-                        </span></li>
+                       </li>
                         <li t-if="not forced_vat"/>
                         <li t-else="">
                             <t t-esc="company.country_id.vat_label or 'Tax ID'">Tax ID</t>:
