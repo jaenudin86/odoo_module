@@ -115,23 +115,25 @@
                         </t>
                         <t t-else="">
 
-                            <div style="width:100%; display: flex; justify-content: space-between; flex-direction: row;">
-                                <div style="display: flex; width: 30%;">
-                                    <div style="width: 40%;"><strong>MOQ</strong></div>
-                                    <div>:</div>
-                                    <div>Sesuai Packing</div>
-                                </div>
-                                <div style="display: flex; width: 30%;">
-                                    <div style="width: 40%;"><strong>Pengiriman</strong></div>
-                                    <div>:</div>
-                                    <div>30 - 60 Hari dari PO diterima</div>
-                                </div>
-                                <div style="display: flex; width: 30%;">
-                                    <div style="width: 40%;"><strong>Pembayaran</strong></div>
-                                    <div>:</div>
-                                    <div><span t-esc="docs.payment_term_id.name" /></div>
-                                </div>
-                            </div>
+<div style="width: 100%; display: flex; justify-content: flex-end; align-items: center; flex-wrap: nowrap; gap: 30px;">
+    <div style="display: flex; align-items: center; gap: 5px; white-space: nowrap;">
+        <strong>MOQ &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</strong>
+        <span>:</span>
+        <span>Sesuai Packing</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 5px; white-space: nowrap;">
+        <strong>Pengiriman &#160;&#160;&#160;&#160;&#160;</strong>
+        <span>:</span>
+        <span>30 - 60 Hari dari PO diterima</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 5px; white-space: nowrap;">
+        <strong>Pembayaran&#160;&#160;&#160;</strong>
+        <span>:</span>
+        <span><t t-esc="docs.payment_term_id.name" /></span>
+    </div>
+</div>
+
+
                             <br />
                             <div>
                                 Demikian surat penawaran ini kami sampaikan dan kami nantikan konfirmasi dari ibu/Bapak<br /><br />
