@@ -95,7 +95,7 @@
                                     <t t-if="docs.report_type == 'quotation'">
                                        <td><strong t-esc="line.product_packaging_id.name" /></td>
                                         <t t-if="docs.incl_tax">
-                                            <td><strong t-esc="line.price_unit + line.tax_amount" /></td>
+                                            <td><strong t-esc="'{:.2f}'.format(line.price_unit + line.tax_amount)" /></td>
                                         </t>
                                         <t t-else="">
                                             <td><strong t-esc="line.price_unit" /></td>
