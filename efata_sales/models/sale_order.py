@@ -114,7 +114,7 @@ class SaleOrderLine(models.Model):
         for line in self:
             if line.order_id.incl_tax:
                 tax_rate = sum(line.tax_id.mapped('amount')) / 100
-                line.tax_amount = line.price_unit * tax_rate
+                line.tax_amount = round(line.price_unit * tax_rate, 2)
             else:
                 line.tax_amount = 0.0
 
