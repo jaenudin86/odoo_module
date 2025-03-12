@@ -115,7 +115,7 @@
                         </t>
                         <t t-else="">
 
-                            <div style="width:100%; display: flex; justify-content: space-between;">
+                            <div style="width:100%; display: flex; justify-content: space-between; flex-direction: row;">
                                 <div style="display: flex; width: 30%;">
                                     <div style="width: 40%;"><strong>MOQ</strong></div>
                                     <div>:</div>
