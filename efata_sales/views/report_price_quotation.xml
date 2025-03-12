@@ -36,7 +36,7 @@
                         </t>
                         <t t-elif="docs.report_type == 'submission'">
 
-                            <strong>SAMPLE SUBMISSION</strong>
+                            <strong>SUBMISSION</strong>
                         </t>
                     </div>
                     
@@ -142,8 +142,8 @@
                     <br />
                     <t t-if="docs.report_type == 'quotation'">
                     <div>
-                        <strong>Hormat Kami</strong><br /><br /><br /><br />
-                        <span t-esc="docs.user_id.name" />
+                        <span>Hormat Kami,</span><br /><br /><br /><br />
+                        <strong t-esc="docs.user_id.name" />
                     </div>
                       </t>
                     
@@ -165,8 +165,8 @@
                     <br />
                     <t t-if="docs.report_type != 'quotation'">
                     <div>
-                        <strong>Hormat Kami</strong><br /><br /><br /><br />
-                        <span t-esc="docs.user_id.name" />
+                        <span>Hormat Kami,</span><br /><br /><br /><br />
+                        <strong t-esc="docs.user_id.name" />
                     </div>
                       </t>
                 </div>
