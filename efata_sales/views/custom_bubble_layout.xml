@@ -12,9 +12,12 @@
                 <!-- <div name="company_address" class="text-end"> -->
                     <ul class="list-unstyled" name="company_address_list">
                         <li>
-                        <div>
-                            <strong>Alamat:</strong><br/>
-                            <span t-esc="docs.partner_id.street"/><br/>
+                        <div class="text-start">
+                            <strong t-esc="docs.partner_id.name"></strong><br/>
+                            <t t-set="street_parts" t-value="docs.partner_id.street.split(',')"/>
+                            <t t-foreach="street_parts" t-as="part">
+                                <span t-esc="part"/><br/>
+                            </t>
                             <span t-esc="docs.partner_id.city"/> <span t-esc="docs.partner_id.zip"/><br/>
                             <span t-esc="docs.partner_id.country_id.name"/>
                         </div>
