@@ -32,6 +32,7 @@ Long description of module's purpose
         'views/report_saleorder.xml',
         'views/product_template_views.xml',
         'data/sequence.xml',
+        'views/custom_bubble_layout.xml'
     ],
     'assets': {
             'web.assets_backend': [
