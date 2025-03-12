@@ -114,8 +114,7 @@ class SaleOrderLine(models.Model):
         for line in self:
             if line.order_id.incl_tax:
                 tax_rate = sum(line.tax_id.mapped('amount')) / 100
-                from decimal import Decimal, ROUND_HALF_UP
-                line.tax_amount = float(Decimal(line.price_unit * tax_rate).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP))
+                line.tax_amount = line.price_unit * tax_rate
             else:
                 line.tax_amount = 0.0
 
