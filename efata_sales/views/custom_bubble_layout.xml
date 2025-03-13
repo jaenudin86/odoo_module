@@ -15,9 +15,11 @@
                         <div class="text-start">
                             <strong t-esc="docs.partner_id.parent_id.name"/><br/>
                             <!-- <strong t-esc="docs.partner_id.user_id.company_id.name"/><br/> -->
-                            <t t-set="street_parts" t-value="docs.partner_id.street.split(',')"/>
-                            <t t-foreach="street_parts" t-as="part">
-                                <span t-esc="part"/><br/>
+                            <t t-if="docs.partner_id.street">
+                                <t t-set="street_parts" t-value="docs.partner_id.street.split(',')"/>
+                                <t t-foreach="street_parts" t-as="part">
+                                    <span t-esc="part"/><br/>
+                                </t>
                             </t>
                             <span t-esc="docs.partner_id.city"/> <span t-esc="docs.partner_id.zip"/><br/>
                             <span t-esc="docs.partner_id.country_id.name"/>

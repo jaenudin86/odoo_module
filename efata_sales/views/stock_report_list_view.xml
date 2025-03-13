@@ -10,4 +10,20 @@
             </xpath>
         </field>
     </record>
+    <record id="view_sales_analysis_report_inherit" model="ir.ui.view">
+        <field name="name">sale.report.search.inherit</field>
+        <field name="model">sale.report</field>  <!-- Sesuaikan dengan model laporan -->
+        <field name="inherit_id" ref="sale.view_order_product_search"/>  <!-- Sesuaikan dengan XML ID yang benar -->
+        <field name="arch" type="xml">
+            <!-- Ganti product_id dengan combined_name -->
+            <xpath expr="//field[@name='product_id']" position="replace">
+                <field name="combined_name" string="Product"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='product_id']" position="replace">
+                <filter string="Product" name="combined_name" context="{'group_by':'combined_name'}"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>
+

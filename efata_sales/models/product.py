@@ -53,4 +53,13 @@ class ProductProduct(models.Model):
                 if not products:
                         return []
                 return products.name_get()
+class SaleReport(models.Model):
+    _inherit = "sale.   "
+
+    combined_name = fields.Char(string="Product", readonly=True)
+
+    def _select(self):
+        select_str = super(SaleReport, self)._select()
+        select_str += ", product_template.combined_name"
+        return select_str
 
