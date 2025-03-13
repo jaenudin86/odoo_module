@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <!-- Add custom fields or modifications here -->
             <xpath expr="//page[@name='general_information']//field[@name='categ_id']" position="after">
-                <field name="reference2"  />
+                <field name="reference2"  groups="base.group_system"/>
             </xpath>
         </field>
     </record>
