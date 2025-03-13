@@ -9,6 +9,8 @@ class ProductTemplate(models.Model):
     #         if product.list_price:
     #             product.standard_price = product.list_price * 0.8
     reference2 = fields.Char(string="Reference 2")
+    qty_available = fields.Float(string="Stock On Hand", digits=(16, 3))
+    free_qty = fields.Float(string="Free Quantity", digits=(16, 3))  # Jika perlu
     @api.depends('standard_price')
     def _compute_list_price(self):
             for product in self:
@@ -68,4 +70,8 @@ class StockChangeProductQty(models.TransientModel):
     _inherit = "stock.change.product.qty"
 
     new_quantity = fields.Float(string="New Quantity", digits=(16, 3))  # 3 angka di belakang koma
+class StockQuant(models.Model):
+    _inherit = "stock.quant"
+
+    quantity = fields.Float(string="Stock Quantity", digits=(16, 3))
 
