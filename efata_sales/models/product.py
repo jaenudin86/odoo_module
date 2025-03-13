@@ -62,4 +62,10 @@ class ProductProduct(models.Model):
 #         select_str = super(SaleReport, self)._select()
 #         select_str += ", product_template.combined_name"
 #         return select_str
+from odoo import models, fields
+
+class StockChangeProductQty(models.TransientModel):
+    _inherit = "stock.change.product.qty"
+
+    new_quantity = fields.Float(string="New Quantity", digits=(16, 3))  # 3 angka di belakang koma
 
