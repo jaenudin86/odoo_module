@@ -14,7 +14,16 @@ class ProductTemplate(models.Model):
             for product in self:
                     product.list_price = product.standard_price / 0.75
     list_price = fields.Float(compute='_compute_list_price',  readonly=False)
+    combined_name = fields.Char(
+        string="Product",
+        compute="_compute_combined_name",
+        store=True
+    )
 
+    @api.depends('display_name', 'reference2')
+    def _compute_combined_name(self):
+        for record in self:
+            record.combined_name = f"{record.default_code} {record.reference2} - {record.name}" if record.reference2 else record.display_name
 
 class ProductProduct(models.Model):
         _inherit = "product.template"

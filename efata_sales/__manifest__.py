@@ -21,7 +21,7 @@ Long description of module's purpose
     'depends': ['base','sale'],
 
 
-    # always loaded
+    # always loaded 
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
@@ -33,7 +33,8 @@ Long description of module's purpose
         'views/product_template_views.xml',
         'data/sequence.xml',
         'views/custom_bubble_layout.xml',
-        'views/product_template_kanban_view.xml'
+        'views/product_template_kanban_view.xml',
+        'views/stock_report_list_view.xml'
     ],
     'assets': {
             'web.assets_backend': [
