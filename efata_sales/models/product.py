@@ -34,7 +34,10 @@ class ProductProduct(models.Model):
                  reference = product.default_code or ""
                 name = product.reference2 or ""
                 barcode = product.name or ""
-                full_name = f"[{reference}] {name} - {barcode}" if name else f"{reference} - {barcode}"
+                if self.env.user.has_group('base.group_system'):
+                        full_name = f"[{reference}] {name} - {barcode}" if name else f"{reference} - {barcode}"
+                else:
+                        full_name = f"{reference} - {barcode}"
                 result.append((product.id, full_name))
                 return result
 
@@ -42,10 +45,15 @@ class ProductProduct(models.Model):
         def name_search(self, name='', args=None, operator='ilike', limit=100):
                 args = args or []
                 if name:
-                        domain = ['|', '|',
-                                ('default_code', operator, name),
-                                ('reference2', operator, name),
-                                ('barcode', operator, name)]
+                        if self.env.user.has_group('base.group_system'):
+                                        domain = ['|', '|',
+                                                        ('default_code', operator, name),
+                                                        ('reference2', operator, name),
+                                                        ('barcode', operator, name)]
+                        else:
+                                        domain = ['|',
+                                                        ('default_code', operator, name),
+                                                        ('barcode', operator, name)]
                 else:
                         domain = []
 
