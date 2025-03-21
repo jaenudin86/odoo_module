@@ -34,7 +34,8 @@ Long description of module's purpose
         'data/sequence.xml',
         'views/custom_bubble_layout.xml',
         'views/product_template_kanban_view.xml',
-        'views/stock_report_list_view.xml'
+        'views/stock_report_list_view.xml',
+        'views/product_product_inherit.xml'
     ],
     'assets': {
             'web.assets_backend': [

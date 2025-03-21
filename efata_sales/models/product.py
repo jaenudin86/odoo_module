@@ -37,7 +37,7 @@ class ProductProduct(models.Model):
                 if self.env.user.has_group('base.group_system'):
                         full_name = f"[{reference}] {name} - {barcode}" if name else f"{reference} - {barcode}"
                 else:
-                        full_name = f"{reference} - {barcode}"
+                        full_name = f"{name} - {barcode}"
                 result.append((product.id, full_name))
                 return result
 
@@ -52,7 +52,8 @@ class ProductProduct(models.Model):
                                                         ('barcode', operator, name)]
                         else:
                                         domain = ['|',
-                                                        ('default_code', operator, name),
+                                                        # ('default_code', operator, name),
+                                                        ('reference2', operator, name),
                                                         ('barcode', operator, name)]
                 else:
                         domain = []
