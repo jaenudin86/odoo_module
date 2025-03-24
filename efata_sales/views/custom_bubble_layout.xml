@@ -14,7 +14,7 @@
                         <li>
                         <div class="text-start">
                             <strong t-esc="docs.partner_id.parent_id.name"/><br/>
-                            <div style="max-width: 250px; word-wrap: break-word; white-space: normal;">
+                            <div style="max-width: 270px; word-wrap: break-word; white-space: normal;">
                                 <span t-esc="docs.partner_id.street"/>
                             </div>
 
