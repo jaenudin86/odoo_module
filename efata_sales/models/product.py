@@ -47,12 +47,12 @@ class ProductProduct(models.Model):
                 if name:
                         name_pattern = f"%{name}%"
                         if self.env.user.has_group('base.group_system'):
-                                        domain = ['|', '|','|',
+                                        domain = ['|', '|',
                                                         ('default_code', operator, name_pattern),
                                                         ('reference2', operator, name_pattern),
                                                         ('name', operator, name_pattern)]
                         else:
-                                        domain = ['|','|',
+                                        domain = ['|',
                                                         # ('default_code', operator, name),
                                                         ('reference2', operator, name_pattern),
                                                         ('name', operator, name_pattern)]
