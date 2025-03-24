@@ -14,7 +14,11 @@
                         <li>
                         <div class="text-start">
                             <strong t-esc="docs.partner_id.parent_id.name"/><br/>
-                            <span t-esc="docs.partner_id.street"/><br/>
+                            <div style="max-width: 200px; word-wrap: break-word; white-space: normal;">
+                                <span t-esc="docs.partner_id.street"/>
+                            </div>
+
+                            <!-- <span t-esc="docs.partner_id.street"/> -->
                             <!-- <strong t-esc="docs.partner_id.user_id.company_id.name"/><br/> -->
                             <!-- <t t-if="docs.partner_id.street">
                                 <t t-set="street_parts" t-value="docs.partner_id.street.split(',')"/>
