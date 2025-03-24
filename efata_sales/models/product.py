@@ -31,30 +31,31 @@ class ProductProduct(models.Model):
         def name_get(self):
                 result = []
                 for product in self:
-                        reference = product.default_code or ""
-                        name = product.reference2 or ""
-                        barcode = product.name or ""
-                        if self.env.user.has_group('base.group_system'):
-                                full_name = f"[{reference}] {name} - {barcode}" if name else f"{reference} - {barcode}"
-                        else:
-                                full_name = f"{name} - {barcode}"
-                        result.append((product.id, full_name))
+                 reference = product.default_code or ""
+                name = product.reference2 or ""
+                barcode = product.name or ""
+                if self.env.user.has_group('base.group_system'):
+                        full_name = f"[{reference}] {name} - {barcode}" if name else f"{reference} - {barcode}"
+                else:
+                        full_name = f"{name} - {barcode}"
+                result.append((product.id, full_name))
                 return result
 
         @api.model
         def name_search(self, name='', args=None, operator='ilike', limit=100):
                 args = args or []
                 if name:
-                        name = f"%{name}%"  # Memastikan pencarian menggunakan %%
+                        name_pattern = f"%{name}%"
                         if self.env.user.has_group('base.group_system'):
-                                domain = ['|', '|', '|', '|',
-                                                ('default_code', operator, name),
-                                                ('reference2', operator, name),
-                                                ('barcode', operator, name)]
+                                        domain = ['|', '|',
+                                                        ('default_code', operator, name_pattern),
+                                                        ('reference2', operator, name_pattern),
+                                                        ('barcode', operator, name_pattern)]
                         else:
-                                domain = ['|', '|',
-                                                ('reference2', operator, name),
-                                                ('barcode', operator, name)]
+                                        domain = ['|',
+                                                        # ('default_code', operator, name),
+                                                        ('reference2', operator, name_pattern),
+                                                        ('barcode', operator, name_pattern)]
                 else:
                         domain = []
 
