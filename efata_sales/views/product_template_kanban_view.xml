@@ -9,9 +9,9 @@
                <xpath expr="//div[@class='mb-1']" position="inside">
                     <field name="reference2"/>
                 </xpath>
-                <xpath expr="//sheet" position="attributes">
+                <!-- <xpath expr="//sheet" position="attributes">
                     <attribute name="string">Product's Code</attribute>
-                </xpath>
+                </xpath> -->
             </field>
         </record>
     </data>
