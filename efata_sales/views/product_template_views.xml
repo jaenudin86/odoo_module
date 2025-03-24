@@ -9,9 +9,9 @@
             <xpath expr="//page[@name='general_information']//field[@name='invoice_policy']" position="after">
                 <field name="reference2" string="Product Name"/>
             </xpath>
-            <xpath expr="//form" position="attributes">
-                <attribute name="string">Product's Code</attribute>
-            </xpath>
+                  <!-- <xpath expr="//tree" position="attributes">
+            <attribute name="string">Daftar Produk</attribute>
+        </xpath> -->
                 <!-- <xpath expr="//form" position="attributes">
                 <attribute name="string">Product Management</attribute>
             </xpath> -->
@@ -20,4 +20,11 @@
         </field> -->
         </field>
     </record>
+    <!-- <record id="product_template_action" model="ir.actions.act_window">
+        <field name="name">Daftar Produk</field>
+    </record> -->
+
+
 </odoo>
+
+
