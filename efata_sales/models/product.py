@@ -50,12 +50,12 @@ class ProductProduct(models.Model):
                                         domain = ['|', '|','|',
                                                         ('default_code', operator, name_pattern),
                                                         ('reference2', operator, name_pattern),
-                                                        ('barcode', operator, name_pattern)]
+                                                        ('name', operator, name_pattern)]
                         else:
                                         domain = ['|','|',
                                                         # ('default_code', operator, name),
                                                         ('reference2', operator, name_pattern),
-                                                        ('barcode', operator, name_pattern)]
+                                                        ('name', operator, name_pattern)]
                 else:
                         domain = []
 
