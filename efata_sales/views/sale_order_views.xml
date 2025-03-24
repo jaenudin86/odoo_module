@@ -40,10 +40,15 @@
             <xpath expr="//field[@name='order_line']/form/group/group/field[@name='tax_id']" position="after">
                 <field name="notes" string="Notes" />
             </xpath>
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='notes']" position="after">
+                <field name="target" string="Target Of" />
+            </xpath>
             <xpath expr="//field[@name='order_line']/list/field[@name='tax_id']" position="after">
                 <field name="notes" string="Notes" optional="show" />
             </xpath>
-
+            <xpath expr="//field[@name='order_line']/list/field[@name='notes']" position="after">
+                <field name="target" string="Target Of" optional="show" />
+            </xpath>
             <!-- <xpath expr="//field[@name='order_line']/form/group/group/field[@name='product_id']" position="attributes">
             <attribute name="widget">many2one</attribute>
             <attribute name="context">{'show_display_name': True}</attribute>

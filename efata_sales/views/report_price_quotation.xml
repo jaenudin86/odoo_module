@@ -84,10 +84,14 @@
                                     <td>
                                         <strong t-esc="line.product_id.reference2" /><br />
                                         <em>
-                                            <t t-if="line.product_properties_dict">
-                                                <t t-esc="json.loads(line.product_properties_dict).get('Trend', '')" />
+                                            <t t-if="line.target">
+                                                <t t-esc="line.target" />
                                             </t>
-
+                                            <t t-else="">
+                                                <t t-if="line.product_properties_dict">
+                                                    <t t-esc="json.loads(line.product_properties_dict).get('Trend', '')" />
+                                                </t>
+                                             </t>
                                         </em>
 
                                     </td>

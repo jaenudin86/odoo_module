@@ -108,6 +108,7 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
     tax_amount = fields.Monetary(string="Pajak", compute="_compute_price_with_tax", store=True)
     notes = fields.Char(string="Notes")
+    target = fields.Char(string="Target of")
     @api.depends('product_id', 'tax_id', 'price_unit', 'order_id.incl_tax')
     def _compute_price_with_tax(self):
         """Menghitung pajak hanya jika checkbox aktif"""
