@@ -16,6 +16,14 @@ class InheritSaleOrder(models.Model):
         'sample_sent': 'set default',
         'save': 'set default'
     })
+    state = fields.Selection(selection_add=[
+        ('draft', 'Quatation'),
+        # ('save', 'Save'),
+        ('sent', 'Save'),
+        ('sale', 'Sales Order'),
+        ('sample_sent', 'Sample Sent')
+        # ('approved', 'Approved')
+    ], string="State")
     report_type = fields.Selection([
         ('quotation', 'Quotation'),
         ('submission', 'Submission')
@@ -25,7 +33,10 @@ class InheritSaleOrder(models.Model):
     #         if order.state != 'draft':  # Jika status bukan draft (Quotation)
     #             raise UserError("Anda tidak dapat mengedit Sales Order setelah dikonfirmasi.")
     #     return super(InheritSaleOrder, self).write(vals)
-
+    def _check_confirmation_state(self):
+        """Override agar state selain draft bisa dikonfirmasi"""
+        if self.state not in ['draft', 'save', 'sent']:  # 🔹 Tambah state yang diperbolehkan
+            raise exceptions.UserError(f"Tidak bisa mengonfirmasi order dari state {self.state}.")
     project = fields.Char(string="Project")
     incl_tax = fields.Boolean(string="Incl. Tax", default=False)
     @api.model
@@ -50,11 +61,14 @@ class InheritSaleOrder(models.Model):
     type_transaksi = fields.Selection([
         ('so', 'Sales Order'),
         ('sample', 'Sample Order'),
-        ('save', 'Saved')
+        ('save', 'Save')
     ], string="Type Transaksi", default='so')
 
     def action_confirm(self):
         """Override action_confirm untuk memastikan perubahan dilakukan setelah konfirmasi"""
+        _logger.info(f"DEBUG: Order ID: comfirm, Name: {self.name}, State: {self.state}")
+        if self.state not in ['draft', 'sent','save']:
+            raise exceptions.UserError("Some 1111 orders are not in a state requiring confirmation.")
         res = super(InheritSaleOrder, self).action_confirm()  # 🔹 Konfirmasi order dulu
         self._update_type_transaksi()  # 🔹 Baru update state setelahnya
         return res
@@ -62,30 +76,24 @@ class InheritSaleOrder(models.Model):
     def action_sample(self):
         """Fungsi untuk konfirmasi sebagai sample"""
         self.ensure_one()  # Pastikan hanya satu order diproses
-
-        if self.state not in ['draft', 'sent']:
-            raise exceptions.UserError("Some orders are not in a state requiring confirmation.")
+        _logger.info(f"DEBUG: Order ID: sample, Name: {self.name}, State: {self.state}")
+        if self.state not in ['draft', 'sent','save']:
+            raise exceptions.UserError("Some 1111 orders are not in a state requiring confirmation.")
 
         self.write({'type_transaksi': 'sample'})  # 🔹 Tetapkan sebagai sample dulu
         res = super(InheritSaleOrder, self).action_confirm()  # 🔹 Konfirmasi order
         self._update_type_transaksi()  # 🔹 Baru update state setelah konfirmasi
         return res
     def action_save(self):
-        """Fungsi untuk konfirmasi sebagai sample"""
-        self.ensure_one()  # Pastikan hanya satu order diproses
-
-        if self.state not in ['draft', 'sent']:
-            raise exceptions.UserError("Some orders are not in a state requiring confirmation.")
-
-        self.write({'type_transaksi': 'save'})  # 🔹 Tetapkan sebagai sample dulu
-        res = super(InheritSaleOrder, self).action_confirm()  # 🔹 Konfirmasi order
-        self._update_type_transaksi()  # 🔹 Baru update state setelah konfirmasi
-        return res
+        for order in self:
+            order.write({'state': 'sent'})  # 🔹 Ubah state ke 'sent'
     def _update_type_transaksi(self):
         """Perbarui type_transaksi dan state setelah order dikonfirmasi"""
         for order in self.filtered(lambda r: r.state == 'sale'):  # 🔹 Hanya order yang sudah dikonfirmasi
             if order.type_transaksi == 'save':
-                order.write({'state': 'save'})  # 🔹 Ubah state setelah action_confirm()
+                order.write({'state': 'sent'}) 
+            if order.type_transaksi == 'sample':    
+                order.write({'state': 'sample_sent'})  # 🔹 Ubah state setelah action_confirm()
 
     color = fields.Selection([
         ('white', 'White'),

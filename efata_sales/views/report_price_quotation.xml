@@ -150,7 +150,7 @@
 </div>
         
 
-                            <br />
+                          
                             <t t-if="len(docs.order_line) == 6 and docs.report_type != 'quotation'">
                                 <div style="page-break-before: always;"></div>
                             </t>
@@ -160,7 +160,10 @@
                             <t t-if="len(docs.order_line) == 8 and docs.report_type != 'quotation'">
                                 <div style="page-break-before: always;"></div>
                             </t>
-                            <t t-if="len(docs.order_line) >= 9 and docs.report_type != 'quotation'">
+                            <t t-if="len(docs.order_line) == 9 and docs.report_type != 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) >= 10 and docs.report_type != 'quotation'">
                                 <div style="page-break-before: always;"></div>
                             </t>
                             <div>
