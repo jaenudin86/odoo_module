@@ -25,7 +25,7 @@
             </xpath>
             <xpath expr="//button[@name='action_confirm']" position="replace">
                 <button name="action_confirm" type="object" string="Confirm"
-                    invisible="state not in ['draft', 'sent','save'] or not id or locked"
+                    invisible="state not in ['sent','save'] or not id or locked"
                     data-hotkey="c" />
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="after">
