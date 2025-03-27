@@ -75,7 +75,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <t t-foreach="docs.order_line" t-as="line">
+                            <t t-foreach="docs.order_line" t-as="line" t-index="index">
                                 <tr>
                                     <td>
                                         <strong t-esc="line.name"  /><br />
@@ -138,9 +138,12 @@
         <span><t t-esc="docs.payment_term_id.name" /></span>
     </div>
 </div>
-
+        
 
                             <br />
+                            <t t-if="len(docs.order_line) > 6">
+                                <div style="page-break-before: always;"></div>
+                            </t>
                             <div>
                                 Demikian surat penawaran ini kami sampaikan dan kami nantikan konfirmasi dari ibu/Bapak<br /><br />
                                 Terima kasih untuk kerjasamanya.

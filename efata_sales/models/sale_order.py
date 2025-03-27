@@ -100,10 +100,17 @@ class InheritSaleOrder(models.Model):
         for order in self:
             _logger.info(f"DEBUG: Order ID: {order.is_new}, Name: {order.name}, State: {order.state}")
             print(f"DEBUG: Order ID: {order.is_new}, Name: {order.name}, State: {order.state}")
-            if  order.is_new == True:  # Order belum tersimpan, masih bisa diedit
+            # if  order.is_new == True:  # Order belum tersimpan, masih bisa diedit
+            #     continue    
+            # else:
+            #     raise UserError("You cannot edit the Sales Order after it has been confirmed or if it has a Sales Order number!")
+
+            if order.state in ['draft']:  # Hanya draft atau quotation sent yang bisa diedit
                 continue    
             else:
-                raise UserError("You cannot edit the Sales Order after it has been confirmed or if it has a Sales Order number!")
+                raise exceptions.UserError(
+                    "You cannot edit the Sales Order after it has been confirmed or if it has a Sales Order number!"
+                )
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
     tax_amount = fields.Monetary(string="Pajak", compute="_compute_price_with_tax", store=True)
