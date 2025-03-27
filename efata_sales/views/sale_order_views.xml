@@ -14,10 +14,19 @@
                 <button name="action_sample" type="object" string="Send Sample" class="oe_highlight"
                     invisible="state == 'sale' or state == 'sample_sent' or report_type != 'quotation'" />
             </xpath>
+            <xpath expr="//button[@name='action_quotation_send']" position="after">
+                <button name="action_save" type="object" string="Saved" class="oe_highlight"
+                    invisible="state == 'sale' or state == 'save'" />
+            </xpath>
             <xpath expr="//button[@name='action_cancel']" position="replace">
                 <button name="action_cancel" type="object" string="Cancel"
-                    invisible="state not in ['draft', 'sent', 'sale','sample_sent'] or not id or locked"
+                    invisible="state not in ['draft', 'sent', 'sale','sample_sent','save'] or not id or locked"
                     data-hotkey="x" />
+            </xpath>
+            <xpath expr="//button[@name='action_confirm']" position="replace">
+                <button name="action_confirm" type="object" string="Confirm"
+                    invisible="state not in ['draft', 'sent','save'] or not id or locked"
+                    data-hotkey="c" />
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="report_type" widget="radio" />
@@ -62,7 +71,7 @@
 
 
             <xpath expr="//field[@name='state']" position="attributes">
-                <attribute name="statusbar_visible">draft,sent,sale,sample_sent,approved</attribute>
+                <attribute name="statusbar_visible">draft,sent,sale,sample_sent,approved,save</attribute>
             </xpath>
 
         </field>

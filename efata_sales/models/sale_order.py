@@ -9,7 +9,13 @@ class InheritSaleOrder(models.Model):
     _inherit = "sale.order"
     _logger = logging.getLogger(__name__)
 
-    state = fields.Selection(selection_add=[('sample_sent', 'Sample Sent')], ondelete={'sample_sent': 'set default'})
+    state = fields.Selection(selection_add=[
+        ('sample_sent', 'Sample Sent'),
+        ('save', 'Save')
+    ], ondelete={
+        'sample_sent': 'set default',
+        'save': 'set default'
+    })
     report_type = fields.Selection([
         ('quotation', 'Quotation'),
         ('submission', 'Submission')
@@ -43,7 +49,8 @@ class InheritSaleOrder(models.Model):
                 line._compute_price_with_tax() # Ensure price unit change is handled
     type_transaksi = fields.Selection([
         ('so', 'Sales Order'),
-        ('sample', 'Sample Order')
+        ('sample', 'Sample Order'),
+        ('save', 'Saved')
     ], string="Type Transaksi", default='so')
 
     def action_confirm(self):
@@ -63,12 +70,22 @@ class InheritSaleOrder(models.Model):
         res = super(InheritSaleOrder, self).action_confirm()  # 🔹 Konfirmasi order
         self._update_type_transaksi()  # 🔹 Baru update state setelah konfirmasi
         return res
+    def action_save(self):
+        """Fungsi untuk konfirmasi sebagai sample"""
+        self.ensure_one()  # Pastikan hanya satu order diproses
 
+        if self.state not in ['draft', 'sent']:
+            raise exceptions.UserError("Some orders are not in a state requiring confirmation.")
+
+        self.write({'type_transaksi': 'save'})  # 🔹 Tetapkan sebagai sample dulu
+        res = super(InheritSaleOrder, self).action_confirm()  # 🔹 Konfirmasi order
+        self._update_type_transaksi()  # 🔹 Baru update state setelah konfirmasi
+        return res
     def _update_type_transaksi(self):
         """Perbarui type_transaksi dan state setelah order dikonfirmasi"""
         for order in self.filtered(lambda r: r.state == 'sale'):  # 🔹 Hanya order yang sudah dikonfirmasi
-            if order.type_transaksi == 'sample':
-                order.write({'state': 'sample_sent'})  # 🔹 Ubah state setelah action_confirm()
+            if order.type_transaksi == 'save':
+                order.write({'state': 'save'})  # 🔹 Ubah state setelah action_confirm()
 
     color = fields.Selection([
         ('white', 'White'),
