@@ -42,6 +42,8 @@
                     
                     <br /><br />
                     <br /><br />
+                    <br /><br />
+                    <!-- <br /><br /> -->
                     <!-- <t t-if="docs.report_type == 'quotation'"> -->
                         Dear <span t-esc="docs.partner_id.name" />,<br />
                         
