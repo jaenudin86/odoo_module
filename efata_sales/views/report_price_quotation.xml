@@ -150,21 +150,21 @@
 </div>
         
 
-                          
+    
                             <t t-if="len(docs.order_line) == 6 and docs.report_type != 'quotation'">
-                                <div style="page-break-before: always;"></div>
+                                <div style="page-break-after: always;"></div>
                             </t>
                             <t t-if="len(docs.order_line) == 7 and docs.report_type != 'quotation'">
-                                <div style="page-break-before: always;"></div>
+                                <div style="page-break-after: always;"></div>
                             </t>
                             <t t-if="len(docs.order_line) == 8 and docs.report_type != 'quotation'">
-                                <div style="page-break-before: always;"></div>
+                                <div style="page-break-after: always;"></div>
                             </t>
                             <t t-if="len(docs.order_line) == 9 and docs.report_type != 'quotation'">
-                                <div style="page-break-before: always;"></div>
+                                <div style="page-break-after: always;"></div>
                             </t>
                             <t t-if="len(docs.order_line) >= 10 and docs.report_type != 'quotation'">
-                                <div style="page-break-before: always;"></div>
+                                <div style="page-break-after: always;"></div>
                             </t>
                             <div>
                                 Demikian surat penawaran ini kami sampaikan dan kami nantikan konfirmasi dari ibu/Bapak<br /><br />
