@@ -131,9 +131,9 @@
                             <t t-if="len(docs.order_line) == 9 and docs.report_type == 'quotation'">
                                 <div style="page-break-before: always;"></div>
                             </t>
-                            <t t-if="len(docs.order_line) >= 10 and docs.report_type == 'quotation'">
+                            <!-- <t t-if="len(docs.order_line) >= 11 and docs.report_type == 'quotation'">
                                 <div style="page-break-before: always;"></div>
-                            </t>
+                            </t> -->
 <div style="width: 100%; display: flex; justify-content: flex-end; align-items: center; flex-wrap: nowrap; gap: 30px;">
     <div style="display: flex; align-items: center; gap: 5px; white-space: nowrap;">
         <strong>MOQ &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</strong>
