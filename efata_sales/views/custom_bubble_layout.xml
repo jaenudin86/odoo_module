@@ -13,7 +13,7 @@
                     <ul class="list-unstyled" name="company_address_list">
                         <li>
                         <div class="text-start">
-                            <!-- <strong t-esc="doc.partner_id.parent_id.name"/><br/> -->
+                            <strong t-esc="doc.partner_id.parent_id.name"/><br/>
                             <div style="max-width: 280px; word-wrap: break-word; white-space: normal;">
                                 <span t-esc="docs.partner_id.street"/>
                             </div>
