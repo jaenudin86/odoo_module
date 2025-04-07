@@ -119,12 +119,12 @@
                                 name="order_note" />
                         </t>
                         <t t-else="">
-                            <!-- <t t-if="len(docs.order_line) == 6 and docs.report_type == 'quotation'">
+                            <t t-if="len(docs.order_line) == 6 and docs.report_type == 'quotation'">
                                 <div style="page-break-before: always;"></div>
                             </t>
                             <t t-if="len(docs.order_line) == 7 and docs.report_type == 'quotation'">
                                 <div style="page-break-before: always;"></div>
-                            </t> -->
+                            </t>
                             <t t-if="len(docs.order_line) == 8 and docs.report_type == 'quotation'">
                                 <div style="page-break-before: always;"></div>
                             </t>
