@@ -32,11 +32,16 @@
                     <div style="text-align: center; font-size: 20px; float: left; width: 33%; margin-top: +100px;">
 
                         <t t-if="docs.report_type == 'quotation'">
-                            <strong>PRICE QUOTATION</strong>
+                            <!-- <strong>PRICE QUOTATION</strong> -->
+                             <strong t-att-style="'color:#006400;' if doc.company_id.name == 'PT. Efata Sejahtera Indonesia' else ''">PRICE QUOTATION</strong>
+                            
                         </t>
                         <t t-elif="docs.report_type == 'submission'">
 
-                            <strong>SUBMISSION</strong>
+                            <!-- <strong>SUBMISSION</strong> -->
+                            <strong t-att-style="'color:#006400;' if doc.company_id.name == 'PT. Efata Sejahtera Indonesia' else ''">SUBMISSION</strong>
+
+                            
                         </t>
                     </div>
                     
