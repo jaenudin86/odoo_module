@@ -33,13 +33,13 @@
 
                         <t t-if="docs.report_type == 'quotation'">
                             <!-- <strong>PRICE QUOTATION</strong> -->
-                             <strong t-att-style="'color:#006400;' if doc.company_id.name == 'PT. Efata Sejahtera Indonesia' else ''">PRICE QUOTATION</strong>
+                             <strong t-att-style="'color:#006400;' if docs.company_id.name == 'PT. Efata Sejahtera Indonesia' else ''">PRICE QUOTATION</strong>
                             
                         </t>
                         <t t-elif="docs.report_type == 'submission'">
 
                             <!-- <strong>SUBMISSION</strong> -->
-                            <strong t-att-style="'color:#006400;' if doc.company_id.name == 'PT. Efata Sejahtera Indonesia' else ''">SUBMISSION</strong>
+                            <strong t-att-style="'color:#006400;' if docs.company_id.name == 'PT. Efata Sejahtera Indonesia' else ''">SUBMISSION</strong>
 
                             
                         </t>
