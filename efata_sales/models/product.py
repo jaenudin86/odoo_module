@@ -19,11 +19,23 @@ class ProductTemplate(models.Model):
         compute="_compute_combined_name",
         store=True
     )
+    show_default_code = fields.Boolean(compute='_compute_show_default_code')
 
+    @api.depends('create_uid')
+
+    def _compute_show_default_code(self):
+                for rec in self:
+                 rec.show_default_code = self.env.user.login != 'Yohana Pranatalie'
     @api.depends('display_name', 'reference2')
     def _compute_combined_name(self):
-        for record in self:
-            record.combined_name = f"{record.default_code} {record.reference2} - {record.name}" if record.reference2 else record.display_name
+           for record in self:
+                if record.reference2:
+                        if record.default_code:
+                                record.combined_name = f"{record.default_code} {record.reference2} - {record.name}"
+                        else:
+                                record.combined_name = f"{record.reference2} - {record.name}"
+                else:
+                        record.combined_name = record.display_name
 
 class ProductProduct(models.Model):
         _inherit = "product.template"

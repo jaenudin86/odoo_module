@@ -17,7 +17,7 @@ class InheritSaleOrder(models.Model):
         'save': 'set default'
     })
     state = fields.Selection(selection_add=[
-        ('draft', 'Quatation'),
+        ('draft', 'Quotation'),
         # ('save', 'Save'),
         ('sent', 'Save'),
         ('sale', 'Sales Order'),

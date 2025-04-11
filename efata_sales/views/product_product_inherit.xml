@@ -10,9 +10,10 @@
                 </field>
 
                 <!-- Tambahkan default_code setelah invoice_policy -->
-                <field name="invoice_policy" position="after">
-                    <field name="default_code" groups="base.group_system"/>
-                </field>
+        <field name="invoice_policy" position="after">
+            <field name="default_code" modifiers="{'invisible': [('show_default_code', '=', False)]}"/>
+        </field>
+
         <field name="barcode" position="attributes">
                     <attribute name="invisible">1</attribute>
         </field>
