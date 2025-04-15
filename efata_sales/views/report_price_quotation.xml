@@ -18,13 +18,13 @@
                 <!-- <span t-esc="docs.name" /> -->
 
                 <div class="page">
-                    <div style="text-align: left; float: left; width: 33%;">
+                    <div style="text-align: left; float: left; width: 33%; font-size: 17px;">
                         <strong>Tanggal:</strong>
                         <span t-esc="docs.date_order.strftime('%d/%m/%Y')" />
                         <strong></strong><br /><br />
                         <strong t-esc="docs.name" />
                     </div>
-                    <div style="text-align: left; float: right; width: 33%;">
+                    <div style="text-align: left; float: right; width: 24%; font-size: 17px;">
                         <strong>Kepada:</strong> <span t-esc="docs.partner_id.name" /><br /><br />
                         <strong>Project:</strong> <span t-esc="docs.project" /><br />
                     </div>
@@ -50,15 +50,17 @@
                     <br /><br />
                     <br /><br />
                     <!-- <br /><br /> -->
-                    <!-- <t t-if="docs.report_type == 'quotation'"> -->
-                    Dear <span t-esc="docs.partner_id.name" />,<br />
+                    <div style="font-size: 17px;">
+                        <!-- <t t-if="docs.report_type == 'quotation'"> -->
+                        Dear <span t-esc="docs.partner_id.name" />,<br />
 
-                    <t t-if="docs.report_type == 'quotation'">
-                        Bersamaan ini kami menyapampaikan penawaran harga sebagai berikut:
-                    </t>
-                    <t t-if="docs.report_type == 'submission'">
-                        Bersamaan ini kami menyapampaikan sample sebagai berikut:
-                    </t>
+                        <t t-if="docs.report_type == 'quotation'">
+                            Bersamaan ini kami menyapampaikan penawaran harga sebagai berikut:
+                        </t>
+                        <t t-if="docs.report_type == 'submission'">
+                            Bersamaan ini kami menyapampaikan sample sebagai berikut:
+                        </t>
+                    </div>
                     <!-- </t> -->
                     <table
                         
@@ -158,7 +160,7 @@
                                 <div style="page-break-before: always;"></div>
                             </t> -->
                             <div
-                                style="width: 100%; display: flex; justify-content: flex-end; align-items: center; flex-wrap: nowrap; gap: 30px;">
+                                style="width: 100%; display: flex; justify-content: flex-end; align-items: center; flex-wrap: nowrap; gap: 30px; font-size: 17px;">
                                 <div style="display: flex; align-items: center; gap: 5px; white-space: nowrap;">
                                     <strong>MOQ
                                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</strong>
@@ -181,7 +183,7 @@
 
 
 
-                            <div>
+                            <div style="font-size: 17px;">
                                 Demikian surat penawaran ini kami sampaikan dan kami nantikan konfirmasi dari
                                 ibu/Bapak<br /><br />
                                 Terima kasih untuk kerjasamanya.
@@ -190,7 +192,7 @@
                     </t>
                     <br />
                     <t t-if="docs.report_type == 'quotation'">
-                        <div>
+                        <div style="font-size: 17px;">
                             <span>Hormat Kami,</span><br /><br /><br /><br />
                             <strong t-esc="docs.user_id.name" />
                         </div>
@@ -204,6 +206,9 @@
                             <t t-if="len(docs.order_line) == 8 and docs.report_type != 'quotation'">
                                 <div style="page-break-after: always;"></div>
                             </t> -->
+                            <t t-if="len(docs.order_line) == 8 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t>
                             <t t-if="len(docs.order_line) == 9 and docs.report_type != 'quotation'">
                                 <div style="page-break-after: always;"></div>
                             </t>
@@ -214,7 +219,7 @@
                                 <div style="page-break-after: always;"></div>
                             </t>
                     <t t-if="docs.report_type != 'quotation'">
-                        <div>
+                        <div style="font-size: 17px;">
                             Demikian surat ini kami sampaikan dan kami nantikan konfirmasi dari ibu/Bapak<br /><br />
                             Terima kasih untuk kerjasamanya.
                         </div>
@@ -228,7 +233,7 @@
                     </t>
                     <br />
                     <t t-if="docs.report_type != 'quotation'">
-                        <div>
+                        <div style="font-size: 17px;">
                             <span>Hormat Kami,</span><br /><br /><br /><br />
                             <strong t-esc="docs.user_id.name" />
                         </div>
