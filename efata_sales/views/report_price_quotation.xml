@@ -24,7 +24,7 @@
                         <strong></strong><br /><br />
                         <strong t-esc="docs.name" />
                     </div>
-                    <div style="text-align: left; float: right; width: 24%; font-size: 17px;">
+                    <div style="text-align: left; float: right; width: 33%; font-size: 17px;">
                         <strong>Kepada:</strong> <span t-esc="docs.partner_id.name" /><br /><br />
                         <strong>Project:</strong> <span t-esc="docs.project" /><br />
                     </div>
@@ -156,6 +156,21 @@
                             <t t-if="len(docs.order_line) == 10 and docs.report_type == 'quotation'">
                                 <div style="page-break-before: always;"></div>
                             </t>
+                            <t t-if="len(docs.order_line) == 21 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 22 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 23 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 24 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <!-- <t t-if="len(docs.order_line) == 25 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t> -->
                             <!-- <t t-if="len(docs.order_line) >= 11 and docs.report_type == 'quotation'">
                                 <div style="page-break-before: always;"></div>
                             </t> -->
@@ -215,9 +230,18 @@
                             <t t-if="len(docs.order_line) == 10 and docs.report_type != 'quotation'">
                                 <div style="page-break-after: always;"></div>
                             </t>
-                            <t t-if="len(docs.order_line) == 11 and docs.report_type != 'quotation'">
+                            <t t-if="len(docs.order_line) == 22 and docs.report_type != 'quotation'">
                                 <div style="page-break-after: always;"></div>
                             </t>
+                            <t t-if="len(docs.order_line) == 23 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 24 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t>
+                            <!-- <t t-if="len(docs.order_line) == 11 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t> -->
                     <t t-if="docs.report_type != 'quotation'">
                         <div style="font-size: 17px;">
                             Demikian surat ini kami sampaikan dan kami nantikan konfirmasi dari ibu/Bapak<br /><br />
