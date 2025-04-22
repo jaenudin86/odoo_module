@@ -13,6 +13,14 @@
             <field name="invoice_policy" position="after">
                 <field name="default_code" groups="base.group_system,sale.sales_user_food_hide_report,sale.sales_user_food,sale.sales_user_fragrance,sale.sales_user_fragrance_hide_report"/>
             </field>
+               <xpath expr="//div[@name='standard_price_uom']" position="attributes">
+            <!-- <attribute name="groups">base.group_system</attribute> -->
+             <attribute name="groups">base.group_system,sale.sales_user_food_hide_report,sale.sales_user_food,sale.sales_user_fragrance,sale.sales_user_fragrance_hide_report</attribute>
+            </xpath>
+        
+
+
+
 
         <field name="barcode" position="attributes">
                     <attribute name="invisible">1</attribute>
