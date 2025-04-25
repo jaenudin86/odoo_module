@@ -36,6 +36,7 @@ Long description of module's purpose
         'views/product_template_kanban_view.xml',
         'views/stock_report_list_view.xml',
         'views/product_product_inherit.xml',
+        'views/view_partner_form_inherit_user_visible.xml',
         # 'security/groups.xml'
     ],
     'assets': {

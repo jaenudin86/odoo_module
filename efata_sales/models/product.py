@@ -118,3 +118,7 @@ class ProductProduct(models.Model):
 #         select_str += ", product_template.combined_name"
 #         return select_str
 
+# class ResPartner(models.Model):
+#     _inherit = 'res.partner'
+
+#     user_visible = fields.Many2one('res.users', string="User")
