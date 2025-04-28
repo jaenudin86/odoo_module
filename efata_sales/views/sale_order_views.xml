@@ -14,6 +14,10 @@
                 <button name="action_sample" type="object" string="Send Sample" class="oe_highlight"
                  />
             </xpath>
+            <xpath expr="//button[@name='action_preview_sale_order']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
             <xpath expr="//button[@name='action_quotation_send']" position="after">
                 <button name="action_save" type="object" string="Save" class="oe_highlight"
                     invisible="state == 'sale' or state == 'save' or  state == 'sent'" />
@@ -74,7 +78,7 @@
 
 
             <xpath expr="//field[@name='state']" position="attributes">
-                <attribute name="statusbar_visible">draft,save,sent,sale,sample_sent,approved</attribute>
+                <attribute name="statusbar_visible">draft,save,sent,sale,approved</attribute>
             </xpath>
 
         </field>
