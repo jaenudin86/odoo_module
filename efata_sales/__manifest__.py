@@ -37,8 +37,10 @@ Long description of module's purpose
         'views/stock_report_list_view.xml',
         'views/product_product_inherit.xml',
         'views/view_partner_form_inherit_user_visible.xml',
-        'views/hide_vendor.xml',
+        # 'views/hide_vendor.xml',
         # 'security/groups.xml'
+        # 'security/res_partner_rules.xml',
+        'views/res_partner_views.xml',
     ],
     'assets': {
             'web.assets_backend': [
