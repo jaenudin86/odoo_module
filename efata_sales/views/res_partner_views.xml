@@ -9,10 +9,6 @@
                   <xpath expr="//field[@name='email']" position="after">
                     <field name="users_visible"/>
                 </xpath>
-                <xpath expr="//list" position="attributes">
-                    <attribute name="groups">base.group_user</attribute>
-                    <attribute name="domain">['|', ('users_visible', '=', uid), ('users_visible', '=', False)]</attribute>
-                </xpath>
             </field>
         </record>
 
