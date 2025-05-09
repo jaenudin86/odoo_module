@@ -7,22 +7,11 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     users_visible = fields.Many2one('res.users', string='User')
+    users_visible_ids = fields.Many2many(
+        'res.users', 
+        'res_partner_users_rel',  # nama tabel relasi
+        'partner_id', 
+        'user_id', 
+        string='Visible Users'
+    )
 
-@api.model
-def search(self, domain, offset=0, limit=None, order=None):
-    domain = domain or []  # pastikan bukan None/False
-
-    _logger.info("Original domain: %s", domain)
-
-    if not self.env.user.has_group('base.group_system'):
-        extra_domain = [
-            '&',
-                ('is_company', '=', True),
-                '|',
-                    ('users_visible', '=', self.env.user.id),
-                    ('users_visible', '=', False)
-        ]
-        domain += extra_domain
-
-    _logger.info("Modified domain: %s", domain)
-    return super().search(domain, offset=offset, limit=limit, order=order)

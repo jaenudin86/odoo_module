@@ -5,9 +5,15 @@
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_partner_form"/>
     <field name="arch" type="xml">
-        <xpath expr="//group[@name='sale']" position="inside">
-            <field name="users_visible" string="User" />
-        </xpath>
+
+      <xpath expr="//notebook" position="inside">
+        <page string="Visible Users">
+          <group>
+            <field name="users_visible_ids" widget="many2many_tags" options="{'no_create': True}" string="Users"/>
+          </group>
+        </page>
+      </xpath>
+
     </field>
 
 

@@ -6,9 +6,12 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_tree"/>
             <field name="arch" type="xml">
-                  <xpath expr="//field[@name='email']" position="after">
+                  <!-- <xpath expr="//field[@name='email']" position="after">
                     <field name="users_visible"/>
-                </xpath>
+                </xpath> -->
+                <xpath expr="//field[@name='email']" position="after">
+                <field name="users_visible_ids" widget="many2many_tags" options="{'no_create': True}"/>
+            </xpath>
             </field>
         </record>
 
