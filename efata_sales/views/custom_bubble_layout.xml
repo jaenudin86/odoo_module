@@ -4,23 +4,21 @@
         <xpath expr="//div[contains(@t-attf-class, 'header')]" position="replace">
         <!-- <xpath expr="//div[contains(@t-att-class, 'header')]" position="replace"> -->
         <div t-attf-class="header o_company_#{company.id}_layout {{report_type == 'pdf' and 'pt-5'}}">
-            <div class="d-flex justify-content-between">
+            <!-- <div class="d-flex justify-content-between">
                 <div>
                     <img t-if="company.logo" class="o_company_logo mb-2" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
                     <div t-if="company.report_header" t-field="company.report_header" class="o_company_tagline fw-bold">Company tagline</div>
                 </div>
-                <!-- <div name="company_address" class="text-end"> -->
-                    <ul class="list-unstyled" name="company_address_list">
-                        <li>
-                        <div class="text-start">
+                
+                    <ul class="list-unstyled" name="company_address_list" style="text-align: left !important;">
+                        <li style="list-style-type: none;">
+                       <div class="text-start" style="max-width: 300px;">
                             <strong t-esc="docs.partner_id.parent_id.name"/><br/>
-                            <!-- <strong t-esc="docs.partner_id.user_id.company_id.name"/><br/> -->
-                            <t t-if="docs.partner_id.street">
-                                <t t-set="street_parts" t-value="docs.partner_id.street.split(',')"/>
-                                <t t-foreach="street_parts" t-as="part">
-                                    <span t-esc="part"/><br/>
-                                </t>
-                            </t>
+                            <div style="max-width: 220px; width: 100%; word-wrap: break-word; white-space: normal;">
+                                <span  t-esc="docs.partner_id.street"/>
+                            </div>
+
+         
                             <span t-esc="docs.partner_id.city"/> <span t-esc="docs.partner_id.zip"/><br/>
                             <span t-esc="docs.partner_id.country_id.name"/>
                         </div>
@@ -31,7 +29,38 @@
                             <span t-esc="forced_vat">US12345671</span>
                         </li>
                     </ul>
+                </div> -->
+                <div class="row align-items-start">
+    <!-- Kolom kiri: Logo dan tagline -->
+    <div class="col-8">
+        <img t-if="company.logo" class="o_company_logo mb-2" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+        <div t-if="company.report_header" t-field="company.report_header" class="o_company_tagline fw-bold">Company tagline</div>
+    </div>
+
+    <!-- Kolom kanan: Alamat customer -->
+    <div class="col-4">
+        <ul class="list-unstyled" name="company_address_list">
+            <li>
+                <div class="text-start" style="max-width: 300px;">
+                    <!-- <strong t-esc="docs.partner_id.parent_id.name"/><br/> -->
+                    <strong t-if="docs.partner_id.parent_id" t-esc="docs.partner_id.parent_id.name"/><br/>
+<strong t-if="docs.partner_id" t-esc="docs.partner_id.name"/><br/>
+
+                    <div style="max-width: 220px; width: 100%; word-wrap: break-word; white-space: normal;">
+                        <span t-esc="docs.partner_id.street"/>
+                    </div>
+                    <span t-esc="docs.partner_id.city"/> <span t-esc="docs.partner_id.zip"/><br/>
+                    <span t-esc="docs.partner_id.country_id.name"/>
                 </div>
+            </li>
+            <li t-if="not forced_vat"/>
+            <li t-else="">
+                <t t-esc="company.country_id.vat_label or 'Tax ID'">Tax ID</t>: <span t-esc="forced_vat"/>
+            </li>
+        </ul>
+    </div>
+</div>
+
             </div>
         </xpath>
 

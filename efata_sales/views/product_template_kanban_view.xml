@@ -6,11 +6,12 @@
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_kanban_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//div[@class='mb-1']/span" position="inside">
-                    <t t-if="record.reference2.raw_value">
-                        <field name="reference2"/>
-                    </t>
+               <xpath expr="//div[@class='mb-1']" position="inside">
+                    <field name="reference2"/>
                 </xpath>
+            <!-- <xpath expr="//form" position="attributes">
+                <attribute name="string">Product Management</attribute>
+            </xpath> -->
             </field>
         </record>
     </data>

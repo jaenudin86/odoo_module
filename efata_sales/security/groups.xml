@@ -1,0 +1,8 @@
+<odoo>
+  <data noupdate="0">
+    <record id="group_hide_default_code" model="res.groups">
+      <field name="name">Hide Default Code</field>
+      <field name="category_id" ref="base.module_category_hidden_fields"/> <!-- atau bikin kategori sendiri -->
+    </record>
+  </data>
+</odoo>

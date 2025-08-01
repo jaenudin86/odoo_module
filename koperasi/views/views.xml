@@ -5,58 +5,59 @@
         <field name="model">ksp.kredit</field>
         <field name="arch" type="xml">
             <form string="Administrasi Kredit">
-              <header>
-                  <button
-                          string="generate angsuran"
-                          type="object"
-                          name="generate_angsuran"
-                          class="btn-primary"
-                          attrs="{'invisible':[('status','!=','draft')]}"
-                  />
-                  <button
-                          string="confirm"
-                          type="object"
-                          name="confirm_kredit"
-                          class="btn-primary"
-                          attrs="{'invisible':[('status','!=','draft')]}"
-                  />
-                  <button
-                          string="validasi"
-                          type="object"
-                          name="validasi_kredit"
-                          class="btn-primary"
-                          attrs="{'invisible':[('status','!=','confirm')]}"
-                  />
-                  <button
-                          string="pencairan"
-                          type="object"
-                          name="pencairan_kredit"
-                          class="btn-primary"
-                          attrs="{'invisible':[('status','!=','validate')]}"
-                  />
-                  <button
-                          string="pelunasan"
-                          type="object"
-                          name="pelunasan_kredit"
-                          class="btn-primary"
-                          attrs="{'invisible':[('status','!=','cair')]}"
-                  />
-                  <button
-                          string="bermasalah"
-                          type="object"
-                          name="kredit_macet"
-                          class="btn-primary"
-                          attrs="{'invisible':[('status','!=','cair')]}"
-                  />
-                  <button
-                          string="cancel"
-                          type="object"
-                          name="button_cancel"
-                          class="btn-primary"
-                          attrs="{'invisible':[('status','=','draft')]}"
-                  />
-                  <field name="status" widget="statusbar"/>
-              </header>
+<header>
+    <button
+        string="generate angsuran"
+        type="object"
+        name="generate_angsuran"
+        class="btn-primary"
+        invisible="status != 'draft'"
+    />
+    <button
+        string="confirm"
+        type="object"
+        name="confirm_kredit"
+        class="btn-primary"
+        invisible="status != 'draft'"
+    />
+    <button
+        string="validasi"
+        type="object"
+        name="validasi_kredit"
+        class="btn-primary"
+        invisible="status != 'confirm'"
+    />
+    <button
+        string="pencairan"
+        type="object"
+        name="pencairan_kredit"
+        class="btn-primary"
+        invisible="status != 'validate'"
+    />
+    <button
+        string="pelunasan"
+        type="object"
+        name="pelunasan_kredit"
+        class="btn-primary"
+        invisible="status != 'cair'"
+    />
+    <button
+        string="bermasalah"
+        type="object"
+        name="kredit_macet"
+        class="btn-primary"
+        invisible="status != 'cair'"
+    />
+    <button
+        string="cancel"
+        type="object"
+        name="button_cancel"
+        class="btn-primary"
+        invisible="status == 'draft'"
+    />
+    <field name="status" widget="statusbar"/>
+</header>
+
               <sheet>
                     <div>
                         <div class="oe_right oe_button_box" name="button_box">
@@ -66,22 +67,22 @@
                         </div>
                     </div>
                     <group>
-                        <group attrs="{'readonly':[('status','!=','draft')]}">
-                            <field name="name" string="No. Pinjaman" attrs="{'readonly':[('status','!=','draft')]}"/>
-                            <!-- <field name="kredit_type" attrs="{'readonly':[('status','!=','draft')]}"/> -->
-                            <field name="tanggal" attrs="{'readonly':[('status','!=','draft')]}"/>
-                            <field name="tgl_cair" attrs="{'readonly':[('status','!=','draft')]}"/>
-                            <field name="partner_id" string="Nasabah" attrs="{'readonly':[('status','!=','draft')]}"/>
-                            <field name="pokok" attrs="{'readonly':[('status','!=','draft')]}"/>
-                            <field name="rate" attrs="{'readonly':[('status','!=','draft')]}"/>
-                            <field name="rate_type" attrs="{'readonly':[('status','!=','draft')]}"/>
-                            <field name="tempo" attrs="{'readonly':[('status','!=','draft')]}"/>
-                            <field name="tempo_type" attrs="{'readonly':[('status','!=','draft')]}"/>
+                        <group readonly="status != 'draft'">
+                            <field name="name" string="No. Pinjaman" readonly="status != 'draft'"/>
+                            <!-- <field name="kredit_type" readonly="status != 'draft'"/> -->
+                            <field name="tanggal" readonly="status != 'draft'"/>
+                            <field name="tgl_cair" readonly="status != 'draft'"/>
+                            <field name="partner_id" string="Nasabah" readonly="status != 'draft'"/>
+                            <field name="pokok" readonly="status != 'draft'"/>
+                            <field name="rate" readonly="status != 'draft'"/>
+                            <field name="rate_type" readonly="status != 'draft'"/>
+                            <field name="tempo" readonly="status != 'draft'"/>
+                            <field name="tempo_type" readonly="status != 'draft'"/>
                         </group>
                         <group>
                             <group>
                                 <field name="angsuran" readonly="1"/>
-                                <field name="bulat" attrs="{'readonly':[('status','!=','draft')]}"/>
+                                <field name="bulat" readonly="status != 'draft'"/>
                                 <field name="bunga" readonly="1"/>
                             </group>
                             <group>
@@ -94,6 +95,7 @@
                             </group>
                         </group>
                     </group>
+
                 <notebook>
                     <page name="kredit_line" string="Jadwal Angsuran">
                         <field name="kredit_line">
@@ -169,26 +171,27 @@
         </field>
     </record>
 
-    <record id='ksp_kredit_tree_view' model='ir.ui.view'>
-        <field name="name">ksp.kredit.tree.view</field>
-        <field name="model">ksp.kredit</field>
-        <field name="arch" type="xml">
-            <tree decoration-success="status=='lunas'" decoration-danger="status=='macet'" string="Administrasi Kredit">
-                <field name="name" string="No Peminjam"/>
-                <field name="partner_id" string="Nasabah"/>
-                <field name="tanggal"/>
-                <field name="tgl_cair"/>
-                <field name="tempo"/>
-                <field name="tempo_type"/>
-                <field name="pokok"/>
-                <field name="rate"/>
-                <field name="rate_type"/>
-                <field name="bunga"/>
-                <field name="angsuran"/>
-                <field name="status"/>
-            </tree>
-        </field>
-    </record>
+<record id="ksp_kredit_tree_view" model="ir.ui.view">
+    <field name="name">ksp.kredit.tree.view</field>
+    <field name="model">ksp.kredit</field>
+    <field name="arch" type="xml">
+        <tree string="Administrasi Kredit">
+            <field name="name" string="No Peminjam"/>
+            <field name="partner_id" string="Nasabah"/>
+            <field name="tanggal"/>
+            <field name="tgl_cair"/>
+            <field name="tempo"/>
+            <field name="tempo_type"/>
+            <field name="pokok"/>
+            <field name="rate"/>
+            <field name="rate_type"/>
+            <field name="bunga"/>
+            <field name="angsuran"/>
+            <field name="status"/>
+        </tree>
+    </field>
+</record>
+
     <record model="ir.ui.view" id="ksp_kredit_pivot_view">
         <field name="name">ksp.kredit.pivot.view</field>
         <field name="model">ksp.kredit</field>
@@ -379,17 +382,20 @@
                             type="object"
                             string="Confirm"
                             class="oe_highlight"
-                            attrs="{'invisible':[('state','!=','draft')]}"/>
+                            invisible="state != 'draft"/>
+
                     <button name="post_bayar"
                             type="object"
                             string="Post"
                             class="oe_highlight"
-                            attrs="{'invisible':[('state','!=','confirm')]}"/>
+                            invisible="state != 'confirm'"/>
+
                     <button name="cancel_bayar"
                             type="object"
                             string="Cancel"
                             class="oe_highlight"
-                            attrs="{'invisible':[('state','=','draft')]}"/>
+                            invisible="state == 'draft'"/>
+
                     <field name="state" widget="statusbar"/>
                 </header>
                 <group>

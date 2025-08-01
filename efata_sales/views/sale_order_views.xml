@@ -12,13 +12,35 @@
             <!-- Menambahkan tombol Sample -->
             <xpath expr="//header" position="inside">
                 <button name="action_sample" type="object" string="Send Sample" class="oe_highlight"
-                    invisible="state == 'sale' or state == 'sample_sent' or report_type != 'quotation'" />
+                invisible="state == 'sale' or  state == 'sample_sent'" />
+
+            </xpath>
+            <xpath expr="//button[@name='action_preview_sale_order']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_quotation_send']" position="after">
+                <button name="action_save" type="object" string="Save" class="oe_highlight"
+                    invisible="state == 'sale' or state == 'save' or  state == 'sent' or  state == 'sample_sent'" />
             </xpath>
             <xpath expr="//button[@name='action_cancel']" position="replace">
                 <button name="action_cancel" type="object" string="Cancel"
-                    invisible="state not in ['draft', 'sent', 'sale','sample_sent'] or not id or locked"
+                    invisible="state not in ['draft', 'sent', 'sale','sample_sent','save'] or not id or locked"
                     data-hotkey="x" />
             </xpath>
+            <!-- <xpath expr="//button[@name='action_sample']" position="replace">
+                <button name="action_sample" type="object" string="Cancel"
+                    invisible="state not in ['sample_sent'] or not id or locked"
+                    data-hotkey="x" />
+            </xpath> -->
+            <xpath expr="//button[@name='action_confirm']" position="replace">
+                <button name="action_confirm" type="object" string="Confirm"
+                    invisible="state not in ['sent','save'] or not id or locked"
+                    data-hotkey="c" />
+            </xpath>
+            <xpath expr="//button[@name='action_quotation_send']" position="attributes">
+            <attribute name="invisible">1</attribute>
+         </xpath>
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="report_type" widget="radio" />
                 <field name="incl_tax" />
@@ -40,10 +62,15 @@
             <xpath expr="//field[@name='order_line']/form/group/group/field[@name='tax_id']" position="after">
                 <field name="notes" string="Notes" />
             </xpath>
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='notes']" position="after">
+                <field name="target" string="Target Of" />
+            </xpath>
             <xpath expr="//field[@name='order_line']/list/field[@name='tax_id']" position="after">
                 <field name="notes" string="Notes" optional="show" />
             </xpath>
-
+            <xpath expr="//field[@name='order_line']/list/field[@name='notes']" position="after">
+                <field name="target" string="Target Of" optional="show" />
+            </xpath>
             <!-- <xpath expr="//field[@name='order_line']/form/group/group/field[@name='product_id']" position="attributes">
             <attribute name="widget">many2one</attribute>
             <attribute name="context">{'show_display_name': True}</attribute>
@@ -57,7 +84,7 @@
 
 
             <xpath expr="//field[@name='state']" position="attributes">
-                <attribute name="statusbar_visible">draft,sent,sale,sample_sent,approved</attribute>
+                <attribute name="statusbar_visible">draft,save,sent,sale,approved,sample_sent</attribute>
             </xpath>
 
         </field>

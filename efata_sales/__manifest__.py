@@ -35,7 +35,12 @@ Long description of module's purpose
         'views/custom_bubble_layout.xml',
         'views/product_template_kanban_view.xml',
         'views/stock_report_list_view.xml',
-        'views/product_product_inherit.xml'
+        'views/product_product_inherit.xml',
+        'views/view_partner_form_inherit_user_visible.xml',
+        # 'views/hide_vendor.xml',
+        # 'security/groups.xml'
+        # 'security/res_partner_rules.xml',
+        'views/res_partner_views.xml',
     ],
     'assets': {
             'web.assets_backend': [

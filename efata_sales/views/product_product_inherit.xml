@@ -10,12 +10,27 @@
                 </field>
 
                 <!-- Tambahkan default_code setelah invoice_policy -->
-                <field name="invoice_policy" position="after">
-                    <field name="default_code" groups="base.group_system"/>
-                </field>
+            <field name="invoice_policy" position="after">
+                <field name="default_code" groups="base.group_system,sale.sales_user_food_hide_report,sale.sales_user_food,sale.sales_user_fragrance,sale.sales_user_fragrance_hide_report"/>
+            </field>
+               <xpath expr="//div[@name='standard_price_uom']" position="attributes">
+            <!-- <attribute name="groups">base.group_system</attribute> -->
+             <attribute name="groups">base.group_system,sale.sales_user_food_hide_report,sale.sales_user_food,sale.sales_user_fragrance,sale.sales_user_fragrance_hide_report</attribute>
+            </xpath>
+        
+
+
+
+
         <field name="barcode" position="attributes">
                     <attribute name="invisible">1</attribute>
         </field>
+        <xpath expr="//form" position="attributes">
+            <attribute name="string">Informasi Produk Baru</attribute>
+        </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="placeholder">Product's Code...</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>
