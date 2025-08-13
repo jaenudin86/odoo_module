@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="menu_scan_barcode_root"
-              name="Scan Barcode"
-              parent="stock.menu_stock_warehouse_mgmt"
-              sequence="100"
-              action="action_scan_barcode_form"/>
+
     
     <record id="action_scan_barcode_form" model="ir.actions.act_window">
         <field name="name">Scan Barcode</field>
