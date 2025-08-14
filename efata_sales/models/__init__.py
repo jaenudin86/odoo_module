@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from . import models
-from . import sale_order
-from . import product
-from . import saleorderLine
-from . import res_partnerin
+# from . import models
+# from . import sale_order
+# from . import product
+# from . import saleorderLine
+# from . import res_partnerin
 # from . import account_move
