@@ -25,3 +25,6 @@ class ProductTemplate(models.Model):
     ingredients = fields.Text(string="Ingredients")
     brand = fields.Char(string="Brand")
     size = fields.Char(string="Size")
+
+
+        
