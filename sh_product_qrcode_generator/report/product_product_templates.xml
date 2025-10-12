@@ -206,12 +206,12 @@
         </template>
         <template id="sh_report_simple_label_dymo">
             <t t-call="web.html_container">
-                <div class="o_label_sheet" style="width:70mm; height:35mm; margin:0; padding:0;">
-                    <table style="width:100%; height:100%; border-collapse:collapse; border:1px solid #000; font-size:9px;">
+                <div class="o_label_sheet" style="width:92mm; height:45mm; margin:0; padding:0;margin:0; box-sizing:border-box; display:flex;">
+                    <table style="width:100%; height:100%; border-collapse:collapse; border:1px solid #000; font-size:10px;">
                         <tr>
                             <!-- Logo + QR -->
                             <td style="width:30%; text-align:center; vertical-align:middle; border-right:1px solid #000;">
-                                <img src="/your_module_name/static/src/img/logo_puco.png" style="width:100%; max-width:60px;"/>
+                                <img src="/sh_product_qrcode_generator/static/logopuco.png" style="width:100px;"/>
                                 <!-- <t t-if="product.sh_qr_code">
                                     <div style="margin-top:4px;">
                                         <img t-att-src="'/report/barcode/?type=QR&amp;value=' + str(product.sh_qr_code) + '&amp;width=50&amp;height=50'"
@@ -221,15 +221,15 @@
                                 <t t-if="product.sh_qr_code">
                             <div t-out="product.sh_qr_code" style="padding:0"
                                 t-options="{'widget': 'barcode', 'symbology': 'QR', 'img_style': barcode_size}" />
-                            <span class="text-center" t-out="product.sh_qr_code" />
+                            <!-- <span class="text-center" t-out="product.sh_qr_code" /> -->
                             </t>
-                                <div style="font-size:8px; margin-top:2px;">Scan Qr</div>
+                                <!-- <div style="font-size:12px; margin-top:4px;">Scan Qr</div> -->
                             </td>
 
                             <!-- Data Field -->
                             <td style="width:70%; vertical-align:top; padding:2px;">
                                 <!-- Header Hijau -->
-                                <div style="background-color:#9bbb59; text-align:center; font-weight:bold; color:#000; font-size:10px; padding:2px;">
+                                <div style="background-color:#9bbb59; text-align:center; font-weight:bold; color:#000; font-size:12px; padding:2px;">
                                     BAP CONTROL
                                 </div>
                                 <table style="width:100%; margin-top:2px; border-collapse:collapse;">
@@ -239,7 +239,7 @@
                                         <td><span t-field="product.name"/></td>
                                     </tr>
                                     <tr>
-                                        <td>SN#</td>
+                                        <td>S/N#</td>
                                         <td>:</td>
                                         <!-- <td><span t-field="product.serial_no"/></td> -->
                                     </tr>
@@ -248,18 +248,23 @@
                                         <td>:</td>
                                         <td><span t-field="product.default_code"/></td>
                                     </tr>
+                                                                        <tr>
+                                        <td>IR#</td>
+                                        <td>:</td>
+                                        <td><span/></td>
+                                    </tr>
                                     <tr>
-                                        <td>Cat</td>
+                                        <td>Category</td>
                                         <td>:</td>
                                         <td><span t-field="product.categ_id.name"/></td>
                                     </tr>
                                     <tr>
-                                        <td>Loc</td>
+                                        <td>Location</td>
                                         <td>:</td>
                                         <td><span t-field="product.location_id.name"/></td>
                                     </tr>
                                     <tr>
-                                        <td>Whs Address</td>
+                                        <td>WHS Address</td>
                                         <td>:</td>
                                         <td><span t-field="product.warehouse_id.name"/></td>
                                     </tr>
@@ -273,7 +278,7 @@
 
         <template id="sh_report_productlabel_dymo_with_qr">
             <t t-call="web.html_container">
-                <t t-set="barcode_size" t-value="'width:7.5mm;height:7.5mm'" />
+                <t t-set="barcode_size" t-value="'width:15.5mm;height:15.5mm'" />
                 <t t-set="table_style" t-value="'width:100%;height:32mm;'" />
                 <t t-set="padding_page" t-value="'padding: 2mm'" />
                 <t t-foreach="quantity.items()" t-as="qr_code_and_qty_by_product">
@@ -320,11 +325,12 @@
 
                 <table style="width:100%; font-size:9px; line-height:1.1;">
                     <tr><td style="width:28%;">Product Name</td><td>:</td><td><span t-field="product.display_name"/></td></tr>
-                    <tr><td>SN#</td><td>:</td><td><span t-field="product.serial_no"/></td></tr>
+                    <tr><td>S/N#</td><td>:</td><td><span t-field="product.serial_no"/></td></tr>
                     <tr><td>Part#</td><td>:</td><td><span t-field="product.default_code"/></td></tr>
-                    <tr><td>Cat</td><td>:</td><td><span t-field="product.categ_id.name"/></td></tr>
-                    <tr><td>Loc</td><td>:</td><td><span t-field="product.location_id.name"/></td></tr>
-                    <tr><td>Whs Addr</td><td>:</td><td><span t-field="product.property_stock_inventory.name"/></td></tr>
+                    <tr><td>IRt#</td><td>:</td><td><span t-field="product.default_code"/></td></tr>
+                    <tr><td>Category</td><td>:</td><td><span t-field="product.categ_id.name"/></td></tr>
+                    <tr><td>Locaction</td><td>:</td><td><span t-field="product.location_id.name"/></td></tr>
+                    <tr><td>WHS Address</td><td>:</td><td><span t-field="product.property_stock_inventory.name"/></td></tr>
                 </table>
             </div>
         </div>
