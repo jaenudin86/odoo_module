@@ -10,13 +10,13 @@ class ShProductQRCodeGeneratorLabelLayout(models.TransientModel):
     _description = 'Choose the sheet layout to print the labels with QR code'
 
     print_format = fields.Selection([
-        ('dymo', 'Dymo'),
-        ('2x7xprice', '2 x 7 with price'),
-        ('4x7xprice', '4 x 7 with price'),
-        ('4x12', '4 x 12'),
-        ('4x12xprice', '4 x 12 with price'),
-        ('bap_2x7', 'BAP Control (2x7 Label)'),
-    ], string="Format", default='2x7xprice', required=True)
+        ('dymo', 'Dymo BAP Control'),
+        # ('2x7xprice', '2 x 7 with price'),
+        # ('4x7xprice', '4 x 7 with price'),
+        # ('4x12', '4 x 12'),
+        # ('4x12xprice', '4 x 12 with price'),
+        # ('bap_2x7', 'BAP Control (2x7 Label)'),
+    ], string="Format", default='dymo', required=True)
 
     custom_quantity = fields.Integer('Quantity', default=1, required=True)
     product_ids = fields.Many2many('product.product')
