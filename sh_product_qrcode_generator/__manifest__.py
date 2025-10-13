@@ -27,6 +27,7 @@
         "report/product_product_templates.xml",
         "report/product_template_templates.xml",
         "report/product_report.xml",
+        "report/product_picking.xml",
 
         "wizard/sh_product_qrcode_generator_label_layout_wizard_views.xml",
         "wizard/sh_qr_generator_views.xml"
