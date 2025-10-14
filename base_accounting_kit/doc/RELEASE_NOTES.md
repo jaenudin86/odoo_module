@@ -10,3 +10,8 @@
 #### UPDT
 - Added the reconciliation widget and lock dates.
 
+#### 26.02.2025
+#### Version 18.0.1.0.2
+#### FIX
+- Fixed the Asset creation issue from the vendor bill.
+
