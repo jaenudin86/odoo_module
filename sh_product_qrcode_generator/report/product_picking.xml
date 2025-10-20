@@ -54,10 +54,10 @@
     <template id="picking_receipt_label_dymo">
         <t t-call="web.html_container">
             <div class="o_label_sheet" style="width:92mm; height:45mm; margin:0; padding:0; box-sizing:border-box;">
-                <table style="width:100%; height:100%; border-collapse:collapse; border:1px solid #000; font-size:9px; page-break-inside:avoid; margin-bottom:3px;">
+                <table style="width:100%; height:100%; border-collapse:collapse; border:1px solid #000; font-size:10px; page-break-inside:avoid; margin-bottom:3px;">
                     <tr>
                         <!-- Logo + QR -->
-                        <td style="width:25%; text-align:center; vertical-align:middle; border-right:1px solid #000;">
+                        <td style="width:20%; text-align:center; vertical-align:middle; border-right:1px solid #000;">
                             <img src="/sh_product_qrcode_generator/static/logopuco.png" style="width:90px; margin-bottom:2px;"/>
                             <t t-if="product.sh_qr_code">
                                 <div t-out="product.sh_qr_code"
@@ -66,7 +66,7 @@
                         </td>
 
                         <!-- Data Field -->
-                        <td style="width:75%; vertical-align:top; padding:2px;">
+                        <td style="width:80%; vertical-align:top; padding:2px;">
                             <!-- Header Hijau -->
                             <div style="background-color:#9bbb59; text-align:center; font-weight:bold; color:#000; font-size:12px; padding:2px;">
                                 BAP CONTROL
