@@ -9,7 +9,21 @@
         <field name="brand"/>
         <field name="size"/>
         <field name="ingredients"/>
+        <field name="gross_weight"/>
+        <field name="net_weight"/>
+        <field name="net_net_weight"/>
+        <field name="base_colour"/>
       </xpath>
+                  <!-- Tambahkan checkbox dan field berat -->
+            <xpath expr="//field[@name='default_code']" position="after">
+                <field name="is_article"/>
+                <field name="text_colour"/>
+            </xpath>
+
+            <!-- <xpath expr="//group[@name='group_weight']" position="inside">
+   
+            </xpath> -->
+
     </field>
   </record>
   <record id="view_product_tree_ingredients" model="ir.ui.view">
@@ -22,7 +36,22 @@
         <field name="brand"/>
         <field name="size"/>
         <field name="ingredients"/>
+                     <field name="gross_weight"/>
+                <field name="net_weight"/>
+                <field name="net_net_weight"/>
+                <field name="base_colour"/>
       </xpath>
+                  <!-- Tambahkan checkbox dan field berat -->
+            <xpath expr="//field[@name='default_code']" position="after">
+                <field name="is_article"/>
+                   <field name="text_colour"/>
+            </xpath>
+
+            <!-- <xpath expr="//group[@name='group_weight']" position="inside">
+                <field name="gross_weight"/>
+                <field name="net_weight"/>
+                <field name="net_net_weight"/>
+            </xpath> -->
     </field>
   </record>
 

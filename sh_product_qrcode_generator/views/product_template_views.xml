@@ -9,10 +9,12 @@
             <field name="barcode" position="after">
                 <field name="sh_qr_code" invisible="product_variant_count &gt; 1" />
                 <field name="sh_qr_code_img" widget="image" class="oe_avatar float-left" invisible="product_variant_count &gt; 1" />
+                <!-- FIELD BARU: QR Code dengan Logo -->
+                <field name="sh_qr_code_with_logo" widget="image" class="oe_avatar float-left" invisible="product_variant_count &gt; 1" />
             </field>
         </field>
     </record>
-
+    
     <record id="sh_product_qrcode_generator_product_template_form_view" model="ir.ui.view">
         <field name="name">sh.product.qrcode.generator.product.tmpl.form</field>
         <field name="model">product.template</field>
@@ -24,7 +26,7 @@
             </xpath>
         </field>
     </record>
-
+    
     <!-- Product Template Tree -->
     <record id="sh_product_qrcode_generator_product_tmpl_tree" model="ir.ui.view">
         <field name="name">sh.product.qrcode.generator.product.tmpl.list</field>
@@ -40,7 +42,7 @@
             </xpath>
         </field>
     </record>
-
+    
     <!-- Product Template Search -->
     <record id="sh_product_qrcode_generator_product_tmpl_search" model="ir.ui.view">
         <field name="name">sh.product.qrcode.generator.product.tmpl.search</field>
@@ -52,5 +54,50 @@
             </field>
         </field>
     </record>
+
+    <!-- Product Product Form (untuk variant) -->
+    <record id="sh_product_qrcode_generator_product_product_form" model="ir.ui.view">
+        <field name="name">sh.product.qrcode.generator.product.product.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <field name="barcode" position="after">
+                <field name="sh_qr_code" />
+                <field name="sh_qr_code_img" widget="image" class="oe_avatar" />
+                <!-- FIELD BARU: QR Code dengan Logo untuk Product Variant -->
+                <field name="sh_qr_code_with_logo" widget="image" class="oe_avatar" />
+            </field>
+        </field>
+    </record>
+
+    <!-- Debug View: Show QR comparisons side by side -->
+    <!-- <record id="sh_product_qr_debug_form" model="ir.ui.view">
+        <field name="name">sh.product.qr.debug.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="QR Code Debug" groups="base.group_no_one">
+                    <group>
+                        <group string="QR Code Original">
+                            <field name="sh_qr_code" readonly="1"/>
+                            <field name="sh_qr_code_img" widget="image" options="{'size': [200, 200]}"/>
+                        </group>
+                        <group string="QR Code With Logo">
+                            <label for="sh_qr_code_with_logo" string="QR with Logo"/>
+                            <field name="sh_qr_code_with_logo" widget="image" options="{'size': [200, 200]}"/>
+                            <button name="_compute_qr_with_logo" string="🔄 Regenerate QR with Logo" 
+                                    type="object" class="oe_highlight"
+                                    help="Force regenerate QR code with logo"/>
+                        </group>
+                    </group>
+                    <group string="Debug Info">
+                        <field name="id" readonly="1"/>
+                        <field name="display_name" readonly="1"/>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record> -->
 
 </odoo>
