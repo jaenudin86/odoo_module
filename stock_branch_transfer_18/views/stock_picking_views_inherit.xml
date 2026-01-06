@@ -1,0 +1,29 @@
+<odoo>
+  <record id="view_picking_form_inherit_branch_request" model="ir.ui.view">
+    <field name="name">stock.picking.form.branch.request</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="arch" type="xml">
+      <!-- Insert a new group after the header (use modifiers instead of attrs) -->
+      <xpath expr="//sheet" position="inside">
+        <group modifiers='{"invisible": [["is_branch_request","=",false]]}'>
+          <field name="request_no" readonly="1"/>
+          <field name="warehouse_from_id"/>
+          <field name="warehouse_to_id"/>
+        </group>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="action_branch_request" model="ir.actions.act_window">
+    <field name="name">Request Barang Antar Cabang</field>
+    <field name="res_model">stock.picking</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[("is_branch_request","=",True)]</field>
+    <field name="context">{'default_is_branch_request': True}</field>
+  </record>
+
+  <!-- place under Inventory -> Operations (stock.menu_stock_operations) -->
+  <menuitem id="menu_branch_request_root" name="Branch Request" parent="stock.menu_stock_operations" sequence="50"/>
+  <menuitem id="menu_branch_request" name="Request Barang" parent="menu_branch_request_root" action="action_branch_request"/>
+</odoo>

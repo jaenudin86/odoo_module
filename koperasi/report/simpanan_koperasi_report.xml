@@ -1,0 +1,119 @@
+ <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="report_simpanan_koperasi">
+	    	<t t-call="report.html_conn          tainer">
+	            <t t-foreach="docs" t-as="doc">	 
+					<div class="header"> 
+						<div class="row">						          	             
+							<div class="page">
+								<div class="col-xs-8">
+									<img class="image" t-att-src="'data:image/png;base64,%s' % res_company.logo" style="height:80px;display:block;float:left;padding-right:10px;"/>
+									<div style="height:80px;display:block;float:left;font-size:11px;width:350px;">
+									<h5><b t-esc="res_company.name"/></h5>
+										<t t-esc="res_company.partner_id.street"/><br/>
+										<t t-esc="res_company.partner_id.street2"/>
+										<t t-esc="res_company.partner_id.city"/>
+										<t t-esc="res_company.partner_id.state_id.name"/>
+										<t t-esc="res_company.partner_id.zip"/>
+									</div>
+								</div>
+								<div class="col-xs-4" style="padding:0;">
+									<table style="border-spacing:0;margin-bottom:0;height:80px;" class="table">
+										<thead>
+											<div class="text-center" style="font-size:23px;margin-top: -6px;">
+											<b>
+											<div style="letter-spacing:3px;">NO SIMPANAN</div>
+											</b></div>						
+										</thead>
+									</table>
+								</div>                         
+							</div>	
+							<div class="row mt32 mb32" id="informations">
+								<div t-if="doc.partner_id.name" class="col-xs-3">
+									<strong>Nasabah :</strong><br/>
+									<t t-esc="doc.partner_id.name"/><br/>
+									<t t-esc="doc.partner_id.street"/><br/>
+									<t t-esc="doc.partner_id.city"/>
+									<t t-esc="doc.partner_id.zip"/><br/>    
+									<t t-esc="doc.partner_id.country_id.display_name"/><br/> 
+								</div>
+								<div t-if="doc.tanggal" class="col-xs-3">
+									<strong>Tanggal Transaksi:</strong>
+									<p t-field="doc.tanggal"/>
+								</div>
+								<div class="col-xs-3">
+									<strong>Serial Number :</strong><br/>			                    
+									<span t-field="doc.name"/>
+								</div>               
+							</div>
+							<div class="row" style="margin-top: 20px;">
+								<div class="col-xs-12">
+									<table class="table table-condensed table-bordered" style="margin-top: 5px;font-size: 11px;">
+										<thead>
+											<tr>
+												<td class="text-center" style="border:1px solid #000;font-sie:13px;width:25%;"><strong>Tanggal</strong></td>
+												<td class="text-center" style="border:1px solid #000;font-sie:13px;width:12%;"><strong>Simpanan Pokok</strong></td>
+												<td class="text-center" style="border:1px solid #000;font-sie:13px;width:18%;"><strong>Simpanan Wajib</strong></td>
+												<td class="text-center" style="border:1px solid #000;font-sie:13px;width:12%;"><strong>Simpanan Sukarela</strong></td>
+												<td class="text-center" style="border:1px solid #000;font-sie:13px;width:25%;"><strong>Total</strong></td>
+											</tr>
+										</thead>
+										<tbody style="font-size: 12px; ">    
+												<tr t-foreach="doc.simpanan_ids" t-as="line">                                        
+													<td style="border-left: 1px solid black;border-right: 1px solid black;padding: 3px;">
+														<span t-esc="line.tanggal_simpan"/>
+													</td>
+													<td class="text-center" style="border-left: 1px solid black;border-right: 1px solid black;padding: 3px;"><span t-esc="line.simpanan_wajib"/></td>
+													<td class="text-center" style="border-left: 1px solid black;border-right: 1px solid black;padding: 3px;"><span t-esc="line.simpanan_sukarela"/></td>
+													<td class="text-center" style="border-left: 1px solid black;border-right: 1px solid black;padding: 3px;"><span t-esc="line.simpanan_pokok"/></td>
+													<td class="text-center" style="border-left: 1px solid black;border-right: 1px solid black;padding: 3px;"><span t-esc="doc.amount_total"/></td> <br/>                 
+												</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="row" style="margin-top: 20px;">
+								<div style="font-size: 12px; " class="col-xs-8">
+									<div class="col-xs-4">
+										Disiapkan Oleh :<br/><br/><br/><br/><br/>
+										<t>
+										<span style="text-decoration:underline" t-esc="user.name"/>
+										<br/>  Tgl. : <span t-field="doc.tanggal" t-field-options="{'format': 'dd-MM-yyyy'}"/> 
+										</t>
+									</div>
+									<div class="col-xs-4">
+										Nasabah :<br/><br/><br/><br/><br/>
+										<t>
+										<span style="text-decoration:underline" t-esc="partner_id"/>
+										<br/>  Tgl. : <span t-field="doc.tanggal" t-field-options="{'format': 'dd-MM-yyyy'}"/> 
+										</t>
+									</div>              
+								</div>
+								<div style="font-size: 12px; " class="col-xs-4">
+									<table style="width: 100%;">
+										<tr>
+											<td style="border: 1px solid black;padding: 3px;">Keterangan :</td>
+										</tr>
+										<tr>
+											<td colspan="3" style="border: 1px solid black;padding: 3px;">
+												<t t-if="not doc.internal_reference">
+												&amp;nbsp;<br/>
+												<br/>
+												<br/>
+												<br/>
+												<br/>
+												</t>
+												<span t-if="doc.internal_reference" t-field="doc.internal_reference"/>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>							
+						</div>
+					</div>
+				</t>
+		    </t>
+		</template>
+	</data>
+</odoo>

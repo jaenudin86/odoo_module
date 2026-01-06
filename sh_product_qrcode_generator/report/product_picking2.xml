@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Paper Format -->
+    <record id="1paperformat_picking_dymo_label" model="report.paperformat">
+        <field name="name">Dymo Label Picking 100x150mm</field>
+        <field name="default" eval="False"/>
+        <field name="format">custom</field>
+        <field name="page_height">150</field>
+        <field name="page_width">100</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">3</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">95</field>
+    </record>
+    
+    <record id="2paperformat_picking_dymo_label_sedang" model="report.paperformat">
+        <field name="name">Dymo Label Picking 100x50mm</field>
+        <field name="default" eval="False"/>
+        <field name="format">custom</field>
+        <field name="orientation">Landscape</field>
+        <field name="page_height">100</field>
+        <field name="page_width">50</field>
+        <field name="margin_top">3</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>    
+        <field name="header_spacing">0</field>
+        <field name="dpi">95</field>
+    </record>
+    
+    <record id="3paperformat_picking_dymo_label_kecil" model="report.paperformat">
+        <field name="name">Dymo Label Picking 80x50mm</field>
+        <field name="default" eval="False"/>
+        <field name="format">custom</field>
+        <field name="page_height">75</field>
+        <field name="page_width">35</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">3</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">25</field>
+        <field name="dpi">85</field>
+    </record>
+
+    <!-- Report Definition -->
+    <record id="action_report_picking_receipt_dymo" model="ir.actions.report">
+        <field name="name">Picking Receipt - Besar</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sh_product_qrcode_generator.1report_picking_receipt_dymo</field>
+        <field name="report_file">sh_product_qrcode_generator.1report_picking_receipt_dymo</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="1paperformat_picking_dymo_label"/>
+    </record>
+    
+    <record id="action_report_picking_receipt_dymo_sedang" model="ir.actions.report">
+        <field name="name">Picking Receipt - Sedang</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sh_product_qrcode_generator.2report_picking_receipt_dymo</field>
+        <field name="report_file">sh_product_qrcode_generator.2report_picking_receipt_dymo</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="2paperformat_picking_dymo_label_sedang"/>
+    </record>
+    
+    <record id="action_report_picking_receipt_dymo_kecil" model="ir.actions.report">
+        <field name="name">Picking Receipt - Kecil</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sh_product_qrcode_generator.3report_picking_receipt_dymo</field>
+        <field name="report_file">sh_product_qrcode_generator.3report_picking_receipt_dymo</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="3paperformat_picking_dymo_label_kecil"/>
+    </record>
+
+    <!-- Main Report Templates -->
+    <template id="1report_picking_receipt_dymo">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="picking">
+                <t t-foreach="picking.move_line_ids_without_package" t-as="move_line">
+                    <t t-if="move_line.quantity > 0">
+                        <t t-foreach="range(int(move_line.quantity))" t-as="qty_index">
+                            <div class="page">
+                                <t t-call="sh_product_qrcode_generator.1picking_receipt_label_dymo">
+                                    <t t-set="picking" t-value="picking"/>
+                                    <t t-set="move_line" t-value="move_line"/>
+                                    <t t-set="product" t-value="move_line.product_id"/>
+                                </t>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+    
+    <template id="2report_picking_receipt_dymo">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="picking">
+                <t t-foreach="picking.move_line_ids_without_package" t-as="move_line">
+                    <t t-if="move_line.quantity > 0">
+                        <t t-foreach="range(int(move_line.quantity))" t-as="qty_index">
+                            <div class="page">
+                                <t t-call="sh_product_qrcode_generator.2picking_receipt_label_dymo">
+                                    <t t-set="picking" t-value="picking"/>
+                                    <t t-set="move_line" t-value="move_line"/>
+                                    <t t-set="product" t-value="move_line.product_id"/>
+                                </t>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+    
+    <template id="3report_picking_receipt_dymo">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="picking">
+                <t t-foreach="picking.move_line_ids_without_package" t-as="move_line">
+                    <t t-if="move_line.quantity > 0">
+                        <t t-foreach="range(int(move_line.quantity))" t-as="qty_index">
+                            <div class="page">
+                                <t t-call="sh_product_qrcode_generator.3picking_receipt_label_dymo">
+                                    <t t-set="picking" t-value="picking"/>
+                                    <t t-set="move_line" t-value="move_line"/>
+                                    <t t-set="product" t-value="move_line.product_id"/>
+                                </t>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Label Template BESAR (155mm x 116mm) -->
+    <template id="1picking_receipt_label_dymo">
+        <t t-call="web.html_container">
+            <div class="o_label_sheet" style="width:155mm; height:116mm; margin:0; padding:0; box-sizing:border-box;">
+                <table style="width:100%; height:100%; border-collapse:collapse; border:2px solid #000; page-break-inside:avoid; margin-bottom:0px;">
+                    <tr>
+                        <td style="vertical-align:top; padding:8px;">
+                            <!-- Header -->
+                            <div style="text-align:center; font-weight:bold; color:#000; font-size:20px; padding:4px; margin-bottom:8px; border-bottom:2px solid #000;">
+                                BAP CONTROLS
+                            </div>
+                            
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr>
+                                    <!-- QR Code dengan Logo di tengah -->
+                                    <td style="width:35%; text-align:center; vertical-align:top; padding-right:10px;">
+                                        <div style="position:relative; display:inline-block;">
+                                            <t t-if="product.sh_qr_code">
+                                                <div t-out="product.sh_qr_code"
+                                                    t-options="{'widget': 'barcode', 'symbology': 'QR', 'img_style': 'width:140px;height:140px;'}"/>
+                                            </t>
+                                            <!-- Logo di tengah QR Code -->
+                                            <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:3px; border-radius:4px;">
+                                                <img src="/sh_product_qrcode_generator/static/logopuco.png" style="width:40px; height:auto;"/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                    <!-- Data Fields -->
+                                    <td style="width:65%; vertical-align:top; font-size:15px; line-height:1.8;">
+                                        <table style="width:100%; border-collapse:collapse;">
+                                            <tr>
+                                                <td style="width:30%; font-weight:600;">Product Name</td>
+                                                <td style="width:3%;">:</td>
+                                                <td style="font-weight:400;"><span t-esc="product.display_name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">S/N#</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="move_line.lot_id.name or move_line.lot_name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">Part#</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="product.default_code"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">IR#</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="picking.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">Category</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="product.categ_id.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">Location</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="picking.picking_type_id.warehouse_id.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">WHS Address</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="picking.picking_type_id.warehouse_id.partner_id.contact_address"/></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <!-- Label Template SEDANG (116mm x 55mm) -->
+    <template id="2picking_receipt_label_dymo">
+        <t t-call="web.html_container">
+            <div class="o_label_sheet" style="width:116mm; height:55mm; margin:0; padding:0; box-sizing:border-box;">
+                <table style="width:100%; height:100%; border-collapse:collapse; border:2px solid #000; page-break-inside:avoid; margin-bottom:0px;">
+                    <tr>
+                        <td style="vertical-align:top; padding:5px;">
+                            <!-- Header -->
+                            <div style="text-align:center; font-weight:bold; color:#000; font-size:13px; padding:2px; margin-bottom:4px; border-bottom:1px solid #000;">
+                                BAP CONTROLS
+                            </div>
+                            
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr>
+                                    <!-- QR Code dengan Logo di tengah -->
+                                    <td style="width:35%; text-align:center; vertical-align:top; padding-right:6px;">
+                                        <div style="position:relative; display:inline-block;">
+                                            <t t-if="product.sh_qr_code">
+                                                <div t-out="product.sh_qr_code"
+                                                    t-options="{'widget': 'barcode', 'symbology': 'QR', 'img_style': 'width:85px;height:85px;'}"/>
+                                            </t>
+                                            <!-- Logo di tengah QR Code -->
+                                            <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:2px; border-radius:3px;">
+                                                <img src="/sh_product_qrcode_generator/static/logopuco.png" style="width:25px; height:auto;"/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                    <!-- Data Fields -->
+                                    <td style="width:65%; vertical-align:top; font-size:9px; line-height:1.6;">
+                                        <table style="width:100%; border-collapse:collapse;">
+                                            <tr>
+                                                <td style="width:32%; font-weight:600;">Product Name</td>
+                                                <td style="width:3%;">:</td>
+                                                <td style="font-weight:400;"><span t-esc="product.display_name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">S/N#</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="move_line.lot_id.name or move_line.lot_name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">Part#</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="product.default_code"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">IR#</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="picking.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">Category</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="product.categ_id.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">Location</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="picking.picking_type_id.warehouse_id.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">WHS Address</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="picking.picking_type_id.warehouse_id.partner_id.contact_address"/></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <!-- Label Template KECIL (100mm x 50mm) -->
+    <template id="3picking_receipt_label_dymo">
+        <t t-call="web.html_container">
+            <div class="o_label_sheet" style="width:100mm; height:50mm; margin:0; padding:0; box-sizing:border-box;">
+                <table style="width:100%; height:100%; border-collapse:collapse; border:2px solid #000; page-break-inside:avoid; margin-bottom:0px;">
+                    <tr>
+                        <td style="vertical-align:top; padding:3px;">
+                            <!-- Header -->
+                            <div style="text-align:center; font-weight:bold; color:#000; font-size:10px; padding:1px; margin-bottom:3px; border-bottom:1px solid #000;">
+                                BAP CONTROLS
+                            </div>
+                            
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr>
+                                    <!-- QR Code dengan Logo di tengah -->
+                                    <td style="width:35%; text-align:center; vertical-align:top; padding-right:4px;">
+                                        <div style="position:relative; display:inline-block;">
+                                            <t t-if="product.sh_qr_code">
+                                                <div t-out="product.sh_qr_code"
+                                                    t-options="{'widget': 'barcode', 'symbology': 'QR', 'img_style': 'width:70px;height:70px;'}"/>
+                                            </t>
+                                            <!-- Logo di tengah QR Code -->
+                                            <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:1px; border-radius:2px;">
+                                                <img src="/sh_product_qrcode_generator/static/logopuco.png" style="width:20px; height:auto;"/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                    <!-- Data Fields -->
+                                    <td style="width:65%; vertical-align:top; font-size:7px; line-height:1.5;">
+                                        <table style="width:100%; border-collapse:collapse;">
+                                            <tr>
+                                                <td style="width:34%; font-weight:600;">Product Name</td>
+                                                <td style="width:3%;">:</td>
+                                                <td style="font-weight:400;"><span t-esc="product.display_name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">S/N#</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="move_line.lot_id.name or move_line.lot_name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">Part#</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="product.default_code"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">IR#</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="picking.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">Category</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="product.categ_id.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">Location</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="picking.picking_type_id.warehouse_id.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:600;">WHS Address</td>
+                                                <td>:</td>
+                                                <td style="font-weight:400;"><span t-esc="picking.picking_type_id.warehouse_id.partner_id.contact_address"/></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+
+</odoo>

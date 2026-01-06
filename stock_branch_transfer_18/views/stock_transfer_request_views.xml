@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <!-- <record id="view_stock_transfer_request_tree" model="ir.ui.view">
+    <field name="name">stock.transfer.request.tree</field>
+    <field name="model">stock.transfer.request</field>
+    <field name="arch" type="xml">
+      <tree string="Transfer Requests">
+        <field name="name"/>
+        <field name="date"/>
+        <field name="warehouse_from_id"/>
+        <field name="warehouse_to_id"/>
+        <field name="requester_id"/>
+        <field name="state"/>
+      </tree>
+    </field>
+  </record> -->
+  <record id="view_stock_transfer_request_form" model="ir.ui.view">
+    <field name="name">stock.transfer.request.form</field>
+    <field name="model">stock.transfer.request</field>
+    <field name="arch" type="xml">
+      <form string="Transfer Request">
+        <header>
+          <button name="action_confirm" string="Confirm" type="object" states="draft" class="btn-primary"/>
+          <button name="action_approve" string="Approve &amp; Create Transfer" type="object" states="confirmed" class="btn-success"/>
+          <button name="action_set_done" string="Mark Done" type="object" states="approved"/>
+          <field name="state" widget="statusbar"/>
+        </header>
+        <sheet>
+          <group>
+            <field name="name" readonly="1"/>
+            <field name="date"/>
+            <field name="warehouse_from_id"/>
+            <field name="warehouse_to_id"/>
+            <field name="requester_id"/>
+          </group>
+          <notebook>
+            <page string="Lines">
+              <field name="line_ids">
+                <tree editable="bottom">
+                  <field name="product_id"/>
+                  <field name="product_uom_qty"/>
+                  <field name="product_uom"/>
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_stock_transfer_request" model="ir.actions.act_window">
+    <field name="name">Transfer Requests</field>
+    <field name="res_model">stock.transfer.request</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="menu_transfer_request_root" name="Transfer Requests" parent="stock.menu_stock_root" sequence="10"/>
+  <menuitem id="menu_stock_transfer_request" name="Request Transfer" parent="menu_transfer_request_root" action="action_stock_transfer_request"/>
+</odoo>

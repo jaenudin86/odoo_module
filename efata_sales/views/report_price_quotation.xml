@@ -2,80 +2,266 @@
 <odoo>
     <template id="report_price_quotation_inherit" inherit_id="sale.report_saleorder">
         <xpath expr="//t[@t-call='sale.report_saleorder_raw']" position="replace">
-            <t t-call="efata_sales.report_price_quotation"/>
+            <t t-call="efata_sales.report_price_quotation" />
         </xpath>
     </template>
 
     <template id="report_price_quotation">
         <t t-call="web.external_layout">
+            <t t-set="doc_name"
+                t-value="'SalesOrder_' + docs.name + '_' + (docs.report_type or 'Report') + '_' + (docs.color or '')" />
+            <t t-set="report_name" t-value="doc_name" />
             <main>
-                <span><h3>Quotation #</h3> </span>
-                <span t-esc="docs.name"/>
-                <br/>
-                <br/>
+                <!-- <span>
+                    <h3>Quotation #</h3>
+                </span> -->
+                <!-- <span t-esc="docs.name" /> -->
+
                 <div class="page">
-                    <div style="text-align: left; float: left; width: 33%;">
-                        <strong>Date:</strong>
-                        <span t-esc="docs.date_order.strftime('%d/%m/%Y')"/>
+                    <div style="text-align: left; float: left; width: 33%; font-size: 17px;">
+                        <strong>Tanggal:</strong>
+                        <span t-esc="docs.date_order.strftime('%d/%m/%Y')" />
+                        <strong></strong><br /><br />
+                        <strong t-esc="docs.name" />
                     </div>
-                    <div style="text-align: center; font-size: 20px; float: left; width: 33%;">
-                        <strong>PRICE QUOTATION</strong>
-                    </div>
-                    <div style="text-align: left; float: right; width: 33%;">
-                        <strong>To:</strong> <span t-esc="docs.partner_id.name"/><br/>
-                        <strong>Customer Address:</strong> <span t-esc="docs.partner_id.contact_address"/><br/>
+                    <div style="text-align: left; float: right; width: 33%; font-size: 17px;">
+                        <strong>Kepada:</strong> <span t-esc="docs.partner_id.name" /><br /><br />
+                        <strong>Project:</strong> <span t-esc="docs.project" /><br />
                     </div>
 
-                    <br/><br/>
-                    <br/><br/>
-                    Dear <span t-esc="docs.partner_id.name"/>,<br/>
-                    Herewith we are pleased to quote you our best price for the following sample recommendation:
 
-                    <table class="table table-bordered" style="width:100%; border-collapse: collapse;">
+                    <div style="text-align: center; font-size: 20px; float: left; width: 33%; margin-top: +100px;">
+
+                        <t t-if="docs.report_type == 'quotation'">
+                            <strong>PRICE QUOTATION</strong>
+                            <!-- <strong t-att-style="'color:#006400;' if docs.company_id.name == 'PT. Efata Sejahtera Indonesia' else ''">PRICE QUOTATION</strong> -->
+
+                        </t>
+                        <t t-elif="docs.report_type == 'submission'">
+
+                            <strong>SUBMISSION</strong>
+                            <!-- <strong t-att-style="'color:#006400;' if docs.company_id.name == 'PT. Efata Sejahtera Indonesia' else ''">SUBMISSION</strong> -->
+
+
+                        </t>
+                    </div>
+
+                    <br /><br />
+                    <br /><br />
+                    <br /><br />
+                    <!-- <br /><br /> -->
+                    <div style="font-size: 17px;">
+                        <!-- <t t-if="docs.report_type == 'quotation'"> -->
+                        Dear <span t-esc="docs.partner_id.name" />,<br />
+
+                        <t t-if="docs.report_type == 'quotation'">
+                            Bersamaan ini kami menyapampaikan penawaran harga sebagai berikut:
+                        </t>
+                        <t t-if="docs.report_type == 'submission'">
+                            Bersamaan ini kami menyapampaikan sample sebagai berikut:
+                        </t>
+                    </div>
+                    <!-- </t> -->
+                    <table
+                        
+                        class="table table-bordered" style="width:100%; border-collapse: collapse;">
                         <thead>
-                            <tr style="background: #EEE;">
-                                <th>Item</th>
-                                <th>Details</th>
-                                <th>USD/Kg before VAT</th>
-                            </tr>
+                            <t>
+                                <th>
+                                    Kode</th>
+                                <th>
+                                    Nama Product</th>
+                                <t t-if="docs.report_type == 'quotation'">
+                                    <th
+>
+                                        Packing</th>
+                                    <t t-if="docs.incl_tax">
+                                        <th
+    >
+                                            USD/Kg</th>
+                                    </t>
+                                    <t t-else="">
+                                        <th
+    >
+                                            USD/Kg excl VAT</th>
+                                    </t>
+                                </t>
+                                <t t-if="docs.report_type != 'quotation'">
+                                    <th
+>
+                                        Notes</th>
+                                </t>
+                            </t>
                         </thead>
                         <tbody>
-                            <t t-foreach="docs.order_line" t-as="line">
+                            <t t-foreach="docs.order_line" t-as="line" t-index="index">
                                 <tr>
                                     <td>
-                                        <strong t-esc="line.product_id.name"/><br/>
+                                        <strong t-esc="line.name" /><br />
                                         <em>Comment:</em>
                                     </td>
                                     <td>
-                                        <strong t-esc="line.name"/><br/>
-                                        <em>In the trend of  
-                                            <t t-if="line.product_properties_dict">
-                                                <t t-esc="json.loads(line.product_properties_dict).get('Trend', '')"/>
+                                        <strong t-esc="line.product_id.reference2" /><br />
+                                        <em>
+                                            <t t-if="line.target">
+                                                <t t-esc="line.target" />
                                             </t>
-                                            
+                                            <t t-else="">
+                                                <t t-if="line.product_properties_dict">
+                                                    <t
+                                                        t-esc="json.loads(line.product_properties_dict).get('Trend', '')" />
+                                                </t>
+                                            </t>
                                         </em>
+
                                     </td>
-                                    <td><strong t-esc="line.price_unit"/></td>
+                                    <t t-if="docs.report_type != 'quotation'">
+                                        <td><strong t-esc="line.notes" /></td>
+                                    </t>
+                                    <t t-if="docs.report_type == 'quotation'">
+                                        <td><strong t-esc="line.product_packaging_id.name" /></td>
+                                        <t t-if="docs.incl_tax">
+                                            <td><strong t-esc="'{:.2f}'.format(line.price_unit + line.tax_amount)" />
+                                            </td>
+                                        </t>
+                                        <t t-else="">
+                                            <td><strong t-esc="line.price_unit" /></td>
+                                        </t>
+                                    </t>
                                 </tr>
                             </t>
                         </tbody>
                     </table>
 
-                    <br/>
-                    <div>
-                        <strong>Packing:</strong> in 25 kg HDPE drum<br/>
-                        <strong>Delivery:</strong> 14 - 30 days from PO received<br/>
-                        <strong>Payment:</strong> transfer in 30 days from invoice date
-                    </div>
-                    <br/>
-                    <div>
-                        We are looking forward to receiving your confirmation/purchase order. Thank you.
-                    </div>
-                    <br/>
-                    <div>
-                        <strong>Salesperson:</strong><br/>
-                        <span t-esc="docs.user_id.name"/>
-                    </div>
+                    <br />
+                    <t t-if="docs.report_type == 'quotation'">
+                        <t t-if="docs.note">
+                            <span t-field="docs.note"
+                                t-attf-style="#{'text-align:justify;text-justify:inter-word;' if docs.company_id.terms_type != 'html' else ''}"
+                                name="order_note" />
+                        </t>
+                        <t t-else="">
+                            <!-- <t t-if="len(docs.order_line) == 6 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t> -->
+                            <t t-if="len(docs.order_line) == 7 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 8 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 9 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 10 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 21 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 22 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 23 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 24 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t>
+                            <!-- <t t-if="len(docs.order_line) == 25 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t> -->
+                            <!-- <t t-if="len(docs.order_line) >= 11 and docs.report_type == 'quotation'">
+                                <div style="page-break-before: always;"></div>
+                            </t> -->
+                            <div
+                                style="width: 100%; display: flex; justify-content: flex-end; align-items: center; flex-wrap: nowrap; gap: 30px; font-size: 17px;">
+                                <div style="display: flex; align-items: center; gap: 5px; white-space: nowrap;">
+                                    <strong>MOQ
+                                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</strong>
+                                    <span>:</span>
+                                    <span>Sesuai Packing</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 5px; white-space: nowrap;">
+                                    <strong>Pengiriman &#160;&#160;&#160;&#160;&#160;</strong>
+                                    <span>:</span>
+                                    <span>30 - 60 Hari dari PO diterima</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 5px; white-space: nowrap;">
+                                    <strong>Pembayaran&#160;&#160;&#160;</strong>
+                                    <span>:</span>
+                                    <span>
+                                        <t t-esc="docs.payment_term_id.name" /></span>
+                                </div>
+                            </div>
+
+
+
+
+                            <div style="font-size: 17px;">
+                                Demikian surat penawaran ini kami sampaikan dan kami nantikan konfirmasi dari
+                                ibu/Bapak<br /><br />
+                                Terima kasih untuk kerjasamanya.
+                            </div>
+                        </t>
+                    </t>
+                    <br />
+                    <t t-if="docs.report_type == 'quotation'">
+                        <div style="font-size: 17px;">
+                            <span>Hormat Kami,</span><br /><br /><br /><br />
+                            <strong t-esc="docs.user_id.name" />
+                        </div>
+                    </t>
+                            <!-- <t t-if="len(docs.order_line) == 6 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 7 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 8 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t> -->
+                            <t t-if="len(docs.order_line) == 8 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 9 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 10 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 22 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 23 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t>
+                            <t t-if="len(docs.order_line) == 24 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t>
+                            <!-- <t t-if="len(docs.order_line) == 11 and docs.report_type != 'quotation'">
+                                <div style="page-break-after: always;"></div>
+                            </t> -->
+                    <t t-if="docs.report_type != 'quotation'">
+                        <div style="font-size: 17px;">
+                            Demikian surat ini kami sampaikan dan kami nantikan konfirmasi dari ibu/Bapak<br /><br />
+                            Terima kasih untuk kerjasamanya.
+                        </div>
+                        <t t-if="docs.note">
+                            <span t-field="docs.note"
+                                t-attf-style="#{'text-align:justify;text-justify:inter-word;' if docs.company_id.terms_type != 'html' else ''}"
+                                name="order_note" />
+                        </t>
+                        <t t-else="">
+                        </t>
+                    </t>
+                    <br />
+                    <t t-if="docs.report_type != 'quotation'">
+                        <div style="font-size: 17px;">
+                            <span>Hormat Kami,</span><br /><br /><br /><br />
+                            <strong t-esc="docs.user_id.name" />
+                        </div>
+                    </t>
                 </div>
             </main>
         </t>

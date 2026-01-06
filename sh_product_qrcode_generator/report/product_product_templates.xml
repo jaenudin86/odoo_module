@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <template id="sh_report_simple_label2x7">
+            <t t-set="barcode_size" t-value="'width:14mm;height:14mm'" />
+            <t t-set="table_style" t-value="'width:97mm;height:37.1mm;' + table_style" />
+            <td t-att-style="make_invisible and 'visibility:hidden;'">
+                <div class="o_label_full" t-att-style="table_style">
+                    <div class="o_label_name">
+                        <strong t-field="product.display_name" />
+                    </div>
+                    <div class="o_label_data">
+                        <div class="text-center o_label_left_column">
+                            <span class="text-nowrap" t-field="product.default_code" />
+                            <t t-if="product.sh_qr_code">
+                                <div t-out="product.sh_qr_code" style="padding:0"
+                                    t-options="{'widget': 'barcode', 'symbology': 'QR', 'img_style': barcode_size}" />
+                                <span class="text-center" t-out="product.sh_qr_code" />
+                            </t>
+                        </div>
+                        <div class="text-end" style="line-height:normal">
+                            <div class="o_label_extra_data">
+                                <t t-out="extra_html" />
+                            </div>
+                            <t t-if="product.is_product_variant">
+                                <strong class="o_label_price" t-field="product.lst_price"
+                                    t-options="{'widget': 'monetary', 'label_price': True}" />
+                            </t>
+                            <t t-else="">
+                                <strong class="o_label_price" t-field="product.list_price"
+                                    t-options="{'widget': 'monetary', 'label_price': True}" />
+                            </t>
+                        </div>
+                        <div class="o_label_clear"></div>
+                    </div>
+                </div>
+            </td>
+        </template>
+
+        <template id="sh_report_simple_label4x7">
+            <t t-set="barcode_size" t-value="'width:8mm;height:8mm'" />
+            <t t-set="table_style" t-value="'width:47mm; height:37.1mm;' + table_style" />
+            <td t-att-style="make_invisible and 'visibility:hidden;'">
+                <div class="o_label_full" t-att-style="table_style">
+                    <div class="o_label_name">
+                        <strong t-field="product.display_name" />
+                    </div>
+                    <div class="text-end" style="padding-top:0;padding-bottom:0">
+                        <t t-if="product.is_product_variant">
+                            <strong class="o_label_price_medium" t-field="product.lst_price"
+                                t-options="{'widget': 'monetary', 'label_price': True}" />
+                        </t>
+                        <t t-else="">
+                            <strong class="o_label_price_medium" t-field="product.list_price"
+                                t-options="{'widget': 'monetary', 'label_price': True}" />
+                        </t>
+                    </div>
+                    <div class="text-center o_label_small_barcode">
+                        <span class="text-nowrap" t-field="product.default_code" />
+                        <t t-if="product.sh_qr_code">
+                            <div t-out="product.sh_qr_code" style="padding:0"
+                                t-options="{'widget': 'barcode', 'symbology': 'QR', 'img_style': barcode_size}" />
+                            <span class="text-center" t-out="product.sh_qr_code" />
+                        </t>
+                    </div>
+                </div>
+            </td>
+        </template>
+
+        <template id="sh_report_simple_label4x12">
+            <t t-set="barcode_size" t-value="'width:4mm;height:4mm'" />
+            <t t-set="table_style" t-value="'width:43mm;height:19mm;' + table_style" />
+            <td t-att-style="make_invisible and 'visibility:hidden;'">
+                <div class="o_label_full o_label_small_text" t-att-style="table_style">
+                    <div class="o_label_name">
+                        <strong t-field="product.display_name" />
+                    </div>
+                    <t t-if="price_included">
+                        <div class="o_label_left_column">
+                            <span class="text-nowrap" t-field="product.default_code" />
+                        </div>
+                        <div class="o_label_price_medium text-end">
+                            <t t-if="product.is_product_variant">
+                                <strong t-field="product.lst_price"
+                                    t-options="{'widget': 'monetary', 'label_price': True}" />
+                            </t>
+                            <t t-else="">
+                                <strong t-field="product.list_price"
+                                    t-options="{'widget': 'monetary', 'label_price': True}" />
+                            </t>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="o_label_left_column o_label_full_with">
+                            <span class="text-nowrap" t-field="product.default_code" />
+                        </div>
+                    </t>
+                    <div class="text-center o_label_small_barcode">
+                        <t t-if="product.sh_qr_code">
+                            <div t-out="product.sh_qr_code" style="padding:0"
+                                t-options="{'widget': 'barcode', 'symbology': 'QR', 'img_style': barcode_size}" />
+                            <span class="text-center" t-out="product.sh_qr_code" />
+                        </t>
+                    </div>
+                </div>
+            </td>
+        </template>
+
+        <template id="sh_report_productlabel_with_qr">
+            <t t-call="web.html_container">
+                <t t-if="columns and rows">
+                    <t t-if="columns == 2 and rows == 7">
+                        <t t-set="padding_page" t-value="'padding: 14mm 3mm'" />
+                        <t t-set="report_to_call"
+                            t-value="'sh_product_qrcode_generator.sh_report_simple_label2x7'" />
+                    </t>
+                    <t t-if="columns == 4 and rows == 7">
+                        <t t-set="padding_page" t-value="'padding: 14mm 3mm'" />
+                        <t t-set="report_to_call"
+                            t-value="'sh_product_qrcode_generator.sh_report_simple_label4x7'" />
+                    </t>
+                    <t t-if="columns == 4 and rows == 12">
+                        <t t-set="padding_page" t-value="'padding: 20mm 8mm'" />
+                        <t t-set="report_to_call"
+                            t-value="'sh_product_qrcode_generator.sh_report_simple_label4x12'" />
+                    </t>
+                    <t t-foreach="range(page_numbers)" t-as="page">
+                        <div class="o_label_sheet" t-att-style="padding_page">
+                            <table class="my-0 table table-sm table-borderless">
+                                <t t-foreach="range(rows)" t-as="row">
+                                    <tr>
+                                        <t t-foreach="range(columns)" t-as="column">
+                                            <t t-if="not current_quantity and quantity">
+                                                <t t-set="current_data" t-value="quantity.popitem()" />
+                                                <t t-set="product" t-value="current_data[0]" />
+                                                <t t-set="qr_code_and_qty"
+                                                    t-value="current_data[1].pop()" />
+                                                <t t-set="current_quantity"
+                                                    t-value="qr_code_and_qty[1]" />
+                                            </t>
+                                            <t t-if="current_quantity">
+                                                <t t-set="make_invisible" t-value="False" />
+                                                <t t-set="current_quantity"
+                                                    t-value="current_quantity - 1" />
+                                            </t>
+                                            <t t-elif="current_data and current_data[1]">
+                                                <t t-set="qr_code_and_qty"
+                                                    t-value="current_data[1].pop()" />
+                                                <t t-set="current_quantity"
+                                                    t-value="qr_code_and_qty[1] - 1" />
+                                            </t>
+                                            <t t-else="">
+                                                <t t-set="make_invisible" t-value="True" />
+                                            </t>
+                                            <t t-set="table_style"
+                                                t-value="'border: 1px solid %s;' % (product.env.user.company_id.primary_color or 'black')" />
+                                            <t t-call="{{report_to_call}}" />
+                                        </t>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="ssh_report_simple_label_dymo">
+            <div class="o_label_sheet o_label_dymo" t-att-style="padding_page">
+                <div class="o_label_full" t-att-style="table_style">
+                    <div class="text-start o_label_small_barcode">
+                        <t t-if="product.sh_qr_code">
+                            <!-- `quiet=0` to remove the left and right margins on the barcode -->
+                            <div t-out="product.sh_qr_code" style="padding:0"
+                                t-options="{'widget': 'barcode', 'quiet': 0, 'symbology': 'QR', 'img_style': barcode_size}" />
+                            <div class="o_label_name"
+                                style="height:1.7em;background-color: transparent;">
+                                <span t-out="product.sh_qr_code" />
+                            </div>
+                        </t>
+                    </div>
+                    <div class="o_label_name"
+                        style="line-height: 100%;height: 2.1em;background-color: transparent;padding-top: 1px;">
+                        <span t-if="product.is_product_variant" t-field="product.display_name" />
+                        <span t-else="" t-field="product.name" />
+                    </div>
+                    <div class="o_label_left_column">
+                        <small class="text-nowrap" t-field="product.default_code" />
+                    </div>
+                    <div class="text-end" style="padding: 0 4px;">
+                        <t t-if="product.is_product_variant">
+                            <strong class="o_label_price_small" t-field="product.lst_price"
+                                t-options="{'widget': 'monetary', 'label_price': True}" />
+                        </t>
+                        <t t-else="">
+                            <strong class="o_label_price_small" t-field="product.list_price"
+                                t-options="{'widget': 'monetary', 'label_price': True}" />
+                        </t>
+                        <div class="o_label_extra_data">
+                            <t t-out="extra_html" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="sh_report_simple_label_dymo">
+            <t t-call="web.html_container">
+                <div class="o_label_sheet" style="width:92mm; height:45mm; margin:0; padding:0;margin:0; box-sizing:border-box;">
+                    <table style="width:100%; height:100%; border-collapse:collapse; border:1px solid #000; font-size:9px;">
+                        <tr>
+                            <!-- Logo + QR -->
+                            <td style="width:20%; text-align:center; vertical-align:middle; border-right:1px solid #000;">
+                                <img src="/sh_product_qrcode_generator/static/logopuco.png" style="width:100px;"/>
+                                <!-- <t t-if="product.sh_qr_code">
+                                    <div style="margin-top:4px;">
+                                        <img t-att-src="'/report/barcode/?type=QR&amp;value=' + str(product.sh_qr_code) + '&amp;width=50&amp;height=50'"
+     style="width:50px; height:50px;"/>
+                                    </div>
+                                </t> -->
+                                <t t-if="product.sh_qr_code">
+                            <div t-out="product.sh_qr_code" style="padding:0"
+                                t-options="{'widget': 'barcode', 'symbology': 'QR', 'img_style': barcode_size}" />
+                            <!-- <span class="text-center" t-out="product.sh_qr_code" /> -->
+                            </t>
+                                <!-- <div style="font-size:12px; margin-top:4px;">Scan Qr</div> -->
+                            </td>
+
+                            <!-- Data Field -->
+                            <td style="width:80%; vertical-align:top; padding:2px;">
+                                <!-- Header Hijau -->
+                                <div style="background-color:#9bbb59; text-align:center; font-weight:bold; color:#000; font-size:12px; padding:2px;">
+                                    BAP CONTROL
+                                </div>
+                                <table style="width:100%; margin-top:2px; border-collapse:collapse;">
+                                    <tr>
+                                        <td style="width:25%;">Product Name</td>
+                                        <td style="width:3%;">:</td>
+                                        <td><span t-field="product.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>S/N#</td>
+                                        <td>:</td>
+                                        <!-- <td><span t-field="product.serial_no"/></td> -->
+                                    </tr>
+                                    <tr>
+                                        <td>Part#</td>
+                                        <td>:</td>
+                                        <td><span t-field="product.default_code"/></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>IR#</td>
+                                        <td>:</td>
+                                        <td><span/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Category</td>
+                                        <td>:</td>
+                                        <td><span t-field="product.categ_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Location</td>
+                                        <td>:</td>
+                                        <td><span t-field="product.location_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WHS Address</td>
+                                        <td>:</td>
+                                        <td><span t-field="product.warehouse_id.name"/></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <template id="sh_report_productlabel_dymo_with_qr">
+            <t t-call="web.html_container">
+                <t t-set="barcode_size" t-value="'width:15.5mm;height:15.5mm'" />
+                <t t-set="table_style" t-value="'width:100%;height:32mm;'" />
+                <t t-set="padding_page" t-value="'padding: 2mm'" />
+                <t t-foreach="quantity.items()" t-as="qr_code_and_qty_by_product">
+                    <t t-set="product" t-value="qr_code_and_qty_by_product[0]" />
+                    <t t-foreach="qr_code_and_qty_by_product[1]" t-as="qr_code_and_qty">
+                        <t t-foreach="range(qr_code_and_qty[1])" t-as="qty">
+                            <t t-call="sh_product_qrcode_generator.sh_report_simple_label_dymo" />
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <template id="report_bap_control_label_2x7">
+            <t t-call="web.html_container">
+                <t t-set="barcode_size" t-value="'width:20mm;height:20mm'" />
+
+                <!-- SETTING UKURAN A4 DAN GRID LABEL -->
+                <div class="o_label_sheet"
+                     style="width:210mm; height:297mm; margin:0 auto; padding:6mm 0 0 6mm; display:flex; flex-wrap:wrap;">
+
+                    <!-- LOOP PRODUK -->
+          <t t-foreach="docs" t-as="product">
+    <t t-foreach="range(int(product.print_qty or 1))" t-as="i">
+        <div class="o_label"
+             style="width:97mm; height:37mm; border:1px solid #000; margin:2mm; box-sizing:border-box; display:flex;">
+             
+            <!-- KIRI: LOGO + QR -->
+            <div style="width:35mm; text-align:center; padding-top:2mm; border-right:1px solid #000;">
+                <img src="/sni/static/src/img/logo.png"
+                     style="width:30mm; margin-bottom:2mm;" alt="Logo"/>
+                <t t-if="product.sh_qr_code">
+                    <div t-out="product.sh_qr_code"
+                         t-options="{'widget': 'barcode', 'symbology': 'QR', 'img_style': barcode_size}" />
+                </t>
+                <div style="font-size:8px; margin-top:1mm;">Scan QR</div>
+            </div>
+
+            <!-- KANAN: DETAIL PRODUK -->
+            <div style="flex:1; padding:2mm;">
+                <div style="background-color:#A5D6A7; text-align:center; font-weight:bold;
+                            font-size:12px; padding:1mm 0; margin-bottom:2mm;">
+                    BAP CONTROL
+                </div>
+
+                <table style="width:100%; font-size:9px; line-height:1.1;">
+                    <tr><td style="width:28%;">Product Name</td><td>:</td><td><span t-field="product.display_name"/></td></tr>
+                    <tr><td>S/N#</td><td>:</td><td><span t-field="product.serial_no"/></td></tr>
+                    <tr><td>Part#</td><td>:</td><td><span t-field="product.default_code"/></td></tr>
+                    <tr><td>IRt#</td><td>:</td><td><span t-field="product.default_code"/></td></tr>
+                    <tr><td>Category</td><td>:</td><td><span t-field="product.categ_id.name"/></td></tr>
+                    <tr><td>Locaction</td><td>:</td><td><span t-field="product.location_id.name"/></td></tr>
+                    <tr><td>WHS Address</td><td>:</td><td><span t-field="product.property_stock_inventory.name"/></td></tr>
+                </table>
+            </div>
+        </div>
+    </t>
+</t>
+
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

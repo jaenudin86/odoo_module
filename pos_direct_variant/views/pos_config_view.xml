@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_direct_variant_settings" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.pos.direct.variant</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Tambahkan di dalam tab POS -->
+            <xpath expr="//form" position="inside">
+                <group string="Direct Variant Option">
+                    <field name="direct_variant_search"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

@@ -16,16 +16,18 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
     <style>
         :root {
-          --primary-color: #7f54b3;
-          --bg-white: #fff;
-          --text-color: #121212;
-          --text-color-light: #64728f;
+            --primary-color: #7f54b3;
+            --bg-white: #fff;
+            --text-color: #121212;
+            --text-color-light: #64728f;
         }
-        body{
-          font-family: "Montserrat", sans-serif;
+
+        body {
+            font-family: "Montserrat", sans-serif;
         }
+
         .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-            color: var(--text-color);
+            color: #121212;
             font-family: Montserrat;
             font-size: 16px !important;
             font-weight: 500 !important;
@@ -36,51 +38,54 @@
             border: none;
             margin-bottom: 0;
             padding: 12px 24px;
-      }
-      .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
-      border-color: transparent;
-      isolation: isolate;
-      }
-      .nav-tabs .nav-link:focus-visible {
-      border-color: transparent;
-      box-shadow: none;
-      }
-      /* owl-carosel */
-    .owl-carousel .owl-nav {
-      position: absolute;
-      top: 42%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-42%);
-    }
+        }
 
-    .owl-carousel .owl-nav button.owl-prev {
-      position: absolute;
-      right: -36px;
-      font-size: 28px;
-      background-color: #e4e4e4;
-      border-radius: 20px;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+        .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+            border-color: transparent;
+            isolation: isolate;
+        }
 
-    .owl-carousel .owl-nav button.owl-next {
-      position: absolute;
-      left: -36px;
-      font-size: 28px;
-      background-color: #e4e4e4;
-      border-radius: 20px;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+        .nav-tabs .nav-link:focus-visible {
+            border-color: transparent;
+            box-shadow: none;
+        }
 
-    }
+        /* owl-carosel */
+        .owl-carousel .owl-nav {
+            position: absolute;
+            top: 42%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-42%);
+        }
+
+        .owl-carousel .owl-nav button.owl-prev {
+            position: absolute;
+            right: -36px;
+            font-size: 28px;
+            background-color: #e4e4e4;
+            border-radius: 20px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .owl-carousel .owl-nav button.owl-next {
+            position: absolute;
+            left: -36px;
+            font-size: 28px;
+            background-color: #e4e4e4;
+            border-radius: 20px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
 
     </style>
 </head>
@@ -91,12 +96,48 @@
         <!-- button tab -->
         <!--  -->
         <!-- version support -->
-        <div class="my-3 d-flex align-items-center justify-content-end">
-            <div class="text-center"
-                 style="background-color:#017E84 !important; font-size:0.8rem !important; color:#fff !important; font-weight:500 !important; padding:4px !important; margin:0 3px !important; border-radius:50px !important; min-width:120px !important">
-                Community
+        <!-- support-header -->
+
+        <div class="supports my-5 py-3" style="border-bottom: 1px solid #e7e7e7;">
+            <div class="row justify-content-between">
+                <div class="col-4">
+                </div>
+                <div class="col-6">
+                    <div class="row" style="margin-top:10px">
+
+                        <div class="my-3 d-flex align-items-center justify-content-end">
+                            <span class="me-3"><b>Supports: </b></span>
+                            <div class="text-center"
+                                 style="background-color:#017E84 !important; font-size:0.8rem !important; color:#fff !important; font-weight:500 !important; padding:4px !important; margin:0 3px !important; border-radius:50px !important; min-width:120px !important">
+                                Community
+                            </div>
+                            <!--                            <div class="text-center"-->
+                            <!--                                 style="background-color:#875A7B !important; color:#fff !important; font-size:0.8rem !important; font-weight:500 !important; padding:4px !important; margin:0 3px !important; border-radius:50px !important; min-width:120px !important">-->
+                            <!--                                Enterprise-->
+                            <!--                            </div>-->
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:10px">
+                        <div class="d-flex align-items-center justify-content-end">
+                            <span class="me-3"><b>Availability: </b></span>
+                            <div class="text-center col"
+                                 style="font-size:0.8rem !important; color:#5B899E !important; border:1px solid #5B899E; font-weight:500 !important; padding:4px !important; margin:0 3px !important; border-radius:20px !important; min-width:120px !important">
+                                <i class="fa fa-check" style="color:green"></i> On Premise
+                            </div>
+                            <div class="text-center col"
+                                 style="border:1px solid #017E84; font-size:0.8rem !important; color:#017E84 !important; font-weight:500 !important; padding:4px !important; margin:0 3px !important; border-radius:20px !important; min-width:120px !important">
+                                <i class="fa fa-times" style="color:red"></i> Odoo Online
+                            </div>
+                            <div class="text-center col"
+                                 style="font-size:0.8rem !important; border:1px solid #714b67; color:#714b67 !important; font-weight:500 !important; padding:4px !important; margin:0 3px !important; border-radius:20px !important; min-width:120px !important">
+                                <i class="fa fa-times" style="color:red"></i> Odoo.sh
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="tab-content" id="myTabContent">
             <!-- description -->
             <div class="tab-pane fade show active" id="home" role="tabpanel"
@@ -110,7 +151,7 @@
                             <p class="my-1 text-center text-uppercase"
                                style="
               letter-spacing: 4px !important;
-              color: var(--primary-color);
+              color: #7f54b3;
               font-weight: bold;
               text-align: center;
               font-size: 14px;
@@ -122,7 +163,7 @@
                             </p>
                             <h1 class="text-center text-uppercase my-0"
                                 style="
-              color: var(--text-color);
+              color: #121212;
               font-size: 46px;
               font-weight: 700;
               line-height: normal;
@@ -144,8 +185,8 @@
               font-family: Montserrat;
               display: inline-block;
               padding: 7px 33px;
-              border: 1px solid var(--primary-color);
-              color: var(--primary-color);
+              border: 1px solid #7f54b3;
+              color: #7f54b3;
               text-decoration: none;
             "
                                class="mx-1 mb-2 deep-1 deep_hover">
@@ -154,8 +195,7 @@
                                      src="./assets/icons/mail.svg"/>
                                 <span class="pl-2"
                                       style=" font-size: 16px; vertical-align: middle"
-                                >Email Us</span
-                                >
+                                >Email Us</span>
                             </a>
                             <a href="skype:cybroopenerp?chat"
                                target="_blank"
@@ -177,9 +217,52 @@
                                 <span
                                         class="pl-2"
                                         style="color: #fff; font-size: 16px; vertical-align: middle"
-                                >Skype Us</span
-                                >
+                                >Skype Us</span>
                             </a>
+                            <!--Test -->
+
+                            <a href="https://wa.me/9074270811"
+                               target="_blank"
+                               style="
+              background-color: #25D366;
+              font-family: Montserrat;
+              display: inline-block;
+              color: #7f54b3;
+              padding: 7px 33px;
+              border: 1px solid #25D366;
+              border-radius: 35px;
+              text-decoration: none;
+            "
+                               class="mx-1 mb-2 deep-1 deep_hover">
+                                <img
+                                        class="img"
+                                        style="width: 24px"
+                                        src="./assets/icons/whatsapp.svg"
+                                />
+                                <span
+                                        class="pl-2"
+                                        style="color: #fff; font-size: 16px; vertical-align: middle"
+                                >WhatsApp</span>
+                            </a>
+
+<!--                            <a href="https://wa.me/9074270811"-->
+<!--                               target="_blank"-->
+<!--                               style="background-color: #25D366;border-radius: 35px;-->
+<!--              font-family: Montserrat;-->
+<!--              display: inline-block;-->
+<!--              padding: 7px 33px;-->
+<!--              border: 1px solid #25D366;-->
+<!--              color: #7f54b3;-->
+<!--              text-decoration: none;-->
+<!--            "-->
+<!--                               class="mx-1 mb-2 deep-1 deep_hover">-->
+<!--                                <img class="img"-->
+<!--                                     style="width: 24px"-->
+<!--                                     src="./assets/icons/whatsapp.svg"/>-->
+<!--                                <span class="pl-2"-->
+<!--                                      style="color: #fff; font-size: 16px; vertical-align: middle"-->
+<!--                                >WhatsApp</span>-->
+<!--                            </a>-->
                         </div>
                         <div class="d-flex justify-content-center mt-2">
                             <img src="./assets/screenshots/hero.gif"
@@ -187,17 +270,68 @@
                                  style="z-index: 3; height: auto;">
                         </div>
                     </div>
-                    <div class="position-absolute"
-                         style="bottom: 0; z-index: 1; width: 100%;">
+                    <div class="position-absolute bottom-0"
+                         style="z-index: 1; width: 100%;">
                         <img src="./assets/icons/banner-bg.svg"
                              class="img-fluid w-100">
                     </div>
-                    <div class="position-absolute"
-                         style="bottom: 0; right: 0; z-index: 2;">
+                    <div class="position-absolute bottom-0 end-0"
+                         style=" z-index: 2;">
                         <img src="./assets/icons/patter.svg">
                     </div>
                 </div>
+
+                <!-- Live Preview -->
+
+                <div class="" style="border-radius: 32px;
+                                     padding: 27px 40px;
+                                     border: 5px solid #EBEEF2;
+                                     background: #E3E3EE;
+                                     box-shadow: 0px 5px 20px -11px rgba(0, 0, 0, 0.25); ">
+                    <div class="row">
+                        <div class="col-lg-12 d-flex flex-column justify-content-center align-items-center">
+                            <h2 style=" color: var(--text-color);
+                                        text-align: center;
+                                        font-size: 40px;
+                                        font-weight: 620;
+                                        padding-bottom: 50px;">Demo Database for Accounting Kit
+                            </h2>
+                            <div class="col-md-6 col-sm-12 p-3">
+                                <div class="d-flex flex-column h-100"
+                                     style="padding:13px; border-radius:25px; background-color:#faf8ff">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <a href="https://kit.easyinstance.com"
+                                           style="text-decoration: none; color:#1A202C; font-weight:700; font-size:1.6rem; margin-bottom:2px;"
+                                           target="_blank">
+                                            https://kit.easyinstance.com
+                                        </a>
+                                        <div class="d-flex justify-content-center align-items-center"
+                                             style="margin-left:13px; background-color:#A375FF !important; border-radius:8px !important; height:50px; width:50px">
+                                            <img src="./assets/icons/mouse-cursor.svg"
+                                                 class="img-responsive" height="29px"
+                                                 width="29px">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-12 p-3">
+                                <div class="d-flex flex-column h-100"
+                                     style="padding:13px; border-radius:25px; background-color:#ece9f2">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <p
+                                                style="text-decoration: none; color:#d20606; font-weight:500; font-size:1.2rem; margin-bottom:2px;">
+                                            login : demo <br/>
+                                            password : demo
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- key-highlight -->
+
                 <div class="" style="border-radius: 16px;
      padding: 60px 40px;
      border: 1px solid #EBEEF2;
@@ -224,7 +358,7 @@
                                 </div>
                                 <h5 class="m-0"
                                     style="color:#000 !important; font-weight:bold">
-                                        Multiple Invoice Copies Option
+                                    Multiple Invoice Copies Option
                                 </h5>
                                 <p class="m-0"
                                    style="font-size:0.9rem; color:var(--text-color-light); font-size: 16px; font-weight: 400;">
@@ -244,11 +378,11 @@
                                 </div>
                                 <h5 class="m-0"
                                     style="color:#000 !important; font-weight:bold">
-                                        Manage Customer Follow-Ups.
+                                    Manage Customer Follow-Ups.
                                 </h5>
                                 <p class="m-0"
                                    style="font-size:0.9rem; color:var(--text-color-light); font-size: 16px; font-weight: 400;">
-                                 The Customer follow-up menu will be provided the Activities .
+                                    The Customer follow-up menu will be provided the Activities .
                                 </p>
                             </div>
                         </div>
@@ -265,10 +399,10 @@
                                 </div>
                                 <h5 class="m-0"
                                     style="color:#000 !important; font-weight:bold">
-                                    Translations.                                </h5>
+                                    Translations. </h5>
                                 <p class="m-0"
                                    style="font-size:0.9rem; color:var(--text-color-light); font-size: 16px; font-weight: 400;">
-                                  This added translation for the module.
+                                    This added translation for the module.
                                 </p>
                             </div>
                         </div>
@@ -306,11 +440,11 @@
                                 </div>
                                 <h5 class="m-0"
                                     style="color:#000 !important; font-weight:bold">
-                                        Asset Management System.
+                                    Asset Management System.
                                 </h5>
                                 <p class="m-0"
                                    style="font-size:0.9rem; color:var(--text-color-light); font-size: 16px; font-weight: 400;">
-                                      We can manage the Asset and the related types.
+                                    We can manage the Asset and the related types.
                                 </p>
                             </div>
                         </div>
@@ -353,7 +487,8 @@
                                 </h5>
                                 <p class="m-0"
                                    style="font-size:0.9rem; color:var(--text-color-light); font-size: 16px; font-weight: 400;">
-                                In the Register Payment wizard we can add the PDC to the recipient's bank account.
+                                    In the Register Payment wizard we can add the PDC to the recipient's bank
+                                    account.
                                 </p>
                             </div>
                         </div>
@@ -374,7 +509,7 @@
                                 </h5>
                                 <p class="m-0"
                                    style="font-size:0.9rem; color:var(--text-color-light); font-size: 16px; font-weight: 400;">
-                                In the Account Dashboard we can reconcile by clicking the button Reconcile.
+                                    In the Account Dashboard we can reconcile by clicking the button Reconcile.
                                 </p>
                             </div>
                         </div>
@@ -395,21 +530,23 @@
                                 </h5>
                                 <p class="m-0"
                                    style="font-size:0.9rem; color:var(--text-color-light); font-size: 16px; font-weight: 400;">
-                                In the Lock Dates wizard we can set the different Lock Dates.
+                                    In the Lock Dates wizard we can set the different Lock Dates.
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!--code  -->
+
                 <div class="my-5">
-                    <div style=" padding: 5rem 4rem 5rem 4rem; background-color: #0A1425; border-radius: 12px; position: relative;">
-                        <div class="wrapper-info"
-                             style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="position-relative"
+                         style=" padding: 5rem 4rem 5rem 4rem; background-color: #0A1425; border-radius: 12px;">
+                        <div class="d-flex flex-column gap-4">
                             <span class="wrapper-subtitle"
-                                  style="font-size: 40px; font-weight: 700; color: #fff;line-height: 60px; text-transform: capitalize; width: 450px;">Odoo 18 Full Accounting Kit for Community</span>
+                                  style="font-size: 40px; font-weight: 700; color: #fff;line-height: 60px; text-transform: capitalize; width: 450px;  font-family: Montserrat;">Odoo 18 Full Accounting Kit for Community</span>
                             <h3 class="wrapper-details"
-                                style="font-size: 20px; font-weight: 400; color: #fff; line-height: 32px; ">
+                                style="font-size: 20px; font-weight: 400; color: #fff; line-height: 32px;  ">
                                 Are you ready to make your business more
                                 organized?
                                 <br> Improve now!
@@ -417,37 +554,37 @@
                             <div class="d-flex gap-3">
                                 <a href="mailto:odoo@cybrosys.com"
                                    class="shop-btn" style="cursor: pointer; border-radius: 16px; display: flex; justify-content: center; align-items: center; gap: 7px;
-            border: 1px solid var(--DarkOverlayElement-DO20, rgba(255, 255, 255, 0.20));
-            background: linear-gradient(93deg, rgba(255, 255, 255, 0.08) 6.01%, rgba(255, 255, 255, 0.17) 90.83%);
+            border: 1px solid  #ffffff33;
+            background-color: #ffffff14;
             backdrop-filter: blur(10px); color: #fff; padding: 12px 16px 12px 16px; text-decoration: none;">
-             <span style="border-radius: 12px;
-             background: var(--DarkOverlayElement-DO10, rgba(255, 255, 255, 0.10));
-             backdrop-filter: blur(6px);padding: 12px;">
-              <img src="./assets/icons/banner-mail.svg">
-           </span>
-                                    <span style="font-weight: 500;">odoo@cybrosys.com</span>
+                             <span style="border-radius: 12px;
+                             background-color: #ffffff1a;
+                             backdrop-filter: blur(6px);padding: 12px;  ">
+                              <img src="./assets/icons/banner-mail.svg">
+                           </span>
+                                    <span style="font-weight: 500;font-family: Montserrat;">odoo@cybrosys.com</span>
                                 </a>
-                                <a href="https://wa.me/919074270811" target="_blank" class="shop-btn"
+                                <a href="tel:+91 9074270811" class="shop-btn"
                                    style="cursor: pointer; border-radius: 16px; display: flex; justify-content: center; align-items: center; gap: 7px;
-            border: 1px solid var(--DarkOverlayElement-DO20, rgba(255, 255, 255, 0.20));
-            background: linear-gradient(93deg, rgba(255, 255, 255, 0.08) 6.01%, rgba(255, 255, 255, 0.17) 90.83%);
+             border: 1px solid  #ffffff33;
+             background-color: #ffffff14;
             backdrop-filter: blur(10px); color: #fff; padding: 12px 22px 12px 18px; text-decoration: none;">
-             <span style="border-radius: 12px;
-             background: var(--DarkOverlayElement-DO10, rgba(255, 255, 255, 0.10));
-             backdrop-filter: blur(6px);padding: 12px;">
-              <img src="./assets/icons/banner-call.svg">
-           </span>
-                                    <span style="font-weight: 500;">+91 9074270811</span>
+                             <span style="border-radius: 12px;
+                             background-color: #ffffff1a;
+                             backdrop-filter: blur(6px);padding: 12px;">
+                              <img src="./assets/icons/banner-call.svg">
+                           </span>
+                                    <span style="font-weight: 500;font-family: Montserrat;">+91 9074270811</span>
                                 </a>
                             </div>
                         </div>
-                        <div class=""
-                             style="position: absolute; bottom: 0; right: 0;">
+                        <div class="position-absolute bottom-0 end-0">
                             <img src="./assets/icons/banner-pattern.svg"
                                  style="width: 540px;">
                         </div>
                     </div>
                 </div>
+
                 <!-- end-code -->
                 <!--  -->
                 <!-- screenshot and other -->
@@ -516,7 +653,7 @@
                                         </div>
                                         <div class="col-md-12 mb-4">
                                             <p style="font-weight:400; font-size:16px; line-height:150%; text-align:center;  color:var(--text-color-light)">
-                                                  Can Create Assets from Accounting > Accounting > Assets > New.
+                                                Can Create Assets from Accounting > Accounting > Assets > New.
                                             </p>
                                         </div>
                                         <div class="col-md-12 text-center">
@@ -544,7 +681,8 @@
                                         </div>
                                         <div class="col-md-12 mb-4">
                                             <p style="font-weight:400; font-size:16px; line-height:150%; text-align:center;  color:var(--text-color-light)">
-                                                 Can see the all Related data in the Asset model, It helps to calculate the depreciation.
+                                                Can see the all Related data in the Asset model, It helps to
+                                                calculate the depreciation.
                                             </p>
                                         </div>
                                         <div class="col-md-12 text-center">
@@ -573,7 +711,8 @@
                                         </div>
                                         <div class="col-md-12 mb-4">
                                             <p style="font-weight:400; font-size:16px; line-height:150%; text-align:center;  color:var(--text-color-light)">
-                                             Can Create Asset categories from Accounting > Configuration > Asset Types > New option.
+                                                Can Create Asset categories from Accounting > Configuration >
+                                                Asset Types > New option.
                                             </p>
                                         </div>
                                         <div class="col-md-12 text-center">
@@ -679,11 +818,11 @@
                                                 <span style="color: var(--primary-color); font-size:calc(1.1rem + 1vw)">  Widget.</span>
                                             </h1>
                                         </div>
-<!--                                        <div class="col-md-12 mb-4">-->
-<!--                                            <p style="font-weight:400; font-size:16px; line-height:150%; text-align:center;  color:var(&#45;&#45;text-color-light)">-->
-<!--                                                Can reconcile the entries.-->
-<!--                                            </p>-->
-<!--                                        </div>-->
+                                        <!--                                        <div class="col-md-12 mb-4">-->
+                                        <!--                                            <p style="font-weight:400; font-size:16px; line-height:150%; text-align:center;  color:var(&#45;&#45;text-color-light)">-->
+                                        <!--                                                Can reconcile the entries.-->
+                                        <!--                                            </p>-->
+                                        <!--                                        </div>-->
                                         <div class="col-md-12 text-center">
                                             <div class="d-inline-block p-3 shadow-sm"
                                                  style="background-color:#fff; border-radius:10px">
@@ -772,7 +911,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><div class="position-relative mb-4"
+                            </div>
+                            <div class="position-relative mb-4"
                                  style="border-radius:10px; background-color:#f4f4f4">
                                 <div class="p-md-5 p-3 position-relative">
                                     <div class="row">
@@ -838,7 +978,9 @@
                                         </div>
                                         <div class="col-md-12 mb-4">
                                             <p style="font-weight:400; font-size:16px; line-height:150%; text-align:center;  color:var(--text-color-light)">
-                                                 Can see menus for getting the Account related Reports. like -Profit and Loss, Balance Sheet , Cash Flow, Bank Book, Cash Book , Day Book etc
+                                                Can see menus for getting the Account related Reports. like
+                                                -Profit and Loss, Balance Sheet , Cash Flow, Bank Book, Cash
+                                                Book , Day Book etc
                                             </p>
                                         </div>
                                         <div class="col-md-12 text-center">
@@ -852,7 +994,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><div class="position-relative mb-4"
+                            </div>
+                            <div class="position-relative mb-4"
                                  style="border-radius:10px; background-color:#f4f4f4">
                                 <div class="p-md-5 p-3 position-relative">
                                     <div class="row">
@@ -875,7 +1018,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><div class="position-relative mb-4"
+                            </div>
+                            <div class="position-relative mb-4"
                                  style="border-radius:10px; background-color:#f4f4f4">
                                 <div class="p-md-5 p-3 position-relative">
                                     <div class="row">
@@ -883,7 +1027,7 @@
                                             <h1 style="font-weight:bold; font-size:calc(1.1rem + 1vw); line-height:120%; text-align:center; text-transform:capitalize; font-size: 40px;
                               font-weight: 700;">
                                                 <span style="color: var(--primary-color); font-size:calc(1.1rem + 1vw)"> Balance Sheet -</span>
-                                      <span style="color:#121212; font-size:calc(1.1rem + 1vw)">For the Accounting Report.
+                                                <span style="color:#121212; font-size:calc(1.1rem + 1vw)">For the Accounting Report.
                                       </span>
                                             </h1>
                                         </div>
@@ -921,11 +1065,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><div class="position-relative mb-4"
+                            </div>
+                            <div class="position-relative mb-4"
                                  style="border-radius:10px; background-color:#f4f4f4">
                                 <div class="p-md-5 p-3 position-relative">
                                     <div class="row">
-                                             <div class="col-md-12">
+                                        <div class="col-md-12">
                                             <h1 style="font-weight:bold; font-size:calc(1.1rem + 1vw); line-height:120%; text-align:center; text-transform:capitalize; font-size: 40px;
                               font-weight: 700;">
                                                 <span style="color: var(--primary-color); font-size:calc(1.1rem + 1vw)"> Bank Book -</span>
@@ -969,7 +1114,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><div class="position-relative mb-4"
+                            </div>
+                            <div class="position-relative mb-4"
                                  style="border-radius:10px; background-color:#f4f4f4">
                                 <div class="p-md-5 p-3 position-relative">
                                     <div class="row">
@@ -977,7 +1123,7 @@
                                             <h1 style="font-weight:bold; font-size:calc(1.1rem + 1vw); line-height:120%; text-align:center; text-transform:capitalize; font-size: 40px;
                               font-weight: 700;">
                                                 <span style="color: var(--primary-color); font-size:calc(1.1rem + 1vw)"> Day Book - </span>
-                                                  <span style="color:#121212; font-size:calc(1.1rem + 1vw)">For the Accounting Report.
+                                                <span style="color:#121212; font-size:calc(1.1rem + 1vw)">For the Accounting Report.
 
                                       </span>
                                             </h1>
@@ -1002,7 +1148,7 @@
                                             <h1 style="font-weight:bold; font-size:calc(1.1rem + 1vw); line-height:120%; text-align:center; text-transform:capitalize; font-size: 40px;
                               font-weight: 700;">
                                                 <span style="color: var(--primary-color); font-size:calc(1.1rem + 1vw)"> Aged Partner Balance </span>
-                                                  <span style="color:#121212; font-size:calc(1.1rem + 1vw)">- For the Accounting Report.
+                                                <span style="color:#121212; font-size:calc(1.1rem + 1vw)">- For the Accounting Report.
                                       </span>
                                             </h1>
                                         </div>
@@ -1018,7 +1164,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><div class="position-relative mb-4"
+                            </div>
+                            <div class="position-relative mb-4"
                                  style="border-radius:10px; background-color:#f4f4f4">
                                 <div class="p-md-5 p-3 position-relative">
                                     <div class="row">
@@ -1041,7 +1188,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><div class="position-relative mb-4"
+                            </div>
+                            <div class="position-relative mb-4"
                                  style="border-radius:10px; background-color:#f4f4f4">
                                 <div class="p-md-5 p-3 position-relative">
                                     <div class="row">
@@ -1049,7 +1197,7 @@
                                             <h1 style="font-weight:bold; font-size:calc(1.1rem + 1vw); line-height:120%; text-align:center; text-transform:capitalize; font-size: 40px;
                               font-weight: 700;">
                                                 <span style="color: var(--primary-color); font-size:calc(1.1rem + 1vw)"> Invoice Analysis </span>
-                                                                                      <span style="color:#121212; font-size:calc(1.1rem + 1vw)">- For the Accounting Report.</span>
+                                                <span style="color:#121212; font-size:calc(1.1rem + 1vw)">- For the Accounting Report.</span>
                                             </h1>
                                         </div>
                                         <div class="col-md-12 text-center">
@@ -1063,7 +1211,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><div class="position-relative mb-4"
+                            </div>
+                            <div class="position-relative mb-4"
                                  style="border-radius:10px; background-color:#f4f4f4">
                                 <div class="p-md-5 p-3 position-relative">
                                     <div class="row">
@@ -1132,7 +1281,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><div class="position-relative mb-4"
+                            </div>
+                            <div class="position-relative mb-4"
                                  style="border-radius:10px; background-color:#f4f4f4">
                                 <div class="p-md-5 p-3 position-relative">
                                     <div class="row">
@@ -1140,7 +1290,7 @@
                                             <h1 style="font-weight:bold; font-size:calc(1.1rem + 1vw); line-height:120%; text-align:center; text-transform:capitalize; font-size: 40px;
                               font-weight: 700;">
                                                 <span style="color: var(--primary-color); font-size:calc(1.1rem + 1vw)">Journal Audit </span>
-                                                 <span style="color:#121212; font-size:calc(1.1rem + 1vw)">- For the Accounting Report.</span>
+                                                <span style="color:#121212; font-size:calc(1.1rem + 1vw)">- For the Accounting Report.</span>
                                             </h1>
                                         </div>
 
@@ -1216,7 +1366,7 @@
                                                    style="color:#fff; font-size:14px"></i>
                                             </div>
                                             <p style="color:#1A202C; font-weight:600; font-size:1.2rem; margin-bottom:2px">
-                                                 Asset Management System.
+                                                Asset Management System.
                                             </p>
                                         </div>
                                     </div>
@@ -1232,7 +1382,7 @@
                                                    style="color:#fff; font-size:14px"></i>
                                             </div>
                                             <p style="color:#1A202C; font-weight:600; font-size:1.2rem; margin-bottom:2px">
-                                                 Accounting Report.
+                                                Accounting Report.
                                             </p>
                                         </div>
                                     </div>
@@ -1247,7 +1397,7 @@
                                                    style="color:#fff; font-size:14px"></i>
                                             </div>
                                             <p style="color:#1A202C; font-weight:600; font-size:1.2rem; margin-bottom:2px">
-                                                    PDC Management.
+                                                PDC Management.
                                             </p>
                                         </div>
                                     </div>
@@ -1262,7 +1412,7 @@
                                                    style="color:#fff; font-size:14px"></i>
                                             </div>
                                             <p style="color:#1A202C; font-weight:600; font-size:1.2rem; margin-bottom:2px">
-                                                 Reconciliation Widget.
+                                                Reconciliation Widget.
                                             </p>
                                         </div>
                                     </div>
@@ -1294,7 +1444,8 @@
                                                          style="cursor: pointer; background-color:#f8f8f8; border:none; border-top-right-radius:10px; border-top-left-radius:10px; padding: 12px 24px;">
                                                         <a class="card-title text-decoration-none"
                                                            style=" font-size:18px; line-height:30px; font-weight:500; color:#040f3a">
-                                                            How does the module handle Post-Dated Cheque (PDC) management?
+                                                            How does the module handle Post-Dated Cheque (PDC)
+                                                            management?
                                                             <img alt=""
                                                                  class="float-end"
                                                                  src="//apps.odoocdn.com/apps/assets/16.0/index_test_odoo/assets/icons/down.svg?6ef7fd7"
@@ -1307,7 +1458,9 @@
                                                          id="collapseFAQOne"
                                                          style=" box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px; border: 1px solid #f8f8f8; border-bottom-right-radius:10px; border-bottom-left-radius:10px">
                                                         <p style=" padding:0.75rem 1.25rem; font-size:16px; line-height:27px;  color:#888; font-weight:normal; border-bottom-right-radius:10px; border-bottom-left-radius:10px">
-                                                           You can manage PDCs by adding them to the recipient's bank account in the Register Payment wizard.
+                                                            You can manage PDCs by adding them to the
+                                                            recipient's bank account in the Register Payment
+                                                            wizard.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -1321,7 +1474,7 @@
                                                          style="cursor: pointer; background-color:#f8f8f8; border:1px solid #f8f8f8; border-top-right-radius:10px; border-top-left-radius:10px; padding: 12px 24px">
                                                         <a class="card-title text-decoration-none"
                                                            style=" font-size:18px; line-height:30px; font-weight:500; color:#040f3a">
-                                                             Does the module support Odoo 18 Community Edition?
+                                                            Does the module support Odoo 18 Community Edition?
                                                             <img alt=""
                                                                  class="float-end"
                                                                  src="//apps.odoocdn.com/apps/assets/16.0/index_test_odoo/assets/icons/down.svg?6ef7fd7"
@@ -1334,7 +1487,9 @@
                                                          id="collapseFAQThree"
                                                          style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px; border: 1px solid #f8f8f8; border-bottom-right-radius:10px; border-bottom-left-radius:10px">
                                                         <p style="padding:0.75rem 1.25rem; font-size:16px; line-height:27px;  color:#888; font-weight:normal; border-bottom-right-radius:10px; border-bottom-left-radius:10px">
-                                                           Yes, this module is specifically designed to work with Odoo 18 Community Edition and not for odoo 18 enterprise edition.
+                                                            Yes, this module is specifically designed to work
+                                                            with Odoo 18 Community Edition and not for odoo 18
+                                                            enterprise edition.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -1348,7 +1503,8 @@
                                                          style="cursor: pointer; background-color:#f8f8f8; border:1px solid #f8f8f8; border-top-right-radius:10px; border-top-left-radius:10px; padding: 12px 24px">
                                                         <a class="card-title text-decoration-none"
                                                            style=" font-size:18px; line-height:30px; font-weight:500; color:#040f3a">
-                                                           How does this module assist with customer follow-ups?
+                                                            How does this module assist with customer
+                                                            follow-ups?
                                                             <img alt=""
                                                                  class="float-end"
                                                                  src="//apps.odoocdn.com/apps/assets/16.0/index_test_odoo/assets/icons/down.svg?6ef7fd7"
@@ -1361,7 +1517,8 @@
                                                          id="collapseFAQFour"
                                                          style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px; border: 1px solid #f8f8f8; border-bottom-right-radius:10px; border-bottom-left-radius:10px">
                                                         <p style="padding:0.75rem 1.25rem; font-size:16px; line-height:27px;  color:#888; font-weight:normal; border-bottom-right-radius:10px; border-bottom-left-radius:10px">
-                                                            It provides a customer follow-up menu that manages follow-up activities directly.
+                                                            It provides a customer follow-up menu that manages
+                                                            follow-up activities directly.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -1470,7 +1627,7 @@
                                         </div>
                                         <p class="text-center mb-2 pb-0 text-black"
                                            style="font-weight: 600; padding-top: 16px;">
-                                           Odoo17 Dynamic Accounting Reports</p>
+                                            Odoo17 Dynamic Accounting Reports</p>
                                     </div>
                                 </a>
                             </div>
@@ -1506,7 +1663,7 @@
                                         </div>
                                         <p class="text-center pb-0 mb-2 text-black"
                                            style="font-weight: 600; padding-top: 16px;">
-                                           Import Bank Statement Odoo17</p>
+                                            Import Bank Statement Odoo17</p>
                                     </div>
                                 </a>
                             </div>
@@ -1524,7 +1681,7 @@
                                         </div>
                                         <p class="text-center pb-0 mb-2 text-black"
                                            style="font-weight: 600; padding-top: 16px;">
-                                           Advanced Cash Flow Statements</p>
+                                            Advanced Cash Flow Statements</p>
                                     </div>
                                 </a>
                             </div>

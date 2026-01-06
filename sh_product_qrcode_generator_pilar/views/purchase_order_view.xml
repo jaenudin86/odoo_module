@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_purchase_order_form_inherit_qr" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.qrcode</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <!-- <group string="QR Code Info" col="2"> -->
+                    <field name="sh_qr_code"/>
+                    <field name="sh_qr_code_img" widget="image" class="oe_avatar" nolabel="1"/>
+                <!-- </group> -->
+            </xpath>
+            
+
+        </field>
+    </record>
+    <!-- <template id="report_purchaseorder_document_inherit_qr" inherit_id="purchase.report_purchaseorder_document">
+      
+        <xpath expr="//h2" position="after">
+            <t t-set="base_url" t-value="request.env['ir.config_parameter'].sudo().get_param('web.base.url')"/>
+            <t t-set="pdf_url" t-value="base_url + '/report/pdf/purchase.report_purchaseorder/' + str(o.sudo().id)"/>
+
+            <div style="text-align:right; margin-top:10px;">
+                <div t-options="{'widget': 'barcode', 'symbology': 'QR', 'value': pdf_url, 'width': 80, 'height': 80}"/>
+                <p style="font-size:10px; margin-top:2px;">Scan to view PO <t t-esc="o.name"/></p>
+            </div>
+        </xpath>
+    </template> -->
+
+    <!-- PURCHASE ORDER QR -->
+    <template id="report_purchaseorder_document_inherit_qr"
+              inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//div[contains(@class, 'page')]" position="inside">
+            <t t-set="base_url" t-value="request.env['ir.config_parameter'].sudo().get_param('web.base.url')"/>
+            <t t-set="pdf_url" t-value="base_url + '/report/pdf/purchase.report_purchaseorder/' + str(o.id)"/>
+
+            <div style="text-align:right; margin-top:10px;">
+                <div t-out="pdf_url"
+                     t-options="{'widget': 'barcode', 'symbology': 'QR', 'width': 80, 'height': 80, 'img_style': 'width:80px;height:80px;'}"/>
+                <p style="font-size:10px; margin-top:2px;">Scan to view PO <t t-esc="o.name"/></p>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- SALE ORDER QR -->
+    <template id="report_saleorder_document_inherit_qr"
+              inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[contains(@class, 'page')]" position="inside">
+            <t t-set="base_url" t-value="request.env['ir.config_parameter'].sudo().get_param('web.base.url')"/>
+            <t t-set="pdf_url" t-value="base_url + '/report/pdf/sale.report_saleorder/' + str(doc.id)"/>
+
+            <div style="text-align:right; margin-top:10px;">
+                <div t-out="pdf_url"
+                     t-options="{'widget': 'barcode', 'symbology': 'QR', 'width': 80, 'height': 80, 'img_style': 'width:80px;height:80px;'}"/>
+                <p style="font-size:10px; margin-top:2px;">Scan to view SO <t t-esc="doc.name"/></p>
+            </div>
+        </xpath>
+    </template>
+
+
+</odoo>

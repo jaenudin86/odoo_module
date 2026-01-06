@@ -1,0 +1,23 @@
+<odoo>
+    <data noupdate="1">
+        <record id="seq_sale_quotations" model="ir.sequence">
+            <field name="name">Quotation Sequence</field>
+            <field name="code">sales.quotation</field>
+            <field name="prefix">Q</field>
+            <field name="padding">4</field>
+             <field name="number_next">1</field>
+              <field name="company_id"></field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="seq_sale_orders" model="ir.sequence">
+            <field name="name">Sales Order Sequence</field>
+            <field name="code">sales.order</field>
+            <field name="prefix">S</field>
+            <field name="padding">4</field>
+            
+            <field name="number_next">1</field>
+              <field name="company_id"></field>
+            <field name="number_increment">1</field>
+        </record>
+    </data>
+</odoo>

@@ -9,17 +9,82 @@
             <xpath expr="//button[@name='action_confirm']" position="attributes">
                 <attribute name="string">Confirm SO</attribute>
             </xpath>
-    
             <!-- Menambahkan tombol Sample -->
             <xpath expr="//header" position="inside">
-                <button name="action_sample" type="object" string="Sample" class="oe_highlight" invisible="state == 'sale' or state == 'sample_sent'"/>
+                <button name="action_sample" type="object" string="Send Sample" class="oe_highlight"
+                invisible="state == 'sale' or  state == 'sample_sent'" />
+
+            </xpath>
+            <xpath expr="//button[@name='action_preview_sale_order']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_quotation_send']" position="after">
+                <button name="action_save" type="object" string="Save" class="oe_highlight"
+                    invisible="state == 'sale' or state == 'save' or  state == 'sent' or  state == 'sample_sent'" />
             </xpath>
             <xpath expr="//button[@name='action_cancel']" position="replace">
-               <button name="action_cancel" type="object" string="Cancel" invisible="state not in ['draft', 'sent', 'sale','sample_sent'] or not id or locked" data-hotkey="x"/>
+                <button name="action_cancel" type="object" string="Cancel"
+                    invisible="state not in ['draft', 'sent', 'sale','sample_sent','save'] or not id or locked"
+                    data-hotkey="x" />
             </xpath>
-               
-             <xpath expr="//field[@name='state']" position="attributes">
-                <attribute name="statusbar_visible">draft,sent,sale,sample_sent,approved</attribute>
+            <!-- <xpath expr="//button[@name='action_sample']" position="replace">
+                <button name="action_sample" type="object" string="Cancel"
+                    invisible="state not in ['sample_sent'] or not id or locked"
+                    data-hotkey="x" />
+            </xpath> -->
+            <xpath expr="//button[@name='action_confirm']" position="replace">
+                <button name="action_confirm" type="object" string="Confirm"
+                    invisible="state not in ['sent','save'] or not id or locked"
+                    data-hotkey="c" />
+            </xpath>
+            <xpath expr="//button[@name='action_quotation_send']" position="attributes">
+            <attribute name="invisible">1</attribute>
+         </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="report_type" widget="radio" />
+                <field name="incl_tax" />
+            </xpath>
+            <xpath expr="//field[@name='incl_tax']" position="after">
+                <field name="color" string="Color Mark" widget="radio" />
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="project"  />
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="before">
+                <field name="tax_amount" string="Tax Amount"
+                    attrs="{'column_invisible': [('order_id.incl_tax', '=', true)]}" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_unit']" position="after">
+                <field name="tax_amount" string="Tax Amount" optional="show" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='tax_id']" position="after">
+                <field name="notes" string="Notes" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='notes']" position="after">
+                <field name="target" string="Target Of" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='tax_id']" position="after">
+                <field name="notes" string="Notes" optional="show" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='notes']" position="after">
+                <field name="target" string="Target Of" optional="show" />
+            </xpath>
+            <!-- <xpath expr="//field[@name='order_line']/form/group/group/field[@name='product_id']" position="attributes">
+            <attribute name="widget">many2one</attribute>
+            <attribute name="context">{'show_display_name': True}</attribute>
+            </xpath> -->
+
+
+
+
+
+
+
+
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="statusbar_visible">draft,save,sent,sale,approved,sample_sent</attribute>
             </xpath>
 
         </field>
@@ -35,6 +100,16 @@
         <xpath expr="//field[@name='name']" position="after">
             <field name="type_transaksi"/>
         </xpath>
+        <xpath expr="//field[@name='type_transaksi']" position="after">
+            <field name="report_type"/>
+              <field name="color"/>
+        </xpath>
+        <xpath expr="//list" position="attributes">
+            <attribute name="decoration-info">color == 'blue'</attribute>
+            <attribute name="decoration-danger">color == 'red'</attribute>
+            <attribute name="decoration-success">color == 'green'</attribute>
+            <attribute name="decoration-warning">color == 'yellow'</attribute>
+        </xpath>
     </field>
 </record>
 <record id="view_order_listview_inherit" model="ir.ui.view">
@@ -45,8 +120,42 @@
         <xpath expr="//field[@name='name']" position="after">
             <field name="type_transaksi"/>
         </xpath>
+        <xpath expr="//field[@name='type_transaksi']" position="after">
+            <field name="report_type"/>
+            <field name="color"/>
+
+        </xpath>
+        <xpath expr="//list" position="attributes">
+            <attribute name="decoration-info">color == 'blue'</attribute>
+            <attribute name="decoration-danger">color == 'red'</attribute>
+            <attribute name="decoration-success">color == 'green'</attribute>
+            <attribute name="decoration-warning">color == 'yellow'</attribute>
+        </xpath>
+
     </field>
 </record>
+<record id="inherit_sale_order_search_view" model="ir.ui.view">
+    <field name="name">sale.order.search.inherit</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+    <field name="arch" type="xml">
+        <xpath expr="//search" position="inside">
+            <!-- Tambahkan filter berdasarkan warna -->
+            <filter string="White" name="filter_white" domain="[('color', '=', 'white')]"/>
+            <filter string="Blue" name="filter_blue" domain="[('color', '=', 'blue')]"/>
+            <filter string="Red" name="filter_red" domain="[('color', '=', 'red')]"/>
+            <filter string="Green" name="filter_green" domain="[('color', '=', 'green')]"/>
+            <filter string="Yellow" name="filter_yellow" domain="[('color', '=', 'yellow')]"/>
+
+            <!-- Tambahkan Group By berdasarkan Warna -->
+            <separator/>
+            <filter string="Group by Color" name="group_by_color" context="{'group_by': 'color'}"/>
+        </xpath>
+    </field>
+</record>
+
+
+
 <!-- <?xml version="1.0" encoding="UTF-8"?> -->
 <!-- <odoo> -->
     <!-- <record id="inherit_sale_order_line_tree_view" model="ir.ui.view">

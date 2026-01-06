@@ -1,0 +1,92 @@
+<odoo>
+    <template id="custom_external_layout_bubble" inherit_id="web.external_layout_bubble">
+        <!-- Ubah bagian HEADER -->
+        <xpath expr="//div[contains(@t-attf-class, 'header')]" position="replace">
+        <!-- <xpath expr="//div[contains(@t-att-class, 'header')]" position="replace"> -->
+        <div t-attf-class="header o_company_#{company.id}_layout {{report_type == 'pdf' and 'pt-5'}}">
+            <!-- <div class="d-flex justify-content-between">
+                <div>
+                    <img t-if="company.logo" class="o_company_logo mb-2" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+                    <div t-if="company.report_header" t-field="company.report_header" class="o_company_tagline fw-bold">Company tagline</div>
+                </div>
+                
+                    <ul class="list-unstyled" name="company_address_list" style="text-align: left !important;">
+                        <li style="list-style-type: none;">
+                       <div class="text-start" style="max-width: 300px;">
+                            <strong t-esc="docs.partner_id.parent_id.name"/><br/>
+                            <div style="max-width: 220px; width: 100%; word-wrap: break-word; white-space: normal;">
+                                <span  t-esc="docs.partner_id.street"/>
+                            </div>
+
+         
+                            <span t-esc="docs.partner_id.city"/> <span t-esc="docs.partner_id.zip"/><br/>
+                            <span t-esc="docs.partner_id.country_id.name"/>
+                        </div>
+                       </li>
+                        <li t-if="not forced_vat"/>
+                        <li t-else="">
+                            <t t-esc="company.country_id.vat_label or 'Tax ID'">Tax ID</t>:
+                            <span t-esc="forced_vat">US12345671</span>
+                        </li>
+                    </ul>
+                </div> -->
+                <div class="row align-items-start">
+    <!-- Kolom kiri: Logo dan tagline -->
+    <div class="col-8">
+        <img t-if="company.logo" class="o_company_logo mb-2" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+        <div t-if="company.report_header" t-field="company.report_header" class="o_company_tagline fw-bold">Company tagline</div>
+    </div>
+
+    <!-- Kolom kanan: Alamat customer -->
+    <div class="col-4">
+        <ul class="list-unstyled" name="company_address_list">
+            <li>
+                <div class="text-start" style="max-width: 300px;">
+                    <!-- <strong t-esc="docs.partner_id.parent_id.name"/><br/> -->
+                    <strong t-if="docs.partner_id.parent_id" t-esc="docs.partner_id.parent_id.name"/><br/>
+<strong t-if="docs.partner_id" t-esc="docs.partner_id.name"/><br/>
+
+                    <div style="max-width: 220px; width: 100%; word-wrap: break-word; white-space: normal;">
+                        <span t-esc="docs.partner_id.street"/>
+                    </div>
+                    <span t-esc="docs.partner_id.city"/> <span t-esc="docs.partner_id.zip"/><br/>
+                    <span t-esc="docs.partner_id.country_id.name"/>
+                </div>
+            </li>
+            <li t-if="not forced_vat"/>
+            <li t-else="">
+                <t t-esc="company.country_id.vat_label or 'Tax ID'">Tax ID</t>: <span t-esc="forced_vat"/>
+            </li>
+        </ul>
+    </div>
+</div>
+
+            </div>
+        </xpath>
+
+        <!-- Ubah bagian BUBBLE -->
+        <!-- <xpath expr="//svg[contains(@class, 'o_shape_bubble_1')]" position="replace">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1100" height="1100">
+                <rect width="100%" height="100%" fill="#00ffcc" opacity=".2"/>
+            </svg>
+        </xpath> -->
+
+        <!-- Tambahkan informasi tambahan di footer -->
+        <!-- <xpath expr="//div[contains(@class, 'o_footer_content')]" position="before">
+            <div class="text-center" style="background: #ddd; padding: 10px;">
+                <strong>Dokumen ini adalah laporan resmi</strong>
+            </div>
+        </xpath> -->
+
+                <!-- Footer -->
+         <xpath expr="//div[contains(@t-attf-class, 'footer')]" position="replace">
+                <div t-attf-class="footer o_company_#{company.id}_layout {{report_type != 'pdf' and 'position-relative mt-auto mx-n5'}}">
+                    <div t-attf-class="o_footer_content {{report_type != 'pdf' and 'position-absolute end-0 start-0 bottom-0 mx-5'}} pt-4 text-center">
+                        <div class="border-top pt-2" t-field="company.report_footer"/>
+                        <span t-if="report_type == 'pdf' and display_name_in_footer" class="text-muted" t-out="str(o.name) + ', '">(document name)</span>
+                        <span t-if="report_type == 'pdf'" class="text-muted">Page <span class="page"/> / <span class="topage"/></span>
+                    </div>
+                </div>
+        </xpath>
+    </template>
+</odoo>

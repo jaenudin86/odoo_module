@@ -20,15 +20,34 @@ Long description of module's purpose
     # any module necessary for this one to work correctly
     'depends': ['base','sale'],
 
-    # always loaded
+
+    # always loaded 
     'data': [
         # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
-        'views/sale_order_views.xml',
+        # 'views/views.xml',
+        # 'views/templates.xml',
+        # 'views/sale_order_views.xml',
+        # # 'views/report_saleorder.xml',
+        # 'views/report_price_quotation.xml',
         # 'views/report_saleorder.xml',
-        'views/report_price_quotation.xml',
+        # 'views/product_template_views.xml',
+        # 'data/sequence.xml',
+        # 'views/custom_bubble_layout.xml',
+        # 'views/product_template_kanban_view.xml',
+        # 'views/stock_report_list_view.xml',
+        # 'views/product_product_inherit.xml',
+        # 'views/view_partner_form_inherit_user_visible.xml',
+        # # 'views/hide_vendor.xml',
+        # # 'security/groups.xml'
+        # # 'security/res_partner_rules.xml',
+        # 'views/res_partner_views.xml',
     ],
+    'assets': {
+            'web.assets_backend': [
+                # 'efata_sales/static/src/js/colored_radio.js',
+                # 'efata_sales/static/src/js/colored_circle.js',
+            ],
+    },
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',

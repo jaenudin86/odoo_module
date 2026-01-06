@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Paper Format untuk Dymo -->
+    <record id="paperformat_picking_dymo_label" model="report.paperformat">
+        <field name="name">Dymo Label Picking 100x50mm</field>
+        <field name="default" eval="False"/>
+        <field name="format">custom</field>
+        <field name="page_height">100</field>
+        <field name="page_width">50</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">3</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">25</field>
+        <field name="dpi">96</field>
+    </record>
+
+    <!-- Report Definition -->
+    <record id="action_report_picking_receipt_dymo" model="ir.actions.report">
+        <field name="name">Picking Receipt - Dymo Label</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sh_product_qrcode_generator.report_picking_receipt_dymo</field>
+        <field name="report_file">sh_product_qrcode_generator.report_picking_receipt_dymo</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_picking_dymo_label"/>
+    </record>
+
+    <!-- Main Report Template -->
+    <template id="report_picking_receipt_dymo">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="picking">
+                <t t-foreach="picking.move_line_ids_without_package" t-as="move_line">
+                    <t t-if="move_line.quantity > 0">
+                        <t t-foreach="range(int(move_line.quantity))" t-as="qty_index">
+                            <div class="page">
+                                <t t-call="sh_product_qrcode_generator.picking_receipt_label_dymo">
+                                    <t t-set="picking" t-value="picking"/>
+                                    <t t-set="move_line" t-value="move_line"/>
+                                    <t t-set="product" t-value="move_line.product_id"/>
+                                    <t t-set="barcode_size" t-value="'width:15.5mm;height:15.5mm'" />
+                                </t>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Label Template - Format SAMA PERSIS dengan BAP Control -->
+<template id="picking_receipt_label_dymo">
+    <t t-call="web.html_container">
+        <div class="o_label_sheet" style="width:92mm; height:45mm; margin:0; padding:0; box-sizing:border-box;">
+            <t t-foreach="docs" t-as="picking">
+                <t t-foreach="picking.move_line_ids_without_package" t-as="line">
+                    <table style="width:100%; height:100%; border-collapse:collapse; border:1px solid #000; font-size:10px; page-break-inside:avoid; margin-bottom:3px;">
+                        <tr>
+                            <!-- Logo + QR -->
+                            <td style="width:30%; text-align:center; vertical-align:middle; border-right:1px solid #000;">
+                                <img src="/sh_product_qrcode_generator/static/logopuco.png" style="width:90px; margin-bottom:2px;"/>
+                                <t t-if="line.lot_id.name">
+                                    <div t-out="line.lot_id.name"
+                                        t-options="{'widget': 'barcode', 'symbology': 'QR', 'img_style': 'width:80px;height:80px;'}"/>
+                                </t>
+                            </td>
+
+                            <!-- Data Field -->
+                            <td style="width:70%; vertical-align:top; padding:2px;">
+                                <!-- Header Hijau -->
+                                <div style="background-color:#9bbb59; text-align:center; font-weight:bold; color:#000; font-size:12px; padding:2px;">
+                                    BAP CONTROL
+                                </div>
+                                <table style="width:100%; margin-top:2px; border-collapse:collapse;">
+                                    <tr>
+                                        <td style="width:35%;">Product Name</td>
+                                        <td style="width:5%;">:</td>
+                                        <td><span t-esc="line.product_id.display_name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>S/N#</td>
+                                        <td>:</td>
+                                        <td>
+                                            <span t-esc="line.lot_id.name or line.lot_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Part#</td>
+                                        <td>:</td>
+                                        <td><span t-esc="line.product_id.default_code"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>IR#</td>
+                                        <td>:</td>
+                                        <td><span t-esc="picking.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Category</td>
+                                        <td>:</td>
+                                        <td><span t-esc="line.product_id.categ_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Location</td>
+                                        <td>:</td>
+                                        <td><span t-esc="picking.picking_type_id.warehouse_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WHS Address</td>
+                                        <td>:</td>
+                                        <td><span t-esc="picking.company_id.partner_id.contact_address"/></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </t>
+            </t>
+        </div>
+    </t>
+</template>
+
+    
+
+</odoo>

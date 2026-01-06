@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_report_list_inherit" model="ir.ui.view">
+        <field name="name">stock.report.list.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_product_stock_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position="replace">
+                <field name="combined_name" string="Product"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+
